@@ -22,18 +22,18 @@ export default function Signin () {
     setSignInEmail(e.target.value);
   };
 
-  const onClickSigninBtn = () => {
+  const onClickSigninBtn = (e) => {
+    e.preventDefault();
     axios.post(`${process.env.REACT_APP_TOUR_API}` + '/users', {
       username: signInUserName,
       password: signInPassword,
       email: signInEmail
     })
-    .then(function (res) {
+    .then((res) => {
       console.log(res);
       navigate("/");
-      return (<Home />);
     })
-    .catch(function (err) {
+    .catch((err) => {
       console.log(err);
     });
   };
