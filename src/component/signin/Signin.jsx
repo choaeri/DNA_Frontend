@@ -28,7 +28,7 @@ export default function Signin () {
       username: signInUserName,
       password: signInPassword,
       email: signInEmail
-    })
+    }, { withCredentials: true })
     .then((res) => {
       console.log(res);
       navigate("/");
