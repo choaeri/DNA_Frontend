@@ -37,17 +37,6 @@ export default function Home() {
       });
   };
 
-  // 테스트 API 호출
-  useEffect(() => {
-    axios.get("http://localhost:8080/api/users", { withCredentials: true })
-      .then(response => {
-        setUserData(response.data);
-      })
-      .catch(error => {
-        console.error("Error fetching user data:", error);
-      });
-  }, []);
-
   // 버튼 클릭 핸들러 수정
   const handleButtonClick = () => {
     if (!isLogin) {
