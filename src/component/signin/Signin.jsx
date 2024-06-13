@@ -1,13 +1,17 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { AppContext } from "../../context/AppContext"
-import axios from "axios";
-import Home from "../Home";
 import { useNavigate } from "react-router-dom";
+import { Button, Card, Form, Input, notification } from "antd";
+import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
+import { axiosInstance } from "../../common/func/axios";
 
 export default function Signin () {
   const { signInUserName, setSignInUserName,
           signInPassword, setSignInPassword,
           signInEmail, setSignInEmail } = useContext(AppContext);
+
+  const [fieldErrors, setFieldErrors] = useState({});
+
   const navigate = useNavigate();
 
   const onUserNameHandler = (e) => {
@@ -22,20 +26,53 @@ export default function Signin () {
     setSignInEmail(e.target.value);
   };
 
-  const onClickSigninBtn = (e) => {
-    e.preventDefault();
-    axios.post(`${process.env.REACT_APP_TOUR_API}` + '/users', {
-      username: signInUserName,
-      password: signInPassword,
-      email: signInEmail
-    }, { withCredentials: true })
+  const onClickSigninBtn = async (e) => {
+    setFieldErrors({});
+    const data = { username: signInUserName, password: signInPassword, email: signInEmail };
+
+    await axiosInstance.post('api/users', data)
     .then((res) => {
       console.log(res);
+      notification.open({
+        message: "회원가입 완료",
+        icon: <SmileOutlined style={{ color: "#108ee9" }} />
+      });
       navigate("/");
     })
     .catch((err) => {
       console.log(err);
+      notification.open({
+        message: `${err} 에러`,
+        description: err,
+        icon: <FrownOutlined style={{ color: "#ff3333" }} />
+      });
+  
+      setFieldErrors((prevErrors) => {
+        const updatedErrors = {};
+  
+        for (const [fieldName, errors] of Object.entries(prevErrors)) {
+          const errorMessage = errors instanceof Array ? errors.join(" ") : errors;
+          updatedErrors[fieldName] = {
+            validateStatus: "error",
+            help: errorMessage,
+          };
+        };
+  
+        return {
+          ...prevErrors,
+          ...updatedErrors,
+        };
+      });
     });
+  };
+
+  const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 10}
+  };
+    
+  const tailLayout = {
+    wrapperCol: { offset: 11}
   };
 
   return (
@@ -43,18 +80,51 @@ export default function Signin () {
       display: 'flex', justifyContent: 'center', alignItems: 'center', 
       width: '100%', height: '100vh'
     }}>
-      <form style={{ display: 'flex', flexDirection: 'column'}}>
-        <label>Username</label>
-        <input type='username' value={signInUserName} onChange={onUserNameHandler}/>
-        <label>Password</label>
-        <input type='password' value={signInPassword} onChange={onPasswordHandler}/>
-        <label>Email</label>
-        <input type='email' value={signInEmail} onChange={onEmailHandler}/>
-        <br />
-        <button onClick={onClickSigninBtn}>
-          SignIn
-        </button>
-      </form>
+      <Card title={<span style={{ color: '#666666' }}>회원가입</span>}>
+        <Form
+          {...layout}
+          onFinish={onClickSigninBtn}
+          autoComplete={"false"}
+        >
+          <Form.Item
+            label="Username"
+            name="name"
+            rules={[
+              { required: true, message: "Please input your username!" },
+            ]}
+            hasFeedback
+            {...fieldErrors.username}
+            {...fieldErrors.non_field_errors}
+          >
+            <Input value={signInUserName} onChange={onUserNameHandler}/>
+          </Form.Item>
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[{ required: true, message: "Please input your password!" }]}
+            {...fieldErrors.password}
+          >
+            <Input.Password value={signInPassword} onChange={onPasswordHandler} />
+          </Form.Item>
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[
+              { required: true, message: "Please input your username!" },
+            ]}
+            hasFeedback
+            {...fieldErrors.email}
+            {...fieldErrors.non_field_errors}
+          >
+            <Input value={signInEmail} onChange={onEmailHandler}/>
+          </Form.Item>
+          <Form.Item {...tailLayout}>
+            <Button htmlType="submit" style={{ width: '100%' }}>
+              SignIn
+            </Button>
+          </Form.Item>
+        </Form>
+      </Card>
     </div>
   )
 };

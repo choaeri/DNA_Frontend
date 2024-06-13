@@ -7,7 +7,7 @@ const AppContext = createContext({
 const AppProvider = ({ children }) => {
 	const [openLoginPage, setOpenLoginPage] = useState(false);
 	const [isLogin, setIsLogin] = useState(false);
-	const [loginId, setLoginId] = useState("");
+	const [loginUserName, setLoginUserName] = useState("");
 	const [loginPassword, setLoginPassword] = useState("");
 	const [signInUserName, setSignInUserName] = useState("");
 	const [signInId, setSignInId] = useState("");
@@ -19,7 +19,7 @@ const AppProvider = ({ children }) => {
 			value={{
 				openLoginPage,
 				isLogin,
-				loginId,
+				loginUserName,
 				loginPassword,
 				signInUserName,
 				signInId,
@@ -28,7 +28,7 @@ const AppProvider = ({ children }) => {
 
 				setOpenLoginPage,
 				setIsLogin,
-				setLoginId,
+				setLoginUserName,
 				setLoginPassword,
 				setSignInUserName,
 				setSignInId,

@@ -1,17 +1,22 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { AppContext } from "../../context/AppContext"
 import axios from "axios";
 import Home from "../Home";
 import { useNavigate } from "react-router-dom";
+import { Button, Card, Form, Input, notification } from "antd";
+import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
+import { axiosInstance } from "../../common/func/axios";
 
 export default function Login () {
-  const { setIsLogin,
-          loginId, setLoginId,
+  const { loginUserName, setLoginUserName,
           loginPassword, setLoginPassword } = useContext(AppContext);
+
+  const [fieldErrors, setFieldErrors] = useState({});
+
   const navigate = useNavigate();
 
-  const onIdHandler = (e) => {
-    setLoginId(e.target.value);
+  const onUserNameHandler = (e) => {
+    setLoginUserName(e.target.value);
   };
 
   const onPasswordHandler = (e) => {
@@ -38,50 +43,118 @@ export default function Login () {
     window.location.href = `http://localhost:8080/oauth2/authorization/facebook`; 
   };
 
-  const onClickLoginBtn = (e) => {
-    e.preventDefault();
-    axios.post(`${process.env.REACT_APP_TOUR_API}` + '/auth/login', {
-      username: loginId,
-      password: loginPassword
-    }, { withCredentials: true })
-    .then(function (res) {
+  const onClickLoginBtn = async (e) => {
+    setFieldErrors({});
+    const data = { username: loginUserName, password: loginPassword };
+
+    await axiosInstance.post('api/auth/login', data)
+    .then((res) => {
+      console.log(res);
+      notification.open({
+        message: "로그인 완료",
+        icon: <SmileOutlined style={{ color: "#108ee9" }} />
+      });
       navigate("/");
     })
-    .catch(function (err) {
+    .catch((err) => {
       console.log(err);
+      notification.open({
+        message: `${err} 에러`,
+        description: err,
+        icon: <FrownOutlined style={{ color: "#ff3333" }} />
+      });
+
+      setFieldErrors((prevErrors) => {
+        const updatedErrors = {};
+
+        for (const [fieldName, errors] of Object.entries(prevErrors)) {
+          const errorMessage = errors instanceof Array ? errors.join(" ") : errors;
+          updatedErrors[fieldName] = {
+            validateStatus: "error",
+            help: errorMessage,
+          };
+        };
+
+        return {
+          ...prevErrors,
+          ...updatedErrors,
+        };
+      });
     });
   };
 
+  const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 10}
+  };
+    
+  const tailLayout = {
+    wrapperCol: { offset: 11}
+  };
+
   return (
-    <div style={{ 
+    <div className="Login" style={{ 
       display: 'flex', justifyContent: 'center', alignItems: 'center', 
       width: '100%', height: '100vh'
     }}>
-      <form style={{ display: 'flex', flexDirection: 'column'}}>
-        <label>Id</label>
-        <input type='id' value={loginId} onChange={onIdHandler}/>
-        <label>Password</label>
-        <input type='password' value={loginPassword} onChange={onPasswordHandler}/>
-        <br />
-        <button onClick={onClickLoginBtn}>
-          Login
-        </button>
-        <button>
-          <a href="/signin">Signup</a>
-        </button>
-        <button onClick={handleNaverLogin}>
-          Naver Login
-        </button>
-        <button onClick={handleKakaoLogin}>
-          Kakao Login
-        </button>
-        <button onClick={handleGoogleLogin}>
-          Google Login
-        </button>
-        <button onClick={handleFaceBookLogin}>
-          FaceBook Login
-        </button>
-      </form>
+      <Card title={<span style={{ color: '#666666' }}>로그인</span>}>
+        <Form
+          {...layout}
+          onFinish={onClickLoginBtn}
+          autoComplete={"false"}
+        >
+          <Form.Item
+            label="Username"
+            name="name"
+            rules={[
+              { required: true, message: "Please input your username!" },
+            ]}
+            hasFeedback
+            {...fieldErrors.username}
+            {...fieldErrors.non_field_errors}
+          >
+            <Input value={loginUserName} onChange={onUserNameHandler}/>
+          </Form.Item>
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[{ required: true, message: "Please input your password!" }]}
+            {...fieldErrors.password}
+          >
+            <Input.Password value={loginPassword} onChange={onPasswordHandler} />
+          </Form.Item>
+          <Form.Item {...tailLayout}>
+            <Button htmlType="submit" style={{ width: '100%' }}>
+              Login
+            </Button>
+          </Form.Item>
+          <Form.Item {...tailLayout}>
+            <Button style={{ width: '100%' }}>
+              <a href="/signin">Signup</a>
+            </Button>
+          </Form.Item>
+          <Form.Item {...tailLayout}>
+            <button onClick={handleNaverLogin} style={{ width: '100%' }}>
+              Naver Login
+            </button>
+          </Form.Item>   
+          <Form.Item {...tailLayout}>
+            <button onClick={handleKakaoLogin} style={{ width: '100%' }}>
+              Kakao Login
+            </button>
+          </Form.Item>  
+          <Form.Item {...tailLayout}>
+            <button onClick={handleGoogleLogin} style={{ width: '100%' }}>
+              Google Login
+            </button>
+          </Form.Item> 
+          <Form.Item {...tailLayout}>
+            <button onClick={handleFaceBookLogin} style={{ width: '100%' }}>
+              FaceBook Login
+            </button>
+          </Form.Item> 
+        </Form>
+      </Card>
     </div>
   )
 };

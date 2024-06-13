@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AppContext } from "../context/AppContext";
+import { axiosInstance } from "../common/func/axios";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -26,8 +27,8 @@ export default function Home() {
   }, []);
 
   // 로그아웃 API 호출
-  const logout = () => {
-    axios.post("http://localhost:8080/api/auth/logout", {}, { withCredentials: true }) // 서버에 로그아웃 요청을 보냄
+  const logout = async () => {
+    await axiosInstance.post("api/auth/logout", {}) // 서버에 로그아웃 요청을 보냄
       .then(() => {
         setIsLogin(false); // 응답을 받으면 로그인 상태를 업데이트
         window.location.reload();
