@@ -15,6 +15,9 @@ export default function Login () {
 
   const navigate = useNavigate();
 
+  const successLogin = <SmileOutlined style={{ color: "#108ee9" }} />;
+  const failLogin = <FrownOutlined style={{ color: "#ff3333" }} />;
+
   const onUserNameHandler = (e) => {
     setLoginUserName(e.target.value);
   };
@@ -23,24 +26,16 @@ export default function Login () {
     setLoginPassword(e.target.value);
   };
 
-  const handleNaverLogin = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    window.location.href = `http://localhost:8080/oauth2/authorization/naver`; 
-  };
-
-  const handleKakaoLogin = (e) => {
-    e.preventDefault();
-    window.location.href = `http://localhost:8080/oauth2/authorization/kakao`; 
-  };
-
-  const handleGoogleLogin = (e) => {
-    e.preventDefault();
-    window.location.href = `http://localhost:8080/oauth2/authorization/google`; 
-  };
-
-  const handleFaceBookLogin = (e) => {
-    e.preventDefault();
-    window.location.href = `http://localhost:8080/oauth2/authorization/facebook`; 
+    const value = e.target.value;
+    const match = {
+      'naver': `http://localhost:8080/oauth2/authorization/naver`,
+      'kakao': `http://localhost:8080/oauth2/authorization/kakao`,
+      'google': `http://localhost:8080/oauth2/authorization/google`,
+      'facebook': `http://localhost:8080/oauth2/authorization/facebook`
+    };
+    return window.location.href = match[value];
   };
 
   const onClickLoginBtn = async (e) => {
@@ -52,7 +47,7 @@ export default function Login () {
       console.log(res);
       notification.open({
         message: "로그인 완료",
-        icon: <SmileOutlined style={{ color: "#108ee9" }} />
+        icon: successLogin
       });
       navigate("/");
     })
@@ -61,7 +56,7 @@ export default function Login () {
       notification.open({
         message: `${err} 에러`,
         description: err,
-        icon: <FrownOutlined style={{ color: "#ff3333" }} />
+        icon: failLogin
       });
 
       setFieldErrors((prevErrors) => {
@@ -134,22 +129,22 @@ export default function Login () {
             </Button>
           </Form.Item>
           <Form.Item {...tailLayout}>
-            <button onClick={handleNaverLogin} style={{ width: '100%' }}>
+            <button value='naver' onClick={handleLogin} style={{ width: '100%' }}>
               Naver Login
             </button>
           </Form.Item>   
           <Form.Item {...tailLayout}>
-            <button onClick={handleKakaoLogin} style={{ width: '100%' }}>
+            <button value='kakao' onClick={handleLogin} style={{ width: '100%' }}>
               Kakao Login
             </button>
           </Form.Item>  
           <Form.Item {...tailLayout}>
-            <button onClick={handleGoogleLogin} style={{ width: '100%' }}>
+            <button value='google' onClick={handleLogin} style={{ width: '100%' }}>
               Google Login
             </button>
           </Form.Item> 
           <Form.Item {...tailLayout}>
-            <button onClick={handleFaceBookLogin} style={{ width: '100%' }}>
+            <button value='facebook' onClick={handleLogin} style={{ width: '100%' }}>
               FaceBook Login
             </button>
           </Form.Item> 

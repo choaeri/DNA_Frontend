@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AppContext } from "../context/AppContext";
 import { axiosInstance } from "../common/func/axios";
+import { notification } from "antd";
+import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -15,20 +17,23 @@ export default function Home() {
 
   // 인증 API 호출
   useEffect(() => {
-    axios.get("http://localhost:8080/api/auth/check", { withCredentials: true })
-      .then(response => {
-        if (response.data.isAuthenticated) {
-          setIsLogin(true);
-        }
-      })
-      .catch(error => {
-        console.error("Error fetching user data:", error);
-      });
+    const axios = async () => {
+      axiosInstance.get("api/auth/check")
+        .then(response => {
+          if (response.data.isAuthenticated) {
+            setIsLogin(true);
+          };
+        })
+        .catch(err => {
+          console.error("Error fetching user data:", err);
+        });
+    };
+    axios();
   }, []);
 
   // 로그아웃 API 호출
   const logout = async () => {
-    await axiosInstance.post("api/auth/logout", {}) // 서버에 로그아웃 요청을 보냄
+    await axiosInstance.post("api/auth/logout") // 서버에 로그아웃 요청을 보냄
       .then(() => {
         setIsLogin(false); // 응답을 받으면 로그인 상태를 업데이트
         window.location.reload();
