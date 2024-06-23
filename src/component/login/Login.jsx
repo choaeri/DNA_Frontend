@@ -30,10 +30,10 @@ export default function Login () {
     e.preventDefault();
     const value = e.target.value;
     const match = {
-      'naver': `https://dna-kangwon.site/oauth2/authorization/naver`,
-      'kakao': `https://dna-kangwon.site/oauth2/authorization/kakao`,
-      'google': `https://dna-kangwon.site/oauth2/authorization/google`,
-      'facebook': `https://dna-kangwon.site/oauth2/authorization/facebook`
+      'naver': `http://dna-kangwon.site/oauth2/authorization/naver`,
+      'kakao': `http://dna-kangwon.site/oauth2/authorization/kakao`,
+      'google': `http://dna-kangwon.site/oauth2/authorization/google`,
+      'facebook': `http://dna-kangwon.site/oauth2/authorization/facebook`
     };
     return window.location.href = match[value];
   };
