@@ -24,8 +24,8 @@ export default function Home() {
           setIsLogin(true);
         }
 
-        // 카드 데이터 API 호출
-        const cardsResponse = await axiosInstance.get("api/cards");
+        // 지역 조회 API 호출
+        const cardsResponse = await axiosInstance.get("api/locations");
         setLocations(cardsResponse.data);
       } catch (err) {
         console.error("Error fetching data:", err);
