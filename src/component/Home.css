@@ -1,0 +1,31 @@
+.DNAHome .Header {
+  display: flex;
+}
+.DNAHome .Header .loginBtn {
+  margin-left: auto;
+}
+
+.DNAHome .CardContent {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+.DNAHome .CardContent .onMap {
+  margin-left: auto;
+}
+.DNAHome .CardContent .cardCnt {
+  display: flex;
+  padding: 1.5rem;
+  height: fit-content;
+  width: fit-content;
+}
+.DNAHome .CardContent .cardCnt .ant-card {
+  display: flex;
+  flex-direction: column;
+  float: left;
+  width: 15rem;
+  margin-right: 4rem;
+}
+.DNAHome .CardContent .cardCnt .ant-card-cover img {
+  height: 10rem
+}
