@@ -27,13 +27,13 @@ export default function Home() {
           console.error("Error fetching user data:", err);
         });
 
-      // axiosInstance.post("api/posts")
-      //   .then((res) => {
-      //     console.log(res);
-      //   })
-      //   .catch(err => {
-      //     console.error("Error fetching user data:", err);
-      //   });
+      axiosInstance.post("api/posts")
+        .then((res) => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.error("Error fetching user data:", err);
+        });
     };
     axios();
   }, []);
