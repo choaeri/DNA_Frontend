@@ -15,19 +15,28 @@ export default function Home() {
     navigate("/login");
   };
 
+  // 인증 API 호출
   useEffect(() => {
-    const fetchData = async () => {
+    const checkAuthentication = async () => {
       try {
-        // 인증 API 호출
         const authResponse = await axiosInstance.get("api/auth/check");
         if (authResponse.data.isAuthenticated) {
           setIsLogin(true);
         }
+      } catch (err) {
+        console.error("Error checking authentication:", err);
+      }
+    };
+    checkAuthentication();
+  }, [setIsLogin]);
 
-        // 지역 조회 API 호출
+  // 지역 조회 API 호출
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
         const cardsResponse = await axiosInstance.get("api/locations");
         const fetchedLocations = cardsResponse.data;
-        
+
         // fetchedLocations가 배열인지 확인
         if (Array.isArray(fetchedLocations)) {
           setLocations(fetchedLocations);
@@ -36,12 +45,12 @@ export default function Home() {
           setLocations([]);
         }
       } catch (err) {
-        console.error("Error fetching data:", err);
+        console.error("Error fetching locations:", err);
         setLocations([]); // 에러 발생 시 빈 배열로 초기화
       }
     };
-    fetchData();
-  }, [setIsLogin]);
+    fetchLocations();
+  }, []);
 
   // 로그아웃 API 호출
   const logout = async () => {
