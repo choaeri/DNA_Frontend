@@ -26,9 +26,18 @@ export default function Home() {
 
         // 지역 조회 API 호출
         const cardsResponse = await axiosInstance.get("api/locations");
-        setLocations(cardsResponse.data);
+        const fetchedLocations = cardsResponse.data;
+        
+        // fetchedLocations가 배열인지 확인
+        if (Array.isArray(fetchedLocations)) {
+          setLocations(fetchedLocations);
+        } else {
+          console.error("Fetched locations data is not an array:", fetchedLocations);
+          setLocations([]);
+        }
       } catch (err) {
         console.error("Error fetching data:", err);
+        setLocations([]); // 에러 발생 시 빈 배열로 초기화
       }
     };
     fetchData();
