@@ -32,21 +32,25 @@ export default function Signin () {
 
     await axiosInstance.post('api/users', data)
     .then((res) => {
-      console.log(res);
       notification.open({
         message: "회원가입 완료",
         icon: <SmileOutlined style={{ color: "#108ee9" }} />
       });
-      navigate("/");
+      navigate("/login");
     })
-    .catch((err) => {
-      console.log(err);
-      notification.open({
-        message: `${err} 에러`,
-        description: err,
-        icon: <FrownOutlined style={{ color: "#ff3333" }} />
-      });
-  
+    .catch((error) => {
+      if (error.response) {
+        console.log(error.response)
+        const {
+          data: { errorMessage },
+        } = error.response;
+        notification.open({
+          message: "회원가입 실패",
+          description: errorMessage,
+          icon: <FrownOutlined style={{ color: "#ff3333" }} />
+        });
+      }
+
       setFieldErrors((prevErrors) => {
         const updatedErrors = {};
   
