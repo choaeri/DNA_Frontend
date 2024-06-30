@@ -3,53 +3,55 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { axiosInstance } from "../common/func/axios";
 import './Home.css';
-import { Card } from "antd";
+import { Button, Card } from "antd";
 import Meta from "antd/es/card/Meta";
+import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 
 export default function Home() {
   const navigate = useNavigate();
   const { isLogin, setIsLogin } = useContext(AppContext);
   const [locations, setLocations] = useState([]);
+  const [like, setLike] = useState();
 
   const goToLogin = () => {
     navigate("/login");
   };
 
-  // 인증 API 호출
-  useEffect(() => {
-    const checkAuthentication = async () => {
-      try {
-        const authResponse = await axiosInstance.get("api/auth/check");
-        if (authResponse.data.isAuthenticated) {
-          setIsLogin(true);
-        }
-      } catch (err) {
-        console.error("Error checking authentication:", err);
-      }
-    };
-    checkAuthentication();
-  }, [setIsLogin]);
-
   // 지역 조회 API 호출
   useEffect(() => {
     const fetchLocations = async () => {
-      try {
-        const cardsResponse = await axiosInstance.get("api/locations");
-        const fetchedLocations = cardsResponse.data;
-
-        // fetchedLocations가 배열인지 확인
-        if (Array.isArray(fetchedLocations)) {
-          setLocations(fetchedLocations);
-        } else {
-          console.error("Fetched locations data is not an array:", fetchedLocations);
-          setLocations([]);
-        }
-      } catch (err) {
-        console.error("Error fetching locations:", err);
-        setLocations([]); // 에러 발생 시 빈 배열로 초기화
-      }
-    };
+      await axiosInstance.get("api/locations")
+        .then((res) => {
+          const data = res.data;
+          if(Array.isArray(data)) {
+            setLocations(data);
+          } else {
+            console.error("Fetched locations data is not an array:", data);
+            setLocations([]);
+          };
+        })
+        .catch((err) => {
+          console.error("Error fetching locations:", err);
+          setLocations([]); // 에러 발생 시 빈 배열로 초기화
+        });
+      };
     fetchLocations();
+  }, []);
+
+  useEffect(() => {
+    // 인증 API 호출
+    const checkAuthentication = async () => {
+      await axiosInstance.get("api/auth/check")
+        .then((res) => {
+          if (res.data.isAuthenticated) {
+            setIsLogin(true);
+          };
+        })
+        .catch ((err) => {
+          setIsLogin(false);
+        });
+    };
+    checkAuthentication();
   }, []);
 
   // 로그아웃 API 호출
@@ -60,7 +62,7 @@ export default function Home() {
       window.location.reload();
     } catch (error) {
       console.error("Error during logout:", error);
-    }
+    };
   };
 
   // 버튼 클릭 핸들러 수정
@@ -72,10 +74,35 @@ export default function Home() {
     }
   };
 
+  const onClickLikeBtn = (e) => {
+    const value = e.target.value;
+    setLike(!like);
+    const onClickLike = async () => {
+      await axiosInstance.post("api/locations/")
+        .then((res) => {
+          const data = res.data;
+          if(Array.isArray(data)) {
+            setLocations(data);
+          } else {
+            console.error("Fetched locations data is not an array:", data);
+            setLocations([]);
+          };
+        })
+        .catch((err) => {
+          console.error("Error fetching locations:", err);
+          setLocations([]); // 에러 발생 시 빈 배열로 초기화
+        });
+      };
+      onClickLike();
+  };
+
   return (
     <div className="DNAHome">
       <div className="Header">
-        <button className="loginBtn" onClick={handleButtonClick}>{!isLogin ? '로그인' : '로그아웃'}</button>
+        <div className="account">
+          <button className="loginBtn" onClick={handleButtonClick}>{!isLogin ? 'Login' : 'Logout'}</button>
+          <button className="signInBtn"><a href="/signin">Signup</a></button>
+        </div>
       </div>
       <div className="RmdContent">
         <button className="recommendBtn">추천받기</button>
@@ -91,9 +118,14 @@ export default function Home() {
               key={index}
               className="card"
               hoverable
+              extra={<Button icon={like ? <HeartFilled /> : <HeartOutlined />} value={location.name} onClick={onClickLikeBtn} ></Button>}
               cover={<img alt={location.name} src={location.thumbNail} />}
             >
               <Meta title={location.name} />
+              <p>temperature: {location.weatherInfo.temperature}</p>
+              <p>humidity: {location.weatherInfo.humidity}</p>
+              <p>cloudiness: {location.weatherInfo.cloudiness}</p>
+              <p>windSpeed: {location.weatherInfo.windSpeed}</p>
             </Card>
           ))}
         </div>

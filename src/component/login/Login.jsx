@@ -125,11 +125,6 @@ export default function Login() {
             </Button>
           </Form.Item>
           <Form.Item {...tailLayout}>
-            <Button style={{ width: "100%" }}>
-              <a href="/signin">Signup</a>
-            </Button>
-          </Form.Item>
-          <Form.Item {...tailLayout}>
             <button value="naver" onClick={handleLogin} style={{ width: "100%" }}>
               Naver Login
             </button>
