@@ -1,24 +1,26 @@
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext";
 import { axiosInstance } from "../common/func/axios";
 import './Home.css';
-import { Button, Card } from "antd";
-import Meta from "antd/es/card/Meta";
-import { HeartFilled, HeartOutlined } from "@ant-design/icons";
+import Recommend from "./Recommend/Recommend";
+import PostCard from "./PostCard/PostCard";
+
 
 export default function Home() {
   const navigate = useNavigate();
-  const { isLogin, setIsLogin } = useContext(AppContext);
-  const [locations, setLocations] = useState([]);
-  const [like, setLike] = useState();
+  const { isLogin, setIsLogin, setLocations } = useContext(AppContext);
 
   const goToLogin = () => {
     navigate("/login");
   };
 
-  // 지역 조회 API 호출
+  const goToSignIn = () => {
+    navigate("/signin");
+  };
+
   useEffect(() => {
+    // 지역 조회 API 호출
     const fetchLocations = async () => {
       await axiosInstance.get("api/locations")
         .then((res) => {
@@ -35,10 +37,7 @@ export default function Home() {
           setLocations([]); // 에러 발생 시 빈 배열로 초기화
         });
       };
-    fetchLocations();
-  }, []);
 
-  useEffect(() => {
     // 인증 API 호출
     const checkAuthentication = async () => {
       await axiosInstance.get("api/auth/check")
@@ -51,6 +50,8 @@ export default function Home() {
           setIsLogin(false);
         });
     };
+    
+    fetchLocations();
     checkAuthentication();
   }, []);
 
@@ -65,8 +66,8 @@ export default function Home() {
     };
   };
 
-  // 버튼 클릭 핸들러 수정
-  const handleButtonClick = () => {
+  // 로그인 버튼 클릭
+  const onClickLoginButton = () => {
     if (!isLogin) {
       goToLogin();
     } else {
@@ -74,62 +75,23 @@ export default function Home() {
     }
   };
 
-  const onClickLikeBtn = (e) => {
-    const value = e.target.value;
-    setLike(!like);
-    const onClickLike = async () => {
-      await axiosInstance.post("api/locations/")
-        .then((res) => {
-          const data = res.data;
-          if(Array.isArray(data)) {
-            setLocations(data);
-          } else {
-            console.error("Fetched locations data is not an array:", data);
-            setLocations([]);
-          };
-        })
-        .catch((err) => {
-          console.error("Error fetching locations:", err);
-          setLocations([]); // 에러 발생 시 빈 배열로 초기화
-        });
-      };
-      onClickLike();
+  // 회원가입 버튼 클릭
+  const onClickSigninButton = () => {
+    if (!isLogin) {
+      goToSignIn();
+    };
   };
 
   return (
     <div className="DNAHome">
       <div className="Header">
         <div className="account">
-          <button className="loginBtn" onClick={handleButtonClick}>{!isLogin ? 'Login' : 'Logout'}</button>
-          <button className="signInBtn"><a href="/signin">Signup</a></button>
+          <button className="loginBtn" onClick={onClickLoginButton}>{!isLogin ? 'Login' : 'Logout'}</button>
+          {!isLogin ? <button className="signInBtn" onClick={onClickSigninButton}>Sign Up</button> : null}
         </div>
       </div>
-      <div className="RmdContent">
-        <button className="recommendBtn">추천받기</button>
-      </div>
-      <div className="CardContent">
-        <header>
-          <h2>Best Workation Recommend</h2>
-        </header>
-        <button className="onMap">map</button>
-        <div className="cardCnt">
-          {locations.map((location, index) => (
-            <Card
-              key={index}
-              className="card"
-              hoverable
-              extra={<Button icon={like ? <HeartFilled /> : <HeartOutlined />} value={location.name} onClick={onClickLikeBtn} ></Button>}
-              cover={<img alt={location.name} src={location.thumbNail} />}
-            >
-              <Meta title={location.name} />
-              <p>temperature: {location.weatherInfo.temperature}</p>
-              <p>humidity: {location.weatherInfo.humidity}</p>
-              <p>cloudiness: {location.weatherInfo.cloudiness}</p>
-              <p>windSpeed: {location.weatherInfo.windSpeed}</p>
-            </Card>
-          ))}
-        </div>
-      </div>
+      <Recommend />
+      <PostCard />
     </div>
   );
 }

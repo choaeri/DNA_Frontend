@@ -13,6 +13,7 @@ const AppProvider = ({ children }) => {
 	const [signInId, setSignInId] = useState("");
 	const [signInPassword, setSignInPassword] = useState("");
 	const [signInEmail, setSignInEmail] = useState("");
+  const [locations, setLocations] = useState([]);
 
 	return (
 		<AppContext.Provider
@@ -25,6 +26,7 @@ const AppProvider = ({ children }) => {
 				signInId,
 				signInPassword,
 				signInEmail,
+				locations,
 
 				setOpenLoginPage,
 				setIsLogin,
@@ -33,7 +35,8 @@ const AppProvider = ({ children }) => {
 				setSignInUserName,
 				setSignInId,
 				setSignInPassword,
-				setSignInEmail
+				setSignInEmail,
+				setLocations
 			}}
 		>
 			{children}
