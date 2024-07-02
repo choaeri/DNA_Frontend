@@ -23,11 +23,16 @@
   src: url("../public/assets/fonts/Syne-Regular.otf") format("woff");
 }
 
+* {
+  font-family: 'Pretendard Variable';
+}
+
 html,
 body,
 #root,
 .App {
 	height: 100%;
+  overflow-x: hidden;
 }
 
 body {

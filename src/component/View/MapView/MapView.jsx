@@ -12,5 +12,5 @@ export default function MapView () {
         <ZoomControl position={"right"} />
       </Map>
     </div>
-  )
+  );
 };

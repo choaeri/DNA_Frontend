@@ -1,17 +1,38 @@
 .RmdContent {
   display: flex;
+  width: 100%;
+  height: 47rem;
+  position: relative;
 }
 
+.RmdContent .rmdTitle {
+  position: absolute;
+  z-index: 1;
+  left: 24%;
+}
+.RmdContent .rmdTitle span {
+  color: var(--Gray-01, var(--Gray1, #000));
+  font-family: "Syne";
+  font-size: 67px;
+  font-weight: 500;
+  line-height: 120%;
+  letter-spacing: -1.62px;
+}
 .RmdContent .dnaHome {
-  width: 530px;
-  height: 572px;
+  width: 536px;
+  height: 552px;
   flex-shrink: 0;
+  position: relative;
+  top: 18%;
+  left: 43%;
 }
 .RmdContent .rmdBtnContent {
   display: flex;
-  width: 628px;
-  height: 72px;
-  padding: 18px var(--button-padding-gap-button-padding-xl, 24px) 18px 40px;
+  width: 410px;
+  height: 23px;
+  top: 37%;
+  left: 38%;
+  padding: 10px var(--button-padding-gap-button-padding-xl, 24px) 10px 30px;
   justify-content: center;
   align-items: center;
   gap: 10px;

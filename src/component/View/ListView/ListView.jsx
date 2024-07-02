@@ -99,4 +99,4 @@ export default function ListView() {
       </div>
     </div>
   );
-}
+};

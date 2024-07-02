@@ -1,34 +1,34 @@
 import { useContext, useState } from "react"
-import { AppContext } from "../../context/AppContext"
+import { AppContext } from "../../../context/AppContext"
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Form, Input, notification } from "antd";
 import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
-import { axiosInstance } from "../../common/func/axios";
+import { axiosInstance } from "../../../common/func/axios";
 
-export default function Signin () {
-  const { signInUserName, setSignInUserName,
-          signInPassword, setSignInPassword,
-          signInEmail, setSignInEmail } = useContext(AppContext);
+export default function Signup () {
+  const { signUpUserName, setSignUpUserName,
+          signUpPassword, setSignUpPassword,
+          signUpEmail, setSignUpEmail } = useContext(AppContext);
 
   const [fieldErrors, setFieldErrors] = useState({});
 
   const navigate = useNavigate();
 
   const onUserNameHandler = (e) => {
-    setSignInUserName(e.target.value);
+    setSignUpUserName(e.target.value);
   };
 
   const onPasswordHandler = (e) => {
-    setSignInPassword(e.target.value);
+    setSignUpPassword(e.target.value);
   };
 
   const onEmailHandler = (e) => {
-    setSignInEmail(e.target.value);
+    setSignUpEmail(e.target.value);
   };
 
-  const onClickSigninBtn = async (e) => {
+  const onClickSignupBtn = async (e) => {
     setFieldErrors({});
-    const data = { username: signInUserName, password: signInPassword, email: signInEmail };
+    const data = { username: signUpUserName, password: signUpPassword, email: signUpEmail };
 
     await axiosInstance.post('api/users', data)
     .then((res) => {
@@ -84,10 +84,10 @@ export default function Signin () {
       display: 'flex', justifyContent: 'center', alignItems: 'center', 
       width: '100%', height: '100vh'
     }}>
-      <Card title={<span style={{ color: '#666666' }}>회원가입</span>}>
+      <Card title={<span style={{ color: '#666666' }}>Sign Up</span>}>
         <Form
           {...layout}
-          onFinish={onClickSigninBtn}
+          onFinish={onClickSignupBtn}
           autoComplete={"false"}
         >
           <Form.Item
@@ -100,7 +100,7 @@ export default function Signin () {
             {...fieldErrors.username}
             {...fieldErrors.non_field_errors}
           >
-            <Input value={signInUserName} onChange={onUserNameHandler}/>
+            <Input value={signUpUserName} onChange={onUserNameHandler}/>
           </Form.Item>
           <Form.Item
             label="Password"
@@ -108,7 +108,7 @@ export default function Signin () {
             rules={[{ required: true, message: "Please input your password!" }]}
             {...fieldErrors.password}
           >
-            <Input.Password value={signInPassword} onChange={onPasswordHandler} />
+            <Input.Password value={signUpPassword} onChange={onPasswordHandler} />
           </Form.Item>
           <Form.Item
             label="Email"
@@ -120,11 +120,11 @@ export default function Signin () {
             {...fieldErrors.email}
             {...fieldErrors.non_field_errors}
           >
-            <Input value={signInEmail} onChange={onEmailHandler}/>
+            <Input value={signUpEmail} onChange={onEmailHandler}/>
           </Form.Item>
           <Form.Item {...tailLayout}>
             <Button htmlType="submit" style={{ width: '100%' }}>
-              SignIn
+              Sign Up
             </Button>
           </Form.Item>
         </Form>

@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext";
 import { axiosInstance } from "../common/func/axios";
@@ -6,21 +5,14 @@ import './Home.css';
 import Recommend from "./Recommend/Recommend";
 import ListView from "./View/ListView/ListView";
 import MapView from "./View/MapView/MapView";
+import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
 
 
 export default function Home() {
-  const navigate = useNavigate();
-  const { isLogin, setIsLogin, 
+  const { setIsLogin, 
           setLocations, 
           viewMode, setViewMode } = useContext(AppContext);
-
-  const goToLogin = () => {
-    navigate("/login");
-  };
-
-  const goToSignIn = () => {
-    navigate("/signin");
-  };
 
   useEffect(() => {
     // 지역 조회 API 호출
@@ -58,41 +50,9 @@ export default function Home() {
     checkAuthentication();
   }, []);
 
-  // 로그아웃 API 호출
-  const logout = async () => {
-    try {
-      await axiosInstance.post("api/auth/logout");
-      setIsLogin(false);
-      window.location.reload();
-    } catch (error) {
-      console.error("Error during logout:", error);
-    };
-  };
-
-  // 로그인 버튼 클릭
-  const onClickLoginButton = () => {
-    if (!isLogin) {
-      goToLogin();
-    } else {
-      logout();
-    }
-  };
-
-  // 회원가입 버튼 클릭
-  const onClickSigninButton = () => {
-    if (!isLogin) {
-      goToSignIn();
-    };
-  };
-
   return (
     <div className="DNAHome">
-      <div className="Header">
-        <div className="account">
-          <button className="loginBtn" onClick={onClickLoginButton}>{!isLogin ? 'Login' : 'Logout'}</button>
-          {!isLogin ? <button className="signInBtn" onClick={onClickSigninButton}>Sign Up</button> : null}
-        </div>
-      </div>
+      <Header />
       <Recommend />
       <div className="ViewContent">
         { viewMode === 'list' ? <ListView /> : <MapView /> }
@@ -109,6 +69,7 @@ export default function Home() {
           style={viewMode === 'map' ? {backgroundColor: "var(--Gray-10, #FFF)", color: "#000"} : {backgroundColor: "#000"}}
         >Map</button>
       </div>
+      <Footer />
     </div>
   );
-}
+};

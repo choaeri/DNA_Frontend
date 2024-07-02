@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import { AppContext } from "../../context/AppContext";
+import { AppContext } from "../../../context/AppContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Form, Input, notification } from "antd";
 import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
-import { axiosInstance } from "../../common/func/axios";
+import { axiosInstance } from "../../../common/func/axios";
 
 export default function Login() {
   const { loginUserName, setLoginUserName, loginPassword, setLoginPassword } = useContext(AppContext);
@@ -99,7 +99,7 @@ export default function Login() {
         height: "100vh",
       }}
     >
-      <Card title={<span style={{ color: "#666666" }}>로그인</span>}>
+      <Card title={<span style={{ color: "#666666" }}>Login</span>}>
         <Form {...layout} onFinish={onClickLoginBtn} autoComplete={"false"}>
           <Form.Item
             label="Username"

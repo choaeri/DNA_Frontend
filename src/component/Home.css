@@ -3,50 +3,15 @@
   flex-direction: column;
 }
 
-.DNAHome .Header {
-  display: flex;
-  width: 1440px;
-  height: 68px;
-  padding: 0px 20px;
-  justify-content: space-between;
-  align-items: center;
-}
-.DNAHome .Header .account {
-  font-family: 'Pretendard Variable';
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 14px;
-}
-.DNAHome .Header .account .loginBtn,
-.DNAHome .Header .account .signInBtn {
-  display: flex;
-  height: var(--Button-Size-button-size-md, 40px);
-  padding: 0px 20px;
-  border-radius: 9999px;
-  justify-content: center;
-  align-items: center;
-  gap: var(--button-padding-gap-button-gap-md, 2px);
-}
-.DNAHome .Header .account .loginBtn {
-  background-color: #ffffff;
-  border: none;
-}
-.DNAHome .Header .account .signInBtn {
-  background: var(--Gray-01, #000);
-  color: #ffffff;
-}
-
-/* .DNAHome .ViewContent {
-  display: flex;
+.DNAHome .ViewContent {
   position: relative;
+  display: flex;
   width: 100%;
-  height: 100%;
-} */
+  height: 43rem;
+}
 .DNAHome .ViewBtn {
   display: inline-flex;
-  position: absolute;
+  position: fixed;
   z-index: 1;
   bottom: 5%;
   left: 50%;
@@ -74,4 +39,3 @@
   padding: 7.5px 21.5px 8.5px 21.5px;
   color: var(--Gray-10, #FFF);
 }
-

@@ -5,15 +5,14 @@ const AppContext = createContext({
 });
 
 const AppProvider = ({ children }) => {
-	const { kakao } = window;
 	const [openLoginPage, setOpenLoginPage] = useState(false);
 	const [isLogin, setIsLogin] = useState(false);
 	const [loginUserName, setLoginUserName] = useState("");
 	const [loginPassword, setLoginPassword] = useState("");
-	const [signInUserName, setSignInUserName] = useState("");
-	const [signInId, setSignInId] = useState("");
-	const [signInPassword, setSignInPassword] = useState("");
-	const [signInEmail, setSignInEmail] = useState("");
+	const [signUpUserName, setSignUpUserName] = useState("");
+	const [signUpId, setSignUpId] = useState("");
+	const [signUpPassword, setSignUpPassword] = useState("");
+	const [signUpEmail, setSignUpEmail] = useState("");
   const [locations, setLocations] = useState([]);
 	const [viewMode, setViewMode] = useState('list');
 
@@ -24,10 +23,10 @@ const AppProvider = ({ children }) => {
 				isLogin,
 				loginUserName,
 				loginPassword,
-				signInUserName,
-				signInId,
-				signInPassword,
-				signInEmail,
+				signUpUserName,
+				signUpId,
+				signUpPassword,
+				signUpEmail,
 				locations,
 				viewMode,
 
@@ -35,10 +34,10 @@ const AppProvider = ({ children }) => {
 				setIsLogin,
 				setLoginUserName,
 				setLoginPassword,
-				setSignInUserName,
-				setSignInId,
-				setSignInPassword,
-				setSignInEmail,
+				setSignUpUserName,
+				setSignUpId,
+				setSignUpPassword,
+				setSignUpEmail,
 				setLocations,
 				setViewMode,
 			}}
