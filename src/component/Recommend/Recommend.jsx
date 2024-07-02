@@ -1,7 +1,14 @@
+import { RightCircleFilled } from "@ant-design/icons";
+import "./Recommend.css";
+
 export default function Recommend () {
   return (
     <div className="RmdContent">
-      <button className="recommendBtn">추천받기</button>
+      {/* <img className="dnaHome" src="img/DNAHome.png" alt="DNAHome"></img>
+      <div className="rmdBtnContent">
+        <p>Find the perfect workation spot for you</p>
+        <RightCircleFilled className="recommendBtn" />
+      </div> */}
     </div>
   )
 };

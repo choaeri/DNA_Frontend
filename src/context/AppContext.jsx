@@ -5,6 +5,7 @@ const AppContext = createContext({
 });
 
 const AppProvider = ({ children }) => {
+	const { kakao } = window;
 	const [openLoginPage, setOpenLoginPage] = useState(false);
 	const [isLogin, setIsLogin] = useState(false);
 	const [loginUserName, setLoginUserName] = useState("");
@@ -14,6 +15,7 @@ const AppProvider = ({ children }) => {
 	const [signInPassword, setSignInPassword] = useState("");
 	const [signInEmail, setSignInEmail] = useState("");
   const [locations, setLocations] = useState([]);
+	const [viewMode, setViewMode] = useState('list');
 
 	return (
 		<AppContext.Provider
@@ -27,6 +29,7 @@ const AppProvider = ({ children }) => {
 				signInPassword,
 				signInEmail,
 				locations,
+				viewMode,
 
 				setOpenLoginPage,
 				setIsLogin,
@@ -36,7 +39,8 @@ const AppProvider = ({ children }) => {
 				setSignInId,
 				setSignInPassword,
 				setSignInEmail,
-				setLocations
+				setLocations,
+				setViewMode,
 			}}
 		>
 			{children}

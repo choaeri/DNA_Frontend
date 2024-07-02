@@ -4,7 +4,8 @@ import Home from './component/Home';
 import Login from './component/login/Login';
 import SignIn from './component/signin/Signin';
 import Recommend from './component/Recommend/Recommend';
-import PostCard from './component/PostCard/PostCard';
+import ListView from './component/View/ListView/ListView';
+import MapView from './component/View/MapView/MapView';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/recommend" element={<Recommend />} />
-          <Route path="/postcard" element={<PostCard />} />
+          <Route path="/listview" element={<ListView />} />
+          <Route path="/mapview" element={<MapView />} />
         </Routes>
       </AppProvider>
     </BrowserRouter>

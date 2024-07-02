@@ -1,13 +1,40 @@
+@font-face {
+  font-family: "Pretendard Variable";
+  src: url("../public/assets/fonts/PretendardVariable.ttf") format("woff");
+}
+@font-face {
+  font-family: "Syne-Bold";
+  src: url("../public/assets/fonts/Syne-Bold.otf") format("woff");
+}
+@font-face {
+  font-family: "Syne-Extra";
+  src: url("../public/assets/fonts/Syne-Extra.otf") format("woff");
+}
+@font-face {
+  font-family: "Syne-Italic";
+  src: url("../public/assets/fonts/Syne-Italic.otf") format("woff");
+}
+@font-face {
+  font-family: "Syne-Mono";
+  src: url("../public/assets/fonts/Syne-Mono.otf") format("woff");
+}
+@font-face {
+  font-family: "Syne-Regular";
+  src: url("../public/assets/fonts/Syne-Regular.otf") format("woff");
+}
+
+html,
+body,
+#root,
+.App {
+	height: 100%;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: 'Pretendard Variable', 'Syne-Bold', 'Syne-Extra', 'Syne-Italic',
+    'Syne-Mono', 'Syne-Regular'
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }

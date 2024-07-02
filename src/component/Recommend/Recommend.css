@@ -1,0 +1,27 @@
+.RmdContent {
+  display: flex;
+}
+
+.RmdContent .dnaHome {
+  width: 530px;
+  height: 572px;
+  flex-shrink: 0;
+}
+.RmdContent .rmdBtnContent {
+  display: flex;
+  width: 628px;
+  height: 72px;
+  padding: 18px var(--button-padding-gap-button-padding-xl, 24px) 18px 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  position: absolute;
+  border-radius: 54px;
+  border: 2px solid var(--Gray1, #000);
+  background: var(--Gray-10, #FFF);
+  box-shadow: 0px 16px 32px 0px rgba(0, 0, 0, 0.16);
+}
+.RmdContent .rmdBtnContent p {
+  margin-right: auto;
+}

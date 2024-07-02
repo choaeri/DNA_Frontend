@@ -4,12 +4,15 @@ import { AppContext } from "../context/AppContext";
 import { axiosInstance } from "../common/func/axios";
 import './Home.css';
 import Recommend from "./Recommend/Recommend";
-import PostCard from "./PostCard/PostCard";
+import ListView from "./View/ListView/ListView";
+import MapView from "./View/MapView/MapView";
 
 
 export default function Home() {
   const navigate = useNavigate();
-  const { isLogin, setIsLogin, setLocations } = useContext(AppContext);
+  const { isLogin, setIsLogin, 
+          setLocations, 
+          viewMode, setViewMode } = useContext(AppContext);
 
   const goToLogin = () => {
     navigate("/login");
@@ -91,7 +94,21 @@ export default function Home() {
         </div>
       </div>
       <Recommend />
-      <PostCard />
+      <div className="ViewContent">
+        { viewMode === 'list' ? <ListView /> : <MapView /> }
+      </div>
+      <div className="ViewBtn">
+        <button 
+          className="list" 
+          onClick={() => setViewMode('list')} 
+          style={viewMode === 'list' ? {backgroundColor: "var(--Gray-10, #FFF)"} : {backgroundColor: "#000", color: "var(--Gray-10, #FFF)"}}
+        >List</button>
+        <button 
+          className="map" 
+          onClick={() => setViewMode('map')}
+          style={viewMode === 'map' ? {backgroundColor: "var(--Gray-10, #FFF)", color: "#000"} : {backgroundColor: "#000"}}
+        >Map</button>
+      </div>
     </div>
   );
 }
