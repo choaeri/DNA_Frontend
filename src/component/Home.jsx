@@ -53,21 +53,29 @@ export default function Home() {
   return (
     <div className="DNAHome">
       <Header />
-      <Recommend />
-      <div className="ViewContent">
-        { viewMode === 'list' ? <ListView /> : <MapView /> }
-      </div>
-      <div className="ViewBtn">
-        <button 
-          className="list" 
-          onClick={() => setViewMode('list')} 
-          style={viewMode === 'list' ? {backgroundColor: "var(--Gray-10, #FFF)"} : {backgroundColor: "#000", color: "var(--Gray-10, #FFF)"}}
-        >List</button>
-        <button 
-          className="map" 
-          onClick={() => setViewMode('map')}
-          style={viewMode === 'map' ? {backgroundColor: "var(--Gray-10, #FFF)", color: "#000"} : {backgroundColor: "#000"}}
-        >Map</button>
+      <div className="Content">
+        <Recommend />
+        <div 
+          className="ViewContent" 
+          // style={ 
+          //   viewMode === "list" ? 
+          //   { height: "119rem" } : 
+          //   { height: "39rem" }}
+        >
+          { viewMode === 'list' ? <ListView /> : <MapView /> }
+        </div>
+        <div className="ViewBtn">
+          <button 
+            className="list" 
+            onClick={() => setViewMode('list')} 
+            style={viewMode === 'list' ? {backgroundColor: "var(--Gray-10, #FFF)"} : {backgroundColor: "#000", color: "var(--Gray-10, #FFF)"}}
+          >List</button>
+          <button 
+            className="map" 
+            onClick={() => setViewMode('map')}
+            style={viewMode === 'map' ? {backgroundColor: "var(--Gray-10, #FFF)", color: "#000"} : {backgroundColor: "#000"}}
+          >Map</button>
+        </div>
       </div>
       <Footer />
     </div>

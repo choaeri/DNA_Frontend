@@ -63,16 +63,18 @@ export default function ListView() {
   return (
     <div className="CardContent">
       <header>
-        <h2>Best Workation Recommend</h2>
+        <span className="num">01</span>
+        <span className="title">Clean  Beaches,<br />Quiet  Streets</span>
       </header>
       <div className="cardCnt">
         {locations.map((location, index) => (
-          <Card
+          <div
             key={index}
             className="card"
-            hoverable
-            extra={
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+          > 
+            
+            <img alt={location.name} src={location.thumbNail}></img>
+            <div style={{ display: 'flex', alignItems: 'center', position: "absolute" }}>
                 {isLike[location.id] ? (
                   <HeartFilled 
                     onClick={() => onClickLike(location.id)} 
@@ -86,15 +88,42 @@ export default function ListView() {
                 )}
                 <span style={{ marginLeft: '8px' }}>{likeCount[location.id]}</span>
               </div>
-            }
-            cover={<img alt={location.name} src={location.thumbNail} />}
-          >
-            <Meta title={location.name} />
-            <p>temperature: {location.weatherInfo.temperature}</p>
-            <p>humidity: {location.weatherInfo.humidity}</p>
-            <p>cloudiness: {location.weatherInfo.cloudiness}</p>
-            <p>windSpeed: {location.weatherInfo.windSpeed}</p>
-          </Card>
+            <div className="locationCnt">
+              <span className="location">{location.name}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29" fill="none">
+                <path d="M5 14.2103L22.3482 14.2103" stroke="black"/>
+                <path d="M15.2898 6.5L23.0001 14.2103L15.2898 21.9206" stroke="black"/>
+              </svg>
+            </div>
+          </div>
+          // <Card
+          //   key={index}
+          //   className="card"
+          //   hoverable
+          //   extra={
+          //     <div style={{ display: 'flex', alignItems: 'center' }}>
+          //       {isLike[location.id] ? (
+          //         <HeartFilled 
+          //           onClick={() => onClickLike(location.id)} 
+          //           style={{ color: 'red', cursor: 'pointer' }} 
+          //         />
+          //       ) : (
+          //         <HeartOutlined 
+          //           onClick={() => onClickLike(location.id)} 
+          //           style={{ color: 'gray', cursor: 'pointer' }} 
+          //         />
+          //       )}
+          //       <span style={{ marginLeft: '8px' }}>{likeCount[location.id]}</span>
+          //     </div>
+          //   }
+          //   cover={<img alt={location.name} src={location.thumbNail} />}
+          // >
+          //   <Meta title={location.name} />
+          //   <p>temperature: {location.weatherInfo.temperature}</p>
+          //   <p>humidity: {location.weatherInfo.humidity}</p>
+          //   <p>cloudiness: {location.weatherInfo.cloudiness}</p>
+          //   <p>windSpeed: {location.weatherInfo.windSpeed}</p>
+          // </Card>
         ))}
       </div>
     </div>

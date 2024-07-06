@@ -1,24 +1,65 @@
 .CardContent {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 10rem 14rem;
+  width: 61rem;
+  align-items: flex-start;
+  gap: 80px;
 }
-.CardContent .onMap {
-  margin-left: auto;
-}
-.CardContent .cardCnt {
-  display: flex;
-  padding: 1.5rem;
-  height: fit-content;
-  width: fit-content;
-}
-.CardContent .cardCnt .ant-card {
+
+.CardContent header {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: var(--button-padding-gap-button-padding-md, 16px);
+}
+.CardContent header .num,
+.CardContent header .title {
+  color: var(--Gray1, #000);
+  font-family: "Syne";
+  font-style: normal;
+  font-weight: 400;
+}
+.CardContent header .num {
+  font-size: 20px;
+  line-height: 160%;
+}
+.CardContent header .title {
+  font-size: 54px;
+  line-height: 120%;
+  letter-spacing: -1.62px;
+}
+
+.CardContent .cardCnt {
+  display: flex;
+  height: fit-content;
+  width: 100%;
+  flex-direction: column;
   float: left;
-  width: 15rem;
   margin-right: 4rem;
 }
-.CardContent .cardCnt .ant-card-cover img {
-  height: 10rem
+.CardContent .cardCnt .card {
+  display: flex;
+}
+.CardContent .cardCnt .card .locationCnt {
+  display: flex;
+  margin-left: 40px;
+}
+.CardContent .cardCnt .card .location {
+  color: var(--Gray-01, var(--Gray1, #000));
+  font-family: "Syne";
+  font-size: 54px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: -1.62px;
+}
+.CardContent .cardCnt .card svg {
+  width: 28px;
+  height: 28px;
+}
+.CardContent .cardCnt img {
+  width: 250px;
+  height: 23rem;
+  flex-shrink: 0;
 }

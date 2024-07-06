@@ -3,13 +3,17 @@
   flex-direction: column;
 }
 
-.DNAHome .ViewContent {
+.DNAHome .Content {
+  padding-top: 68px;
+}
+
+.DNAHome .Content .ViewContent {
   position: relative;
   display: flex;
   width: 100%;
-  height: 43rem;
+  height: 119rem;
 }
-.DNAHome .ViewBtn {
+.DNAHome .Content .ViewBtn {
   display: inline-flex;
   position: fixed;
   z-index: 1;
@@ -22,8 +26,8 @@
   background: var(--Gray1, #000);
   transform: translate(-50%, -50%);
 }
-.DNAHome .ViewBtn .list,
-.DNAHome .ViewBtn .map {
+.DNAHome .Content .ViewBtn .list,
+.DNAHome .Content .ViewBtn .map {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,11 +35,11 @@
   border: none;
   background-color: #000;
 }
-.DNAHome .ViewBtn .list {
+.DNAHome .Content .ViewBtn .list {
   padding: 7.5px 26px 8.5px 26px;
   background-color: var(--Gray-10, #FFF);
 }
-.DNAHome .ViewBtn .map {
+.DNAHome .Content .ViewBtn .map {
   padding: 7.5px 21.5px 8.5px 21.5px;
   color: var(--Gray-10, #FFF);
 }

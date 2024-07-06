@@ -1,16 +1,21 @@
 .Header {
   display: flex;
+  width: 100%;
   height: 68px;
-  padding: 0px 20px;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  z-index: 2;
+  background-color: #fff;
 }
 .Header .account {
-  margin-left: auto;
+  /* margin-left: auto; */
   display: flex;
   align-items: center;
   gap: 4px;
   font-size: 14px;
+  position: relative;
+  left: 87%;
 }
 .Header .account .loginBtn,
 .Header .account .signUpBtn {
