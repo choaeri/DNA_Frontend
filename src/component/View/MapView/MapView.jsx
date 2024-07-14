@@ -31,7 +31,8 @@ export default function MapView () {
       "Sokcho": '속초',
       "Chuncheon": '춘천',
       "Yangyang": '양양',
-      "Gangneung": '강릉'
+      "Gangneung": '강릉',
+      "Taebaek" : '태백'
     };
     setMapStep(2);
     getLocationByAddress(match[e.target.attributes.name.value]);
@@ -47,7 +48,7 @@ export default function MapView () {
       <Map
         className="map"
         center={centerMarker}
-        level={11}
+        level={mapStep === 1 ? 11 : 8}
       >
         {mapStep === 1 ? (
           <CustomOverlayMap

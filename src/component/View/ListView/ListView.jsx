@@ -3,11 +3,14 @@ import { useContext, useState, useEffect } from "react";
 import { axiosInstance } from "../../../common/func/axios";
 import { AppContext } from "../../../context/AppContext";
 import "./ListView.css"
+import LocationModal from "./LocationModal/LocationModal";
 
 export default function ListView() {
   const { isLogin, locations } = useContext(AppContext);
   const [isLike, setIsLike] = useState({});
   const [likeCount, setLikeCount] = useState({});
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   // 좋아요 수 조회 요청
   const fetchLikeCount = async (locationId) => {
@@ -51,6 +54,21 @@ export default function ListView() {
     }
   };
 
+  // 모달 열기
+  const showModal = (location) => {
+    setSelectedLocation(location);
+    setIsModalVisible(true);
+  };
+
+  // 모달 닫기
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   useEffect(() => {
     locations.forEach((location) => {
       fetchLocationLike(location.id);
@@ -70,7 +88,6 @@ export default function ListView() {
             key={index}
             className="card"
           > 
-            
             <img alt={location.name} src={location.thumbNail}></img>
             <div style={{ display: 'flex', alignItems: 'center', position: "absolute" }}>
                 {isLike[location.id] ? (
@@ -86,7 +103,7 @@ export default function ListView() {
                 )}
                 <span style={{ marginLeft: '8px' }}>{likeCount[location.id]}</span>
               </div>
-            <div className="locationCnt">
+            <div className="locationCnt" onClick={() => showModal(location)}>
               <div className="header">
                 <span className="location">{location.name}</span>
                 <svg className="modalBtn" xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29" fill="none">
@@ -116,36 +133,16 @@ export default function ListView() {
               </div>
             </div>
           </div>
-          // <Card
-          //   key={index}
-          //   className="card"
-          //   hoverable
-          //   extra={
-          //     <div style={{ display: 'flex', alignItems: 'center' }}>
-          //       {isLike[location.id] ? (
-          //         <HeartFilled 
-          //           onClick={() => onClickLike(location.id)} 
-          //           style={{ color: 'red', cursor: 'pointer' }} 
-          //         />
-          //       ) : (
-          //         <HeartOutlined 
-          //           onClick={() => onClickLike(location.id)} 
-          //           style={{ color: 'gray', cursor: 'pointer' }} 
-          //         />
-          //       )}
-          //       <span style={{ marginLeft: '8px' }}>{likeCount[location.id]}</span>
-          //     </div>
-          //   }
-          //   cover={<img alt={location.name} src={location.thumbNail} />}
-          // >
-          //   <Meta title={location.name} />
-          //   <p>temperature: {location.weatherInfo.temperature}</p>
-          //   <p>humidity: {location.weatherInfo.humidity}</p>
-          //   <p>cloudiness: {location.weatherInfo.cloudiness}</p>
-          //   <p>windSpeed: {location.weatherInfo.windSpeed}</p>
-          // </Card>
         ))}
       </div>
+      {selectedLocation && (
+        <LocationModal 
+          visible={isModalVisible} 
+          location={selectedLocation} 
+          onOk={handleOk} 
+          onCancel={handleCancel} 
+        />
+      )}
     </div>
   );
 };
