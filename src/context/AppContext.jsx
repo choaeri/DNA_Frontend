@@ -15,6 +15,8 @@ const AppProvider = ({ children }) => {
 	const [signUpEmail, setSignUpEmail] = useState("");
   const [locations, setLocations] = useState([]);
 	const [viewMode, setViewMode] = useState('list');
+  const [mapStep, setMapStep] = useState(1);
+  const [selectLocation, setSelectLocation] = useState();
 
 	return (
 		<AppContext.Provider
@@ -29,6 +31,8 @@ const AppProvider = ({ children }) => {
 				signUpEmail,
 				locations,
 				viewMode,
+				mapStep,
+				selectLocation,
 
 				setOpenLoginPage,
 				setIsLogin,
@@ -40,6 +44,8 @@ const AppProvider = ({ children }) => {
 				setSignUpEmail,
 				setLocations,
 				setViewMode,
+				setMapStep,
+				setSelectLocation
 			}}
 		>
 			{children}

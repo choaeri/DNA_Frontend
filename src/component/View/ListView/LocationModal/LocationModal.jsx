@@ -32,7 +32,7 @@ const LocationModal = ({ visible, location, onOk, onCancel }) => {
   useEffect(() => {
     if (!locationId || !visible) return;
 
-    const socket = new SockJS(`${process.env.REACT_APP_TOUR_API}ws`);
+    const socket = new SockJS(`${process.env.REACT_APP_TOUR_API}/ws`);
     const stompClientInstance = Stomp.over(socket);
     setStompClient(stompClientInstance);
 

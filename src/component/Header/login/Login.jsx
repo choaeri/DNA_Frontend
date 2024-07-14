@@ -40,7 +40,7 @@ export default function Login() {
     setFieldErrors({});
     const data = { username: loginUserName, password: loginPassword };
 
-    axiosInstance.post("api/auth/login", data)
+    axiosInstance.post("/api/auth/login", data)
       .then((res) => {
         notification.open({
           message: "로그인 완료",
