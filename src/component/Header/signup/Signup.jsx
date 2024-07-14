@@ -30,7 +30,7 @@ export default function Signup () {
     setFieldErrors({});
     const data = { username: signUpUserName, password: signUpPassword, email: signUpEmail };
 
-    await axiosInstance.post('api/users', data)
+    await axiosInstance.post('/api/users', data)
     .then((res) => {
       notification.open({
         message: "회원가입 완료",

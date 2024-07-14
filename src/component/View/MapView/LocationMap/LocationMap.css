@@ -1,0 +1,84 @@
+.locationDetail {
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  padding: 2rem;
+}
+.locationDetail .header,
+.locationDetail .detail .item {
+  display: flex;
+  align-items: center;
+}
+
+.locationDetail .title {
+  display: flex;
+  align-items: center;
+  margin: 40px 0 25px;
+}
+.locationDetail .title span {
+  color: var(--Gray-01, var(--Gray1, #000));
+  font-family: "Syne";
+  font-size: 54px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: -1.62px;
+}
+.locationDetail .title svg {
+  width: 28px;
+  height: 28px;
+  margin-left: 12px;
+}
+
+.locationDetail .detail {
+  gap: 24px;
+}
+.locationDetail .detail .item .detailIcon {
+  width: var(--button-padding-gap-button-padding-xl, 24px);
+  height: var(--button-padding-gap-button-padding-xl, 24px);
+}
+.locationDetail .detail .item .detailCnt {
+  color: var(--Gray-01, var(--Gray1, #000));
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+.locationDetail .detail .item .detailCnt.spot {
+  font-family: "Syne";
+  font-size: 20px;
+}
+
+.locationDetail .category {
+  display: flex;
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.locationDetail .category ul {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.locationDetail .category li {
+  display: flex;
+  padding: 4px var(--button-padding-gap-button-padding-md, 16px);
+  align-items: center;
+  gap: 10px;
+  border-radius: 40px;
+  background: var(--Gray-10, #FFF);
+}
+.locationDetail .category svg {
+  width: 20px;
+  height: 20px;
+}
+.locationDetail .category span {
+  color: var(--Gray-01, var(--Gray1, #000));
+  font-family: "Syne";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}

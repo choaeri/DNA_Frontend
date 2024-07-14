@@ -19,7 +19,7 @@ export default function Header () {
   // 로그아웃 API 호출
   const logout = async () => {
     try {
-      await axiosInstance.post("api/auth/logout");
+      await axiosInstance.post("/api/auth/logout");
       setIsLogin(false);
       window.location.reload();
     } catch (error) {

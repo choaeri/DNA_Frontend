@@ -17,7 +17,7 @@ export default function Home() {
   useEffect(() => {
     // 지역 조회 API 호출
     const fetchLocations = async () => {
-      await axiosInstance.get("api/locations")
+      await axiosInstance.get("/api/locations")
         .then((res) => {
           const data = res.data;
           if(Array.isArray(data)) {
@@ -35,7 +35,7 @@ export default function Home() {
 
     // 인증 API 호출
     const checkAuthentication = async () => {
-      await axiosInstance.get("api/auth/check")
+      await axiosInstance.get("/api/auth/check")
         .then((res) => {
           if (res.data.isAuthenticated) {
             setIsLogin(true);
