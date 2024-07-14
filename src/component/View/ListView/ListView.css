@@ -40,12 +40,24 @@
 }
 .CardContent .cardCnt .card {
   display: flex;
+  margin-bottom: 120px;
 }
+.CardContent .cardCnt img {
+  width: 250px;
+  height: 23rem;
+  flex-shrink: 0;
+}
+
 .CardContent .cardCnt .card .locationCnt {
   display: flex;
+  flex-direction: column;
   margin-left: 40px;
+  margin-top: auto;
+  width: fit-content;
+  height: 75%;
+  align-items: flex-start;
 }
-.CardContent .cardCnt .card .location {
+.CardContent .cardCnt .card .header .location {
   color: var(--Gray-01, var(--Gray1, #000));
   font-family: "Syne";
   font-size: 54px;
@@ -54,12 +66,32 @@
   line-height: 120%;
   letter-spacing: -1.62px;
 }
-.CardContent .cardCnt .card svg {
+.CardContent .cardCnt .card .header .modalBtn {
   width: 28px;
   height: 28px;
 }
-.CardContent .cardCnt img {
-  width: 250px;
-  height: 23rem;
-  flex-shrink: 0;
+
+.CardContent .cardCnt .card .detail {
+  margin-top: 2rem;
+}
+.CardContent .cardCnt .card .detail .item {
+  display: flex;
+  align-items: center;
+}
+.CardContent .cardCnt .card .detail svg {
+  width: var(--button-padding-gap-button-padding-xl, 24px);
+  height: var(--button-padding-gap-button-padding-xl, 24px);
+}
+.CardContent .cardCnt .card .detail .item .detailCtn {
+  color: var(--Gray1, #000);
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  margin-left: 0.5rem;
+}
+.CardContent .cardCnt .card .detail .item .detailCtn.spot {
+  font-family: "Syne";
+  font-size: 20px;
 }

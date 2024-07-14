@@ -1,7 +1,7 @@
 .mapArea {
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 39rem;
   bottom: 0;
   position: relative;
 }
@@ -10,4 +10,110 @@
   position: absolute;
   width: 100%;
   height: 100%;
+}
+
+.mapArea .locationMarker {
+  display: flex;
+  width: 20rem;
+  padding: 10px;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--Gray1, #000);
+  background: #FFF;
+  box-shadow: 0 1rem 2rem 0 rgba(0, 0, 0, 0.16);
+}
+
+.mapArea .locationMarker img {
+  width: 5rem;
+  height: 5rem;
+}
+
+.mapArea .locationMarker .header .location {
+  color: var(--Gray-01, var(--Gray1, #000));
+  font-family: "Syne";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+
+.mapArea .locationMarker .locationCnt {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.mapArea .locationMarker .locationCnt .header,
+.mapArea .locationMarker .locationCnt .detail {
+  display: flex;
+  align-items: center;
+}
+.mapArea .locationMarker .locationCnt .header .detailBtn {
+  margin-left: auto;
+}
+
+.mapArea .locationMarker .locationCnt .detail .spotIcon {
+  z-index: 2;
+  width: var(--button-padding-gap-button-padding-md, 16px);
+  height: var(--button-padding-gap-button-padding-md, 16px);
+}
+.mapArea .locationMarker .locationCnt .detail .spot {
+  color: var(--Gray-01, var(--Gray1, #000));
+  font-family: "Syne";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+
+.mapArea .locationDetail {
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  padding: 2rem;
+}
+.mapArea .locationDetail .header,
+.mapArea .locationDetail .detail .item {
+  display: flex;
+  align-items: center;
+}
+
+.mapArea .locationDetail .title {
+  display: flex;
+  align-items: center;
+  margin: 40px 0 25px;
+}
+.mapArea .locationDetail .title span {
+  color: var(--Gray-01, var(--Gray1, #000));
+  font-family: "Syne";
+  font-size: 54px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: -1.62px;
+}
+.mapArea .locationDetail .title svg {
+  width: 28px;
+  height: 28px;
+  margin-left: 12px;
+}
+
+.mapArea .locationDetail .detail {
+  gap: 24px;
+}
+.mapArea .locationDetail .detail .item .detailIcon {
+  width: var(--button-padding-gap-button-padding-xl, 24px);
+  height: var(--button-padding-gap-button-padding-xl, 24px);
+}
+.mapArea .locationDetail .detail .item .detailCnt {
+  color: var(--Gray-01, var(--Gray1, #000));
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+.mapArea .locationDetail .detail .item .detailCnt.spot {
+  font-family: "Syne";
+  font-size: 20px;
 }
