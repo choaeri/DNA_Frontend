@@ -22,6 +22,7 @@ export default function Home() {
           const data = res.data;
           if(Array.isArray(data)) {
             setLocations(data);
+            console.log(data)
           } else {
             console.error("Fetched locations data is not an array:", data);
             setLocations([]);

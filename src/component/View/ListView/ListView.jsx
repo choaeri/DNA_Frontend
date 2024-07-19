@@ -90,19 +90,19 @@ export default function ListView() {
           > 
             <img alt={location.name} src={location.thumbNail}></img>
             <div style={{ display: 'flex', alignItems: 'center', position: "absolute" }}>
-                {isLike[location.id] ? (
-                  <HeartFilled 
-                    onClick={() => onClickLike(location.id)} 
-                    style={{ color: 'red', cursor: 'pointer' }} 
-                  />
-                ) : (
-                  <HeartOutlined 
-                    onClick={() => onClickLike(location.id)} 
-                    style={{ color: 'gray', cursor: 'pointer' }} 
-                  />
-                )}
-                <span style={{ marginLeft: '8px' }}>{likeCount[location.id]}</span>
-              </div>
+              {isLike[location.id] ? (
+                <HeartFilled 
+                  onClick={() => onClickLike(location.id)} 
+                  style={{ color: 'red', cursor: 'pointer' }} 
+                />
+              ) : (
+                <HeartOutlined 
+                  onClick={() => onClickLike(location.id)} 
+                  style={{ color: 'gray', cursor: 'pointer' }} 
+                />
+              )}
+              <span style={{ marginLeft: '8px' }}>{likeCount[location.id]}</span>
+            </div>
             <div className="locationCnt" onClick={() => showModal(location)}>
               <div className="header">
                 <span className="location">{location.name}</span>
