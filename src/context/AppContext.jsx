@@ -13,6 +13,7 @@ const AppProvider = ({ children }) => {
 	const [signUpId, setSignUpId] = useState("");
 	const [signUpPassword, setSignUpPassword] = useState("");
 	const [signUpEmail, setSignUpEmail] = useState("");
+	const [signUpVerifyCode, setSignUpVerifyCode] = useState("");
   const [locations, setLocations] = useState([]);
 	const [viewMode, setViewMode] = useState('list');
   const [mapStep, setMapStep] = useState(1);
@@ -29,6 +30,7 @@ const AppProvider = ({ children }) => {
 				signUpId,
 				signUpPassword,
 				signUpEmail,
+				signUpVerifyCode,
 				locations,
 				viewMode,
 				mapStep,
@@ -42,6 +44,7 @@ const AppProvider = ({ children }) => {
 				setSignUpId,
 				setSignUpPassword,
 				setSignUpEmail,
+				setSignUpVerifyCode,
 				setLocations,
 				setViewMode,
 				setMapStep,
