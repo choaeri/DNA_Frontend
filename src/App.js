@@ -6,7 +6,7 @@ import SignUp from './component/Header/signup/Signup';
 import Recommend from './component/Recommend/Recommend';
 import ListView from './component/View/ListView/ListView';
 import MapView from './component/View/MapView/MapView';
-import AuthCheck from './component/Header/authCeck/AuthCheck';
+import LoginCheck from './component/Header/loginCheck/LoginCheck';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/auth/check" element={<AuthCheck />} />
+          <Route path="/users/login/check" element={<LoginCheck />} />
           <Route path="/recommend" element={<Recommend />} />
           <Route path="/listview" element={<ListView />} />
           <Route path="/mapview" element={<MapView />} />

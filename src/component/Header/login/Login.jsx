@@ -1,13 +1,12 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../../context/AppContext";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Form, Input, notification } from "antd";
 import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
 import { axiosInstance } from "../../../common/func/axios";
 
 export default function Login() {
-  const { loginUserName, setLoginUserName, loginPassword, setLoginPassword } = useContext(AppContext);
+  const { setIsLogin, loginUserName, setLoginUserName, loginPassword, setLoginPassword } = useContext(AppContext);
 
   const [fieldErrors, setFieldErrors] = useState({});
 
@@ -46,6 +45,7 @@ export default function Login() {
           message: "로그인 완료",
           icon: successLogin,
         });
+        setIsLogin(true);
         navigate("/");
       })
       .catch((error) => {

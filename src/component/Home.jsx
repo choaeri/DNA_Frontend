@@ -33,23 +33,8 @@ export default function Home() {
           setLocations([]); // 에러 발생 시 빈 배열로 초기화
         });
       };
-
-    // 인증 API 호출
-    const checkAuthentication = async () => {
-      await axiosInstance.get("/api/auth/check")
-        .then((res) => {
-          if (res.data.isAuthenticated) {
-            setIsLogin(true);
-          };
-        })
-        .catch ((err) => {
-          setIsLogin(false);
-        });
-    };
-    
-    fetchLocations();
-    checkAuthentication();
-  }, []);
+    }
+  );
 
   return (
     <div className="DNAHome">
