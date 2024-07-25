@@ -15,26 +15,25 @@ export default function Home() {
           viewMode, setViewMode } = useContext(AppContext);
 
   useEffect(() => {
-    // 지역 조회 API 호출
-    const fetchLocations = async () => {
-      await axiosInstance.get("/api/locations")
-        .then((res) => {
-          const data = res.data;
-          if(Array.isArray(data)) {
-            setLocations(data);
-            console.log(data)
-          } else {
-            console.error("Fetched locations data is not an array:", data);
-            setLocations([]);
-          };
-        })
-        .catch((err) => {
-          console.error("Error fetching locations:", err);
-          setLocations([]); // 에러 발생 시 빈 배열로 초기화
-        });
-      };
+  // 지역 조회 API 호출
+  const fetchLocations = async () => {
+    try {
+      const res = await axiosInstance.get("/api/locations");
+      const data = res.data;
+      if (Array.isArray(data)) {
+        setLocations(data);
+        console.log(data);
+      } else {
+        console.error("Fetched locations data is not an array:", data);
+        setLocations([]);
+      }
+    } catch (err) {
+      console.error("Error fetching locations:", err);
     }
-  );
+  };
+
+  fetchLocations();
+  }, []); 
 
   return (
     <div className="DNAHome">
