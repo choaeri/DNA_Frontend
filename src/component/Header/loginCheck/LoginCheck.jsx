@@ -29,9 +29,9 @@ export default function LoginCheck() {
   }, [isFirstLogin, navigate]);
 
   const onFinish = async (values) => {
-    const newUserNameRequest = { newUserName: values.username }; // DTO 형태로 객체 생성
+    const newUsernameRequest = { newUsername: values.username }; // DTO 형태로 객체 생성
     try {
-      await axiosInstance.post('/api/users/names', newUserNameRequest);
+      await axiosInstance.post('/api/auth/names', newUsernameRequest);
       setIsLogin(true);
       navigate('/'); // 홈으로 이동
     } catch (error) {

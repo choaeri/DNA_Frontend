@@ -10,9 +10,7 @@ import Footer from "./Footer/Footer";
 
 
 export default function Home() {
-  const { setIsLogin, 
-          setLocations, 
-          viewMode, setViewMode } = useContext(AppContext);
+  const { setLocations, viewMode, setViewMode } = useContext(AppContext);
 
   useEffect(() => {
   // 지역 조회 API 호출
@@ -22,7 +20,6 @@ export default function Home() {
       const data = res.data;
       if (Array.isArray(data)) {
         setLocations(data);
-        console.log(data);
       } else {
         console.error("Fetched locations data is not an array:", data);
         setLocations([]);

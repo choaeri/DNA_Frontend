@@ -19,8 +19,10 @@ const LocationModal = ({ visible, location, onOk, onCancel }) => {
   useEffect(() => {
     const fetchUsername = async () => {
       try {
-        const response = await axiosInstance.get('/api/users/name');
+        const response = await axiosInstance.get('/api/users/names');
         setUsername(response.data.username);
+        console.log(response.data.username);
+        console.log(username);
       } catch (error) {
         console.error('Failed to fetch username:', error);
       }
