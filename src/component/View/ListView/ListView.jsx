@@ -105,7 +105,7 @@ export default function ListView() {
             </div>
             <div className="locationCnt" onClick={() => showModal(location)}>
               <div className="header">
-                <span className="location">{location.name}</span>
+                <span className="location">{location.locationName}</span>
                 <svg className="modalBtn" xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29" fill="none">
                   <path d="M5 14.2103L22.3482 14.2103" stroke="black"/>
                   <path d="M15.2898 6.5L23.0001 14.2103L15.2898 21.9206" stroke="black"/>
