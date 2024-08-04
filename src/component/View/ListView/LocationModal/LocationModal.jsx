@@ -100,7 +100,7 @@ const LocationModal = ({ visible, location, onOk, onCancel }) => {
 
   return (
     <Modal
-      title={`${location.name} 채팅방`}
+      title={`${location.locationName} 채팅방`}
       visible={visible}
       onOk={onOk}
       onCancel={onCancel}
