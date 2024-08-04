@@ -6,7 +6,6 @@ const AppContext = createContext({
 
 const AppProvider = ({ children }) => {
 	const [openLoginPage, setOpenLoginPage] = useState(false);
-	const [isLogin, setIsLogin] = useState(false);
 	const [loginUserName, setLoginUserName] = useState("");
 	const [loginPassword, setLoginPassword] = useState("");
 	const [signUpUserName, setSignUpUserName] = useState("");
@@ -23,7 +22,6 @@ const AppProvider = ({ children }) => {
 		<AppContext.Provider
 			value={{
 				openLoginPage,
-				isLogin,
 				loginUserName,
 				loginPassword,
 				signUpUserName,
@@ -37,7 +35,6 @@ const AppProvider = ({ children }) => {
 				selectLocation,
 
 				setOpenLoginPage,
-				setIsLogin,
 				setLoginUserName,
 				setLoginPassword,
 				setSignUpUserName,

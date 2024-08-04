@@ -4,9 +4,11 @@ import { axiosInstance } from "../../../common/func/axios";
 import { AppContext } from "../../../context/AppContext";
 import "./ListView.css"
 import LocationModal from "./LocationModal/LocationModal";
+import useLocalStorage from "../../../utils/useLocalStorage";
 
 export default function ListView() {
-  const { isLogin, locations } = useContext(AppContext);
+  const { isLoggedIn } = useLocalStorage();
+  const { locations } = useContext(AppContext);
   const [isLike, setIsLike] = useState({});
   const [likeCount, setLikeCount] = useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -25,7 +27,7 @@ export default function ListView() {
 
   // 좋아요 여부 조회 요청
   const fetchLocationLike = async (locationId) => {
-    if (isLogin) {
+    if (isLoggedIn) {
       const apiUrl = `/api/locations/${locationId}/like`;
       try {
         const response = await axiosInstance.get(apiUrl);

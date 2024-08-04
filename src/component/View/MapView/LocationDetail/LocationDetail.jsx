@@ -4,9 +4,11 @@ import "./LocationDetail.css";
 import { axiosInstance } from "../../../../common/func/axios";
 import SockJS from "sockjs-client";
 import Stomp from 'stompjs';
+import useLocalStorage from "../../../../utils/useLocalStorage";
 
 export default function LocationDetail () {
-  const { isLogin, setMapStep, selectLocation } = useContext(AppContext);
+  const { setMapStep, selectLocation } = useContext(AppContext);
+  const { isLoggedIn } = useLocalStorage();
   const [stompClient, setStompClient] = useState(null);
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
@@ -46,7 +48,7 @@ export default function LocationDetail () {
 
   // 채팅방 입장
   useEffect(() => {
-    if(isLogin) {
+    if(isLoggedIn) {
       if (!locationId) return;
   
       const socket = new SockJS(`${process.env.REACT_APP_TOUR_API}/ws`);
@@ -151,7 +153,7 @@ export default function LocationDetail () {
 
       <div className="chat">
         <span className="header">Open Talk</span>
-        { isLogin ? (
+        { isLoggedIn ? (
           <>
             <div className="chatCnt">
               <div

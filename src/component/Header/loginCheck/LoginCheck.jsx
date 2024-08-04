@@ -1,11 +1,13 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { AppContext } from "../../../context/AppContext";
 import { axiosInstance } from '../../../common/func/axios';
 import { useNavigate } from "react-router-dom";
 import { Card, Form, Input, Button } from 'antd';
+import useLocalStorage from '../../../utils/useLocalStorage';
 
 export default function LoginCheck() {
-  const { setIsLogin, isFirstLogin, setIsFirstLogin } = useContext(AppContext);
+  const { processLogin } = useLocalStorage();
+  const { isFirstLogin, setIsFirstLogin } = useContext(AppContext);
   const navigate = useNavigate(); 
 
   useEffect(() => {
@@ -22,7 +24,7 @@ export default function LoginCheck() {
 
   useEffect(() => {
     if (isFirstLogin === false) {
-      setIsLogin(true);
+      processLogin();
       navigate('/'); 
     }
   }, [isFirstLogin, navigate]);
@@ -31,7 +33,7 @@ export default function LoginCheck() {
     const newUsernameRequest = { newUsername: values.username }; // DTO 형태로 객체 생성
     try {
       await axiosInstance.post('/api/auth/names', newUsernameRequest);
-      setIsLogin(true);
+      processLogin();
       navigate('/'); // 홈으로 이동
     } catch (error) {
       console.error('Failed to submit name:', error);

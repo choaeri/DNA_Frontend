@@ -1,12 +1,11 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "../../context/AppContext";
 import { axiosInstance } from "../../common/func/axios";
 import "./Header.css";
+import useLocalStorage from '../../utils/useLocalStorage';
 
 export default function Header () {
+  const { isLoggedIn, processLogout } = useLocalStorage();
   const navigate = useNavigate();
-  const { isLogin, setIsLogin } = useContext(AppContext);
 
   const goToLogin = () => {
     navigate("/login");
@@ -20,7 +19,7 @@ export default function Header () {
   const logout = async () => {
     try {
       await axiosInstance.post("/api/auth/logout");
-      setIsLogin(false);
+      processLogout();
       window.location.reload();
     } catch (error) {
       console.error("Error during logout:", error);
@@ -29,7 +28,7 @@ export default function Header () {
 
   // 로그인 버튼 클릭
   const onClickLoginButton = () => {
-    if (!isLogin) {
+    if (!isLoggedIn) {
       goToLogin();
     } else {
       logout();
@@ -38,7 +37,7 @@ export default function Header () {
 
   // 회원가입 버튼 클릭
   const onClickSignupButton = () => {
-    if (!isLogin) {
+    if (!isLoggedIn) {
       goToSignUp();
     };
   };
@@ -46,8 +45,8 @@ export default function Header () {
   return (
     <div className="Header">
       <div className="account">
-        <button className="loginBtn" onClick={onClickLoginButton}>{!isLogin ? 'Login' : 'Logout'}</button>
-        {!isLogin ? <button className="signUpBtn" onClick={onClickSignupButton}>Sign Up</button> : null}
+        <button className="loginBtn" onClick={onClickLoginButton}>{!isLoggedIn ? 'Login' : 'Logout'}</button>
+        {!isLoggedIn ? <button className="signUpBtn" onClick={onClickSignupButton}>Sign Up</button> : null}
       </div>
     </div>
   );

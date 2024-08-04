@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { Button, Card, Form, Input, notification } from "antd";
 import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
 import { axiosInstance } from "../../../common/func/axios";
+import useLocalStorage from '../../../utils/useLocalStorage';
 
 export default function Login() {
-  const { setIsLogin, loginUserName, setLoginUserName, loginPassword, setLoginPassword } = useContext(AppContext);
+  const { processLogin } = useLocalStorage();
+  const { loginUserName, setLoginUserName, loginPassword, setLoginPassword } = useContext(AppContext);
 
   const [fieldErrors, setFieldErrors] = useState({});
 
@@ -41,7 +43,7 @@ export default function Login() {
           message: "로그인 완료",
           icon: successLogin,
         });
-        setIsLogin(true);
+        processLogin();
         navigate("/");
       })
       .catch((error) => {
