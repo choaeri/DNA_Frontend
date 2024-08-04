@@ -10,6 +10,7 @@ export default function Signup () {
           signUpPassword, setSignUpPassword,
           signUpEmail, setSignUpEmail,
           signUpVerifyCode, setSignUpVerifyCode } = useContext(AppContext);
+  const [isDuplicated, setIsDuplicated] = useState(false);
 
   const [fieldErrors, setFieldErrors] = useState({});
 
@@ -83,9 +84,24 @@ export default function Signup () {
     });
   };
 
+  const onClickValidate = async () => {
+    const data = { username: signUpUserName };
+    await axiosInstance.post("/api/users/names/validate", data) 
+      .then((res) => {
+        if(res.data.isDuplicated === true) {
+          setIsDuplicated(true);
+        } else {
+          setIsDuplicated(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const verification = async () => {
     const data = { email: signUpEmail };
-    await axiosInstance.post("/api/users/emails/verify", data)
+    await axiosInstance.post("/api/users/emails/code", data)
       .then((res) => {
         console.log(res.data);
       })
@@ -95,7 +111,8 @@ export default function Signup () {
   };
 
   const emailCheck = async () => {
-    await axiosInstance.get("/api/users/emails/verify")
+    const data = { email: signUpEmail, code: signUpVerifyCode };
+    await axiosInstance.post("/api/users/emails/verify", data)
       .then((res) => {
         const data = res.data;
         if(data.isVerified === true) {
@@ -117,6 +134,17 @@ export default function Signup () {
       })
   };
 
+  const signupRules = async (_, value) => {
+    if(!value) {
+      return Promise.reject(new Error('Please input your E-mail!'));
+    }
+    const isValid = await onClickValidate(value);
+    if(!isValid) {
+      // return Promise.reject(new Error('이미 사용 중인 userName입니다.'));
+    }
+    return Promise.resolve();
+  };
+
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 10}
@@ -132,7 +160,7 @@ export default function Signup () {
       <div className="content">
         <img src="/img/DNALogin.png" />
         <Card className="accountCnt signup" title={<span className="tit">Sign Up</span>}>
-          <Form {...layout} onFinish={onClickSignupBtn} autoComplete={"false"}>
+          <Form {...layout} autoComplete={"false"}>
             <Form.Item {...tailLayout}>
               <button className="accountBtn google" onClick={() => handleSignup("google")}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -173,20 +201,28 @@ export default function Signup () {
               label={<span className="userTit">Username</span>}
               name="name"
               rules={[
-                { required: true, message: <span style={{fontSize: "0.7rem"}}>Please input your username!</span> },
+                { validator: signupRules },
               ]}
               hasFeedback
               {...fieldErrors.username}
               {...fieldErrors.non_field_errors}
             >
               <Input placeholder="Username" value={signUpUserName} onChange={onUserNameHandler}/>
+              <button className="chkBtn" onClick={onClickValidate}>validate check</button>
             </Form.Item>
             <Form.Item
               className="userAccount"
               label={<span className="userTit">Email</span>}
               name="email"
               rules={[
-                { required: true, type: 'email', message: <span style={{fontSize: "0.7rem"}}>Please input your email!</span> },
+                {
+                  type: 'email', 
+                  message: 'The input is not valid E-mail!',
+                },
+                {
+                  required: true,
+                  message: 'Please input your E-mail!',
+                }
               ]}
               hasFeedback
               {...fieldErrors.email}
@@ -216,7 +252,7 @@ export default function Signup () {
               <Input.Password placeholder="Password" value={signUpPassword} onChange={onPasswordHandler} />
             </Form.Item>
             <Form.Item {...tailLayout} style={{marginBottom: "0px"}}>
-              <Button className="accountBtn basic" htmlType="submit" style={{ width: '100%' }}>
+              <Button className="accountBtn basic" onClick={onClickSignupBtn} htmlType="submit" style={{ width: '100%' }}>
                 Create Account
               </Button>
             </Form.Item>

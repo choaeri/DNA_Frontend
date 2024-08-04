@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Card, Form, Input, Button } from 'antd';
 
 export default function LoginCheck() {
-  const { setIsLogin } = useContext(AppContext);
-  const [isFirstLogin, setIsFirstLogin] = useState(null);
+  const { setIsLogin, isFirstLogin, setIsFirstLogin } = useContext(AppContext);
   const navigate = useNavigate(); 
 
   useEffect(() => {
