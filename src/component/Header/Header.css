@@ -1,12 +1,15 @@
-.Header {
+.Header,
+.Account .header {
   display: flex;
   width: 100%;
   height: 68px;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
   z-index: 2;
   background-color: #fff;
+}
+.Header {
+  position: fixed;
 }
 .Header .account {
   /* margin-left: auto; */
@@ -34,4 +37,203 @@
 .Header .account .signUpBtn {
   background: var(--Gray-01, #000);
   color: #ffffff;
+}
+
+.Account {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.Account .content {
+  display: flex;
+  width: 100%;
+  height: calc(100% - 68px);
+  overflow: hidden;
+}
+.Account .content img {
+  width: 480px;
+  height: 732px;
+  flex-shrink: 0;
+}
+
+.Account .content .accountCnt {
+  border: none;
+  padding: 18px 83px;
+}
+.Account .content .accountCnt.signup {
+  padding: 0px 83px;
+}
+.Account .content .tit {
+  color: var(--Gray1, #000);
+  font-family: "Syne";
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+.Account .content .ant-card-head {
+  padding: 0;
+}
+.Account .content .ant-card-body {
+  display: flex;
+  width: 321px;
+  height: fit-content;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  align-items: center;
+  gap: 24px;
+  padding: 0;
+  border-radius: none;
+}
+.Account .content .ant-card-body::before {
+  content: none;
+}
+.Account .content .ant-card-body .ant-col-offset-11 {
+  margin-inline-start: 0;
+}
+.Account .content .ant-card-body .ant-form-item {
+  margin-bottom: 0px;
+}
+
+.Account .content .accountBtn {
+  display: flex;
+  width: 100%;
+  height: 44px;
+  border: none;
+  padding-right: 52px;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 42px;
+  margin-bottom: 5px;
+  background: var(--Gray-8, #ECEEF4);
+}
+.Account .content .accountBtn.basic {
+  height: var(--Button-Size-button-size-lg, 48px);
+  padding: 0px 24px;
+  gap: var(--button-padding-gap-button-gap-lg, 4px);
+  background: var(--Fill-fill-disabled, rgba(22, 88, 255, 0.03));
+}
+.Account .content .accountBtn.isg {
+  background-color: #000;
+}
+.Account .content .accountBtn.fb {
+  background-color: #1877F2;
+}
+.Account .content .accountBtn svg {
+  width: var(--Modal-Radius-modal-radius-sm, 20px);
+  height: var(--Modal-Radius-modal-radius-sm, 20px);
+  padding: 12px;
+  flex-shrink: 0;
+}
+.Account .content .accountBtn span {
+  display: flex;
+  height: 22px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
+}
+.Account .content .accountBtn.google span {
+  padding: 0px 50px 0px 49px;
+}
+.Account .content .accountBtn.isg span {
+  padding: 0px 37px 0px 39px;
+  color: #fff;
+}
+.Account .content .accountBtn.fb span {
+  padding: 0px 40px 0px 42px;
+  color: #fff;
+}
+.Account .content .accountBtn.basic span {
+  color: var(--Foreground-fg-disabled, rgba(11, 27, 55, 0.18));
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%;
+}
+.ant-col.ant-col-10.ant-form-item-control.css-dev-only-do-not-override-zg0ahe {
+  display: grid;
+}
+
+.Account .content .description {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0;
+  text-align: center;
+  color: var(--Gray-6, #B6B9BE);
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+
+.Account .content .userAccount {
+  height: 85px;
+}
+.Account .content .userTit {
+  color: var(--Gray1, #000);
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%;
+}
+.Account .content .userAccount .ant-row {
+  display: flex;
+  flex-direction: column;
+}
+.Account .content .userAccount .ant-form-item-label {
+  text-align: start;
+}
+.Account .content .userAccount .ant-form-item-label >label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before,
+.Account .content .userAccount .ant-form-item-label >label::after {
+  content: none;
+}
+.Account .content .userAccount .ant-form-item-control-input {
+  width: 20rem;
+}
+.Account .content .userAccount .ant-input-affix-wrapper {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+.Account .content .userAccount .chkBtn {
+  position: absolute;
+}
+
+.Account .content .etcCtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0rem !important;
+}
+.Account .content .etcCtn .ant-form-item-control-input-content {
+  display: flex;
+}
+.Account .content .etcCtn .etc {
+  color: var(--Gray-6, #B6B9BE);
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  margin-right: 0.5rem;
+}
+.Account .content .etcCtn .etcBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--Gray1, #000);
+  font-family: "Syne";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  border: none;
 }
