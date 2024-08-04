@@ -23,14 +23,12 @@ export default function Login() {
     setLoginPassword(e.target.value);
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    const value = e.target.value;
+  const handleLogin = (type) => {
     const match = {
-      google: `https://dna-kangwon.site/oauth2/authorization/google`,
-      facebook: `https://dna-kangwon.site/oauth2/authorization/facebook`,
+      google: `${process.env.REACT_APP_TOUR_API}/oauth2/authorization/google`,
+      facebook: `${process.env.REACT_APP_TOUR_API}/oauth2/authorization/facebook`,
     };
-    return (window.location.href = match[value]);
+    return (window.location.href = match[type]);
   };
 
   const onClickLoginBtn = () => {
@@ -94,7 +92,7 @@ export default function Login() {
         <Card className="accountCnt" title={<span className="tit">Log in</span>}>
           <Form {...layout} onFinish={onClickLoginBtn} autoComplete={"false"}>
             <Form.Item {...tailLayout}>
-              <button className="accountBtn google" value="google" onClick={handleLogin}>
+              <button className="accountBtn google" value="google" onClick={() => handleLogin("google")}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <path fillRule="evenodd" clipRule="evenodd" d="M19 10.2125C19 9.54776 18.9403 8.90856 18.8295 8.29492H10V11.9213H15.0455C14.8281 13.0932 14.1676 14.0861 13.1747 14.7509V17.1032H16.2045C17.9773 15.4711 19 13.0676 19 10.2125Z" fill="#4285F4"/>
                   <path fillRule="evenodd" clipRule="evenodd" d="M9.99991 19.375C12.5312 19.375 14.6533 18.5355 16.2045 17.1037L13.1746 14.7514C12.3351 15.3139 11.2613 15.6463 9.99991 15.6463C7.55815 15.6463 5.49139 13.9972 4.75417 11.7812H1.62207V14.2102C3.16468 17.2741 6.33514 19.375 9.99991 19.375Z" fill="#34A853"/>
