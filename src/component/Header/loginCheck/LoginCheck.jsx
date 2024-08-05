@@ -1,5 +1,4 @@
-import { useContext, useEffect } from 'react';
-import { AppContext } from "../../../context/AppContext";
+import { useEffect, useState } from 'react';
 import { axiosInstance } from '../../../common/func/axios';
 import { useNavigate } from "react-router-dom";
 import { Card, Form, Input, Button } from 'antd';
@@ -7,7 +6,7 @@ import useLocalStorage from '../../../utils/useLocalStorage';
 
 export default function LoginCheck() {
   const { processLogin } = useLocalStorage();
-  const { isFirstLogin, setIsFirstLogin } = useContext(AppContext);
+  const [isFirstLogin, setIsFirstLogin] = useState(null); // useState로 상태 정의
   const navigate = useNavigate(); 
 
   useEffect(() => {

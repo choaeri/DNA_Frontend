@@ -137,12 +137,11 @@ export default function Signup () {
   const signupRules = async (_, value) => {
     if(!value) {
       return Promise.reject(new Error('Please input your E-mail!'));
+    } else if(isDuplicated) {
+      return Promise.reject(new Error('이미 사용 중인 userName입니다.'));
+    } else if(!isDuplicated) {
+      return Promise.resolve();
     }
-    const isValid = await onClickValidate(value);
-    if(!isValid) {
-      // return Promise.reject(new Error('이미 사용 중인 userName입니다.'));
-    }
-    return Promise.resolve();
   };
 
   const layout = {
