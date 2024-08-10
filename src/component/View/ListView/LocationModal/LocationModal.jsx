@@ -12,6 +12,7 @@ const LocationModal = ({ visible, location, onOk, onCancel }) => {
   const messagesEndRef = useRef(null);
   const currentSubscription = useRef(null);
   const [username, setUsername] = useState('');
+  const [participantCount, setParticipantCount] = useState(0); // 참여 인원 상태 추가
 
   const locationId = location ? location.id : null;
 
@@ -21,8 +22,6 @@ const LocationModal = ({ visible, location, onOk, onCancel }) => {
       try {
         const response = await axiosInstance.get('/api/users/names');
         setUsername(response.data.username);
-        console.log(response.data.username);
-        console.log(username);
       } catch (error) {
         console.error('Failed to fetch username:', error);
       }
@@ -47,6 +46,9 @@ const LocationModal = ({ visible, location, onOk, onCancel }) => {
         const newMessage = JSON.parse(data.body);
         const messageTime = new Date();
         const timestamp = messageTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        
+        // 참여 인원 수 업데이트
+        setParticipantCount(newMessage.participantCount);
         
         setMessages(messages => [...messages, { ...newMessage, timestamp }]);
     
@@ -100,7 +102,12 @@ const LocationModal = ({ visible, location, onOk, onCancel }) => {
 
   return (
     <Modal
-      title={`${location.locationName} 채팅방`}
+      title={
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span>{`${location.locationName} 채팅방`}</span>
+          <span style={{ marginLeft: 'auto' }}>{`${participantCount}명 참여 중`}</span>
+        </div>
+      }
       visible={visible}
       onOk={onOk}
       onCancel={onCancel}
