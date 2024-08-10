@@ -21,8 +21,8 @@ export default function Header () {
       await axiosInstance.post("/api/auth/logout");
       processLogout();
       window.location.reload();
-    } catch (error) {
-      console.error("Error during logout:", error);
+    } catch (err) {
+      console.error("Error during logout:", err);
     };
   };
 
@@ -30,9 +30,14 @@ export default function Header () {
   const onClickLoginButton = () => {
     if (!isLoggedIn) {
       goToLogin();
-    } else {
+    };
+  };
+
+  // 로그아웃 버튼 클릭
+  const onClickLogoutButton = () => {
+    if (isLoggedIn) {
       logout();
-    }
+    };
   };
 
   // 회원가입 버튼 클릭
@@ -45,8 +50,13 @@ export default function Header () {
   return (
     <div className="Header">
       <div className="account">
-        <button className="loginBtn" onClick={onClickLoginButton}>{!isLoggedIn ? 'Login' : 'Logout'}</button>
-        {!isLoggedIn ? <button className="signUpBtn" onClick={onClickSignupButton}>Sign Up</button> : null}
+        { !isLoggedIn ? 
+          <>
+            <button className="loginBtn" onClick={onClickLoginButton}>Login</button>
+            <button className="signUpBtn" onClick={onClickSignupButton}>Sign Up</button>
+          </> : 
+          <button className="loginBtn" onClick={onClickLogoutButton}>Logout</button>
+        }
       </div>
     </div>
   );

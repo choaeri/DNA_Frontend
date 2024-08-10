@@ -51,28 +51,27 @@ export default function Login() {
           const {
             data: { errorMessage },
           } = error.response;
+
           notification.open({
             message: "로그인 실패",
             description: "올바른 정보를 입력해주세요!",
             icon: failLogin,
           });
 
-          setFieldErrors((prevErrors) => {
-            const updatedErrors = {};
-
-            for (const [fieldName, errors] of Object.entries(prevErrors)) {
-              const errorMessage = errors instanceof Array ? errors.join(" ") : errors;
-              updatedErrors[fieldName] = {
+          let newFieldErrors;
+          if (errorMessage) {
+            newFieldErrors = {
+              username: {
                 validateStatus: "error",
-                help: errorMessage,
-              };
-            }
-
-            return {
-              ...prevErrors,
-              ...updatedErrors,
+                help: "Please input your username!",
+              },
+              password: {
+                validateStatus: "error",
+                help: "Please input your password!",
+              }
             };
-          });
+            setFieldErrors(newFieldErrors);
+          }
         }
       });
   };
@@ -92,7 +91,7 @@ export default function Login() {
       <div className="content">
         <img src="/img/DNALogin.png" />
         <Card className="accountCnt" title={<span className="tit">Log in</span>}>
-          <Form {...layout} onFinish={onClickLoginBtn} autoComplete={"false"}>
+          <Form {...layout} initialValues={{ username: loginUserName, password: loginPassword }}>
             <Form.Item {...tailLayout}>
               <button className="accountBtn google" value="google" onClick={() => handleLogin("google")}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -132,10 +131,9 @@ export default function Login() {
               className="userAccount"
               label={<span className="userTit">Username</span>}
               name="name"
-              rules={[{ required: true, message: <span style={{fontSize: "0.7rem"}}>Please input your username!</span> }]}
               hasFeedback
-              {...fieldErrors.username}
-              {...fieldErrors.non_field_errors}
+              validateStatus={fieldErrors.username ? fieldErrors.username.validateStatus : ''}
+              help={fieldErrors.username ? fieldErrors.username.help : ''}
             >
               <Input placeholder="Username" value={loginUserName} onChange={onUserNameHandler} />
             </Form.Item>
@@ -143,13 +141,13 @@ export default function Login() {
               className="userAccount"
               label={<span className="userTit">Password</span>}
               name="password"
-              rules={[{ required: true, message: <span style={{fontSize: "0.7rem"}}>Please input your password!</span> }]}
-              {...fieldErrors.password}
+              validateStatus={fieldErrors.password ? fieldErrors.password.validateStatus : ''}
+              help={fieldErrors.password ? fieldErrors.password.help : ''}
             >
               <Input.Password placeholder="Password" value={loginPassword} onChange={onPasswordHandler} />
             </Form.Item>
             <Form.Item {...tailLayout}>
-              <Button className="accountBtn basic" htmlType="submit" style={{ width: "100%" }}>
+              <Button className="accountBtn basic" onClick={onClickLoginBtn} htmlType="submit" style={{ width: "100%" }}>
                 <span>Log in</span>
               </Button>
             </Form.Item>

@@ -5,6 +5,7 @@ import { Button, Card, Form, Input, notification } from "antd";
 import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
 import { axiosInstance } from "../../../common/func/axios";
 
+let newFieldErrors;
 export default function Signup () {
   const { signUpUserName, setSignUpUserName,
           signUpPassword, setSignUpPassword,
@@ -46,11 +47,13 @@ export default function Signup () {
 
     await axiosInstance.post('/api/users', data)
     .then((res) => {
-      notification.open({
-        message: "회원가입 완료",
-        icon: <SmileOutlined style={{ color: "#108ee9" }} />
-      });
-      navigate("/");
+      if(!isDuplicated && signUpVerifyCode !== "") {
+        notification.open({
+          message: "회원가입 완료",
+          icon: <SmileOutlined style={{ color: "#108ee9" }} />
+        });
+        navigate("/");
+      }
     })
     .catch((error) => {
       if (error.response) {
@@ -58,29 +61,31 @@ export default function Signup () {
         const {
           data: { errorMessage },
         } = error.response;
+
         notification.open({
           message: "회원가입 실패",
           description: errorMessage,
           icon: <FrownOutlined style={{ color: "#ff3333" }} />
         });
-      }
 
-      setFieldErrors((prevErrors) => {
-        const updatedErrors = {};
-  
-        for (const [fieldName, errors] of Object.entries(prevErrors)) {
-          const errorMessage = errors instanceof Array ? errors.join(" ") : errors;
-          updatedErrors[fieldName] = {
-            validateStatus: "error",
-            help: errorMessage,
+        if (errorMessage) {
+          newFieldErrors = {
+            username: {
+              validateStatus: "error",
+              help: "Please input your username!",
+            },
+            password: {
+              validateStatus: "error",
+              help: "Please input your password!",
+            },
+            email: {
+              validateStatus: "error",
+              help: "Please input your email!",
+            }
           };
-        };
-  
-        return {
-          ...prevErrors,
-          ...updatedErrors,
-        };
-      });
+          setFieldErrors(newFieldErrors);
+        }
+      }
     });
   };
 
@@ -90,13 +95,31 @@ export default function Signup () {
       .then((res) => {
         if(res.data.isDuplicated === true) {
           setIsDuplicated(true);
-        } else {
+          newFieldErrors = {
+            username: {
+              validateStatus: "error",
+              help: "이미 사용 중인 userName입니다.",
+            }
+          };
+        } else if(res.data.isDuplicated === false) {
           setIsDuplicated(false);
+          newFieldErrors = {
+            username: {
+              help: "사용 가능한 userName입니다.",
+            }
+          };
         }
       })
       .catch((err) => {
         console.log(err);
+        newFieldErrors = {
+          username: {
+            validateStatus: "error",
+            help: "Please input your username!",
+          }
+        };
       });
+      setFieldErrors(newFieldErrors);
   };
 
   const verification = async () => {
@@ -132,16 +155,6 @@ export default function Signup () {
           icon: <FrownOutlined style={{ color: "#ff3333" }} />,
         });
       })
-  };
-
-  const signupRules = async (_, value) => {
-    if(!value) {
-      return Promise.reject(new Error('Please input your E-mail!'));
-    } else if(isDuplicated) {
-      return Promise.reject(new Error('이미 사용 중인 userName입니다.'));
-    } else if(!isDuplicated) {
-      return Promise.resolve();
-    }
   };
 
   const layout = {
@@ -198,13 +211,10 @@ export default function Signup () {
             <Form.Item
               className="userAccount"
               label={<span className="userTit">Username</span>}
-              name="name"
-              rules={[
-                { validator: signupRules },
-              ]}
+              name="username"
               hasFeedback
-              {...fieldErrors.username}
-              {...fieldErrors.non_field_errors}
+              validateStatus={isDuplicated && fieldErrors.username ? fieldErrors.username.validateStatus : ''}
+              help={isDuplicated && fieldErrors.username ? fieldErrors.username.help : ''}
             >
               <Input placeholder="Username" value={signUpUserName} onChange={onUserNameHandler}/>
               <button className="chkBtn" onClick={onClickValidate}>validate check</button>
@@ -213,18 +223,9 @@ export default function Signup () {
               className="userAccount"
               label={<span className="userTit">Email</span>}
               name="email"
-              rules={[
-                {
-                  type: 'email', 
-                  message: 'The input is not valid E-mail!',
-                },
-                {
-                  required: true,
-                  message: 'Please input your E-mail!',
-                }
-              ]}
               hasFeedback
-              {...fieldErrors.email}
+              validateStatus={fieldErrors.email ? fieldErrors.email.validateStatus : ''}
+              help={fieldErrors.email ? fieldErrors.email.help : ''}
             >
               <Input placeholder="@Email.com" value={signUpEmail} onChange={onEmailHandler}/>
               <button className="chkBtn" onClick={verification}>Verification</button>
@@ -245,8 +246,8 @@ export default function Signup () {
               className="userAccount"
               label={<span className="userTit">Password</span>}
               name="password"
-              rules={[{ required: true, message: <span style={{fontSize: "0.7rem"}}>Please input your password!</span> }]}
-              {...fieldErrors.password}
+              validateStatus={fieldErrors.password ? fieldErrors.password.validateStatus : ''}
+              help={fieldErrors.password ? fieldErrors.password.help : ''}
             >
               <Input.Password placeholder="Password" value={signUpPassword} onChange={onPasswordHandler} />
             </Form.Item>

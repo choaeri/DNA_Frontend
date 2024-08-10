@@ -19,7 +19,7 @@ export default function ListView() {
     const apiUrl = `/api/locations/${locationId}/like/count`;
     try {
       const response = await axiosInstance.get(apiUrl);
-      setLikeCount((prev) => ({ ...prev, [locationId]: response.data.likeCount }));
+      setLikeCount((prev) => ({ ...prev, [locationId]: response.data.likesCount }));
     } catch (error) {
       // 에러 처리
     }
