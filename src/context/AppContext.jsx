@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 const AppContext = createContext({
 	
@@ -17,6 +17,11 @@ const AppProvider = ({ children }) => {
 	const [viewMode, setViewMode] = useState('list');
   const [mapStep, setMapStep] = useState(1);
   const [selectLocation, setSelectLocation] = useState();
+  const [fieldErrors, setFieldErrors] = useState({});
+
+	useEffect(() => {
+		console.log(fieldErrors)
+	}, [fieldErrors])
 
 	return (
 		<AppContext.Provider
@@ -33,6 +38,7 @@ const AppProvider = ({ children }) => {
 				viewMode,
 				mapStep,
 				selectLocation,
+				fieldErrors,
 
 				setOpenLoginPage,
 				setLoginUserName,
@@ -45,7 +51,8 @@ const AppProvider = ({ children }) => {
 				setLocations,
 				setViewMode,
 				setMapStep,
-				setSelectLocation
+				setSelectLocation,
+				setFieldErrors
 			}}
 		>
 			{children}

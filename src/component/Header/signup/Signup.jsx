@@ -10,10 +10,11 @@ export default function Signup () {
   const { signUpUserName, setSignUpUserName,
           signUpPassword, setSignUpPassword,
           signUpEmail, setSignUpEmail,
-          signUpVerifyCode, setSignUpVerifyCode } = useContext(AppContext);
-  const [isDuplicated, setIsDuplicated] = useState(false);
-
-  const [fieldErrors, setFieldErrors] = useState({});
+          signUpVerifyCode, setSignUpVerifyCode,
+          fieldErrors, setFieldErrors } = useContext(AppContext);
+  const [isDuplicated, setIsDuplicated] = useState(null);
+  const [passwordCheck, setPasswordCheck] = useState("");
+  const [validPwd, setValidPwd] = useState(false);
 
   const navigate = useNavigate();
 
@@ -23,6 +24,9 @@ export default function Signup () {
 
   const onPasswordHandler = (e) => {
     setSignUpPassword(e.target.value);
+  };
+  const onPwdChkHandler = (e) => {
+    setPasswordCheck(e.target.value);
   };
 
   const onEmailHandler = (e) => {
@@ -42,12 +46,20 @@ export default function Signup () {
   };
 
   const onClickSignupBtn = async (e) => {
+    const rules = signUpUserName !== "" && 
+                  signUpPassword !== "" && 
+                  passwordCheck !== "" && 
+                  signUpEmail !== "" &&
+                  validPwd
+    if(rules) {
+      
+    }
     setFieldErrors({});
     const data = { username: signUpUserName, password: signUpPassword, email: signUpEmail };
 
     await axiosInstance.post('/api/users', data)
     .then((res) => {
-      if(!isDuplicated && signUpVerifyCode !== "") {
+      if(!isDuplicated && signUpUserName !== "" && signUpPassword !== "" && signUpEmail !== "" && signUpVerifyCode !== "") {
         notification.open({
           message: "회원가입 완료",
           icon: <SmileOutlined style={{ color: "#108ee9" }} />
@@ -90,71 +102,59 @@ export default function Signup () {
   };
 
   const onClickValidate = async () => {
-    const data = { username: signUpUserName };
-    await axiosInstance.post("/api/users/names/validate", data) 
-      .then((res) => {
-        if(res.data.isDuplicated === true) {
-          setIsDuplicated(true);
-          newFieldErrors = {
-            username: {
-              validateStatus: "error",
-              help: "이미 사용 중인 userName입니다.",
-            }
-          };
-        } else if(res.data.isDuplicated === false) {
-          setIsDuplicated(false);
-          newFieldErrors = {
-            username: {
-              help: "사용 가능한 userName입니다.",
-            }
-          };
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        newFieldErrors = {
-          username: {
-            validateStatus: "error",
-            help: "Please input your username!",
+    if(signUpUserName !== "") {
+      const data = { username: signUpUserName };
+      await axiosInstance.post("/api/users/names/validate", data) 
+        .then((res) => {
+          if(res.data.isDuplicated === true) {
+            setIsDuplicated(true);
+          } else if(res.data.isDuplicated === false) {
+            setIsDuplicated(false);
           }
-        };
-      });
-      setFieldErrors(newFieldErrors);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const verification = async () => {
-    const data = { email: signUpEmail };
-    await axiosInstance.post("/api/users/emails/code", data)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+    if(signUpEmail !== "") {
+      const data = { email: signUpEmail };
+      await axiosInstance.post("/api/users/emails/code", data)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
   };
 
   const emailCheck = async () => {
-    const data = { email: signUpEmail, code: signUpVerifyCode };
-    await axiosInstance.post("/api/users/emails/verify", data)
-      .then((res) => {
-        const data = res.data;
-        if(data.isVerified === true) {
+    if(signUpEmail !== "" && signUpVerifyCode !== "") {
+      const data = { email: signUpEmail, code: signUpVerifyCode };
+      await axiosInstance.post("/api/users/emails/verify", data)
+        .then((res) => {
+          const data = res.data;
+          if(data.isVerified === true) {
+            notification.open({
+              message: "인증 완료",
+              icon: <SmileOutlined style={{ color: "#108ee9" }} />,
+            });
+          }
+        })
+        .catch((err)=> {
+          const {
+            data: { errorMessage },
+          } = err.response;
           notification.open({
-            message: "인증 완료",
-            icon: <SmileOutlined style={{ color: "#108ee9" }} />,
+            message: "인증 실패",
+            description: errorMessage,
+            icon: <FrownOutlined style={{ color: "#ff3333" }} />,
           });
-        }
-      })
-      .catch((err)=> {
-        const {
-          data: { errorMessage },
-        } = err.response;
-        notification.open({
-          message: "인증 실패",
-          description: errorMessage,
-          icon: <FrownOutlined style={{ color: "#ff3333" }} />,
-        });
-      })
+        })
+    }
   };
 
   const layout = {
@@ -213,8 +213,8 @@ export default function Signup () {
               label={<span className="userTit">Username</span>}
               name="username"
               hasFeedback
-              validateStatus={isDuplicated && fieldErrors.username ? fieldErrors.username.validateStatus : ''}
-              help={isDuplicated && fieldErrors.username ? fieldErrors.username.help : ''}
+              validateStatus={fieldErrors.username ? fieldErrors.username.validateStatus : ''}
+              help={fieldErrors.username ? fieldErrors.username.help : ''}
             >
               <Input placeholder="Username" value={signUpUserName} onChange={onUserNameHandler}/>
               <button className="chkBtn" onClick={onClickValidate}>validate check</button>
@@ -233,9 +233,6 @@ export default function Signup () {
             <Form.Item
               className="userAccount"
               name="verify"
-              // rules={[
-              //   { required: true, message: <span style={{fontSize: "0.7rem"}}>Please input your verification code!</span> },
-              // ]}
               style={{height: "53px"}}
               hasFeedback
             >
@@ -250,6 +247,7 @@ export default function Signup () {
               help={fieldErrors.password ? fieldErrors.password.help : ''}
             >
               <Input.Password placeholder="Password" value={signUpPassword} onChange={onPasswordHandler} />
+              <Input.Password placeholder="Password Check" value={passwordCheck} onChange={onPwdChkHandler} />
             </Form.Item>
             <Form.Item {...tailLayout} style={{marginBottom: "0px"}}>
               <Button className="accountBtn basic" onClick={onClickSignupBtn} htmlType="submit" style={{ width: '100%' }}>

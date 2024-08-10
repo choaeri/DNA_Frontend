@@ -8,9 +8,9 @@ import useLocalStorage from '../../../utils/useLocalStorage';
 
 export default function Login() {
   const { processLogin } = useLocalStorage();
-  const { loginUserName, setLoginUserName, loginPassword, setLoginPassword } = useContext(AppContext);
-
-  const [fieldErrors, setFieldErrors] = useState({});
+  const { loginUserName, setLoginUserName, 
+          loginPassword, setLoginPassword,
+          fieldErrors, setFieldErrors } = useContext(AppContext);
 
   const navigate = useNavigate();
 
