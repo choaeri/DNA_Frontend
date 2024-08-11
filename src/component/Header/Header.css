@@ -15,7 +15,9 @@
 
 .Header .logo {
   margin-left: 40px; /* 버튼과의 간격 */
+  cursor: default; /* 기본 커서 스타일로 설정 */
 }
+
 
 .Header .logoButton {
   background: none;
