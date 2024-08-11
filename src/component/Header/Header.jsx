@@ -7,6 +7,10 @@ export default function Header () {
   const { isLoggedIn, processLogout } = useLocalStorage();
   const navigate = useNavigate();
 
+  const goToHome = () => {
+    navigate("/");
+  };
+
   const goToLogin = () => {
     navigate("/login");
   };
@@ -15,7 +19,6 @@ export default function Header () {
     navigate("/signup");
   };
 
-  // 로그아웃 API 호출
   const logout = async () => {
     try {
       await axiosInstance.post("/api/auth/logout");
@@ -23,32 +26,32 @@ export default function Header () {
       window.location.reload();
     } catch (err) {
       console.error("Error during logout:", err);
-    };
+    }
   };
 
-  // 로그인 버튼 클릭
   const onClickLoginButton = () => {
     if (!isLoggedIn) {
       goToLogin();
-    };
+    }
   };
 
-  // 로그아웃 버튼 클릭
   const onClickLogoutButton = () => {
     if (isLoggedIn) {
       logout();
-    };
+    }
   };
 
-  // 회원가입 버튼 클릭
   const onClickSignupButton = () => {
     if (!isLoggedIn) {
       goToSignUp();
-    };
+    }
   };
 
   return (
     <div className="Header">
+      <div className="logo" onClick={goToHome} style={{ cursor: 'pointer' }}>
+        <img src="img/DNALogo.png" alt="Logo" className="logoImage" />
+      </div>
       <div className="account">
         { !isLoggedIn ? 
           <>

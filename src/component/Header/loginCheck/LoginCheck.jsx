@@ -38,7 +38,7 @@ export default function LoginCheck() {
   const onClickLoginCheck = async () => {
     const newUsernameRequest = { newUsername: userName }; // DTO 형태로 객체 생성
     try {
-      await axiosInstance.patch('/api/auth/names', newUsernameRequest);
+      await axiosInstance.patch('/api/auth/name', newUsernameRequest);
       processLogin();
       navigate('/'); // 홈으로 이동
     } catch (error) {

@@ -8,18 +8,34 @@
   z-index: 2;
   background-color: #fff;
 }
+
 .Header {
   position: fixed;
 }
+
+.Header .logo {
+  margin-left: 40px; /* 버튼과의 간격 */
+}
+
+.Header .logoButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.Header .logoImage {
+  height: 40px; /* 로고 이미지 크기 조정 */
+  width: auto; /* 비율 유지 */
+}
+
 .Header .account {
-  /* margin-left: auto; */
   display: flex;
   align-items: center;
   gap: 4px;
   font-size: 14px;
-  position: relative;
-  left: 87%;
+  margin-right: 40px; /* 오른쪽 여백 추가 */
 }
+
 .Header .account .loginBtn,
 .Header .account .signUpBtn {
   display: flex;
@@ -30,10 +46,12 @@
   align-items: center;
   gap: var(--button-padding-gap-button-gap-md, 2px);
 }
+
 .Header .account .loginBtn {
   background-color: #ffffff;
   border: none;
 }
+
 .Header .account .signUpBtn {
   background: var(--Gray-01, #000);
   color: #ffffff;
@@ -45,12 +63,14 @@
   width: 100%;
   height: 100%;
 }
+
 .Account .content {
   display: flex;
   width: 100%;
   height: calc(100% - 68px);
   overflow: hidden;
 }
+
 .Account .content img {
   width: 480px;
   height: 732px;
@@ -61,9 +81,11 @@
   border: none;
   padding: 18px 83px;
 }
+
 .Account .content .accountCnt.signup {
   padding: 0px 83px;
 }
+
 .Account .content .tit {
   color: var(--Gray1, #000);
   font-family: "Syne";
@@ -72,9 +94,11 @@
   font-weight: 400;
   line-height: 160%;
 }
+
 .Account .content .ant-card-head {
   padding: 0;
 }
+
 .Account .content .ant-card-body {
   display: flex;
   width: 321px;
@@ -86,12 +110,15 @@
   padding: 0;
   border-radius: none;
 }
+
 .Account .content .ant-card-body::before {
   content: none;
 }
+
 .Account .content .ant-card-body .ant-col-offset-11 {
   margin-inline-start: 0;
 }
+
 .Account .content .ant-card-body .ant-form-item {
   margin-bottom: 0px;
 }
@@ -109,24 +136,29 @@
   margin-bottom: 5px;
   background: var(--Gray-8, #ECEEF4);
 }
+
 .Account .content .accountBtn.basic {
   height: var(--Button-Size-button-size-lg, 48px);
   padding: 0px 24px;
   gap: var(--button-padding-gap-button-gap-lg, 4px);
   background: var(--Fill-fill-disabled, rgba(22, 88, 255, 0.03));
 }
+
 .Account .content .accountBtn.isg {
   background-color: #000;
 }
+
 .Account .content .accountBtn.fb {
   background-color: #1877F2;
 }
+
 .Account .content .accountBtn svg {
   width: var(--Modal-Radius-modal-radius-sm, 20px);
   height: var(--Modal-Radius-modal-radius-sm, 20px);
   padding: 12px;
   flex-shrink: 0;
 }
+
 .Account .content .accountBtn span {
   display: flex;
   height: 22px;
@@ -135,17 +167,21 @@
   align-items: center;
   flex: 1 0 0;
 }
+
 .Account .content .accountBtn.google span {
   padding: 0px 50px 0px 49px;
 }
+
 .Account .content .accountBtn.isg span {
   padding: 0px 37px 0px 39px;
   color: #fff;
 }
+
 .Account .content .accountBtn.fb span {
   padding: 0px 40px 0px 42px;
   color: #fff;
 }
+
 .Account .content .accountBtn.basic span {
   color: var(--Foreground-fg-disabled, rgba(11, 27, 55, 0.18));
   font-family: "Pretendard Variable";
@@ -154,6 +190,7 @@
   font-weight: 500;
   line-height: 160%;
 }
+
 .ant-col.ant-col-10.ant-form-item-control.css-dev-only-do-not-override-zg0ahe {
   display: grid;
 }
@@ -175,6 +212,7 @@
 .Account .content .userAccount {
   height: 85px;
 }
+
 .Account .content .userTit {
   color: var(--Gray1, #000);
   font-family: "Pretendard Variable";
@@ -183,25 +221,31 @@
   font-weight: 500;
   line-height: 160%;
 }
+
 .Account .content .userAccount .ant-row {
   display: flex;
   flex-direction: column;
 }
+
 .Account .content .userAccount .ant-form-item-label {
   text-align: start;
 }
+
 .Account .content .userAccount .ant-form-item-label >label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before,
 .Account .content .userAccount .ant-form-item-label >label::after {
   content: none;
 }
+
 .Account .content .userAccount .ant-form-item-control-input {
   width: 20rem;
 }
+
 .Account .content .userAccount .ant-input-affix-wrapper {
   border-top: none;
   border-right: none;
   border-left: none;
 }
+
 .Account .content .userAccount .chkBtn {
   position: absolute;
 }
@@ -212,9 +256,11 @@
   justify-content: center;
   margin-bottom: 0rem !important;
 }
+
 .Account .content .etcCtn .ant-form-item-control-input-content {
   display: flex;
 }
+
 .Account .content .etcCtn .etc {
   color: var(--Gray-6, #B6B9BE);
   text-align: center;
@@ -225,6 +271,7 @@
   line-height: 160%;
   margin-right: 0.5rem;
 }
+
 .Account .content .etcCtn .etcBtn {
   display: flex;
   justify-content: center;

@@ -9,7 +9,7 @@ import useLocalStorage from "../../../utils/useLocalStorage";
 export default function ListView() {
   const { isLoggedIn } = useLocalStorage();
   const { locations } = useContext(AppContext);
-  const [isLike, setIsLike] = useState({});
+  const [isLiked, setIsLiked] = useState({});
   const [likeCount, setLikeCount] = useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -19,7 +19,7 @@ export default function ListView() {
     const apiUrl = `/api/locations/${locationId}/like/count`;
     try {
       const response = await axiosInstance.get(apiUrl);
-      setLikeCount((prev) => ({ ...prev, [locationId]: response.data.likesCount }));
+      setLikeCount((prev) => ({ ...prev, [locationId]: response.data.likeCount }));
     } catch (error) {
       // 에러 처리
     }
@@ -31,19 +31,19 @@ export default function ListView() {
       const apiUrl = `/api/locations/${locationId}/like`;
       try {
         const response = await axiosInstance.get(apiUrl);
-        setIsLike((prev) => ({ ...prev, [locationId]: response.data.isLike }));
+        setIsLiked((prev) => ({ ...prev, [locationId]: response.data.isLiked }));
       } catch (error) {
         // 에러 처리
       }
     } else {
-      setIsLike((prev) => ({ ...prev, [locationId]: false }));
+      setIsLiked((prev) => ({ ...prev, [locationId]: false }));
     }
   };
 
   // 좋아요 요청
   const onClickLike = async (locationId) => {
     const apiUrl = `/api/locations/${locationId}/like`;
-    const method = isLike[locationId] ? "DELETE" : "POST";
+    const method = isLiked[locationId] ? "DELETE" : "POST";
     try {
       await axiosInstance({
         url: apiUrl,
@@ -73,8 +73,8 @@ export default function ListView() {
 
   useEffect(() => {
     locations.forEach((location) => {
-      fetchLocationLike(location.id);
-      fetchLikeCount(location.id);
+      fetchLocationLike(location.locationId);
+      fetchLikeCount(location.locationId);
     });
   }, [locations]);
 
@@ -92,18 +92,18 @@ export default function ListView() {
           > 
             <img alt={location.locationName} src={location.thumbNail}></img>
             <div style={{ display: 'flex', alignItems: 'center', position: "absolute" }}>
-              {isLike[location.id] ? (
+              {isLiked[location.locationId] ? (
                 <HeartFilled 
-                  onClick={() => onClickLike(location.id)} 
+                  onClick={() => onClickLike(location.locationId)} 
                   style={{ color: 'red', cursor: 'pointer' }} 
                 />
               ) : (
                 <HeartOutlined 
-                  onClick={() => onClickLike(location.id)} 
+                  onClick={() => onClickLike(location.locationId)} 
                   style={{ color: 'gray', cursor: 'pointer' }} 
                 />
               )}
-              <span style={{ marginLeft: '8px' }}>{likeCount[location.id]}</span>
+              <span style={{ marginLeft: '8px' }}>{likeCount[location.locationId]}</span>
             </div>
             <div className="locationCnt" onClick={() => showModal(location)}>
               <div className="header">

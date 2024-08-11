@@ -14,13 +14,13 @@ const LocationModal = ({ visible, location, onOk, onCancel }) => {
   const [username, setUsername] = useState('');
   const [participantCount, setParticipantCount] = useState(0); // 참여 인원 상태 추가
 
-  const locationId = location ? location.id : null;
+  const locationId = location ? location.locationId : null;
 
   // 사용자 이름 조회 API 호출
   useEffect(() => {
     const fetchUsername = async () => {
       try {
-        const response = await axiosInstance.get('/api/users/names');
+        const response = await axiosInstance.get('/api/users/name');
         setUsername(response.data.username);
       } catch (error) {
         console.error('Failed to fetch username:', error);
