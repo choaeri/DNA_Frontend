@@ -13,11 +13,11 @@ const AppProvider = ({ children }) => {
 	const [signUpPassword, setSignUpPassword] = useState("");
 	const [signUpEmail, setSignUpEmail] = useState("");
 	const [signUpVerifyCode, setSignUpVerifyCode] = useState("");
-  	const [locations, setLocations] = useState([]);
+	const [locations, setLocations] = useState([]);
 	const [viewMode, setViewMode] = useState('list');
- 	const [mapStep, setMapStep] = useState(1);
-  	const [selectLocation, setSelectLocation] = useState();
-  	const [fieldErrors, setFieldErrors] = useState({});
+	const [mapStep, setMapStep] = useState(1);
+	const [selectLocation, setSelectLocation] = useState();
+	const [fieldErrors, setFieldErrors] = useState({});
 
 	useEffect(() => {
 		console.log(fieldErrors)

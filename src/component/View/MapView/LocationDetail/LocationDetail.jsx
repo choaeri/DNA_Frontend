@@ -1,7 +1,7 @@
-import { useContext, useEffect, useRef, useState } from "react"
+import { useContext } from "react"
 import { AppContext } from "../../../../context/AppContext"
 import "./LocationDetail.css";
-import useLocalStorage from "../../../../utils/useLocalStorage";
+import OpenChat from "./OpenChat/OpenChat";
 
 export default function LocationDetail () {
   const { setMapStep, selectLocation } = useContext(AppContext);
@@ -56,6 +56,8 @@ export default function LocationDetail () {
         <span>surfing</span>
         <span>quiet</span>
       </div>
+
+      <OpenChat />
     </div>
   )
 };
