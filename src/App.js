@@ -24,7 +24,7 @@ function App() {
           <Route path="/users/login/check" element={<LoginCheck />} />
           <Route path="/account" element={<Account />} />
           <Route path="/recommend" element={<Recommend />} />
-          <Route path={`/locations/:${selectLocationId}`} element={<DetailLocation />} />
+          <Route path={`/locations/:locationId`} element={<DetailLocation />} />
         </Routes>
       </AppProvider>
     </BrowserRouter>
