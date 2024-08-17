@@ -12,7 +12,7 @@ import { useContext } from 'react';
 import Account from './component/Header/Account/Account';
 
 function App() {
-  const {selectLocation} = useContext(AppContext);
+  const {selectLocationId} = useContext(AppContext);
 
   return (
     <BrowserRouter>
@@ -24,7 +24,7 @@ function App() {
           <Route path="/users/login/check" element={<LoginCheck />} />
           <Route path="/account" element={<Account />} />
           <Route path="/recommend" element={<Recommend />} />
-          <Route path={`/locations/:${selectLocation}`} element={<DetailLocation />} />
+          <Route path={`/locations/:${selectLocationId}`} element={<DetailLocation />} />
         </Routes>
       </AppProvider>
     </BrowserRouter>

@@ -2,41 +2,34 @@ import { Map } from 'react-kakao-maps-sdk';
 import LocationDetail from './LocationDetail/LocationDetail';
 import LocationMap from "./LocationMap/LocationMap";
 import "./DetailLocation.css";
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/AppContext';
+import { axiosInstance } from '../../common/func/axios';
 
 const { kakao } = window;
 export default function DetailLocation () {
-  const {selectLocation} = useContext(AppContext);
+  const {setDetailInfo, selectLocationId} = useContext(AppContext);
   const [centerMarker, setCenterMarker] = useState({
     lat: 0,
     lng: 0
   });
 
-  const geocoder = new window.kakao.maps.services.Geocoder();
-  const getLocationByAddress = async (address) => {
-    geocoder.addressSearch(address, (result, status) => {
-      if(status === kakao.maps.services.Status.OK) {
-        const coord = new kakao.maps.LatLng(result[0].y, result[0].x);
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
+        const res = await axiosInstance.get(`/api/locations/${selectLocationId}`);
+        const data = res.data;
+        setDetailInfo(data);
         setCenterMarker({
-          lat: coord.Ma,
-          lng: coord.La
+          lat: data.latitude,
+          lng: data.longitude
         })
-      };
-    });
-  };
-
-  // useEffect(() => {
-  //   const match = {
-  //     "SOCKCHO": '속초',
-  //     "CHUNCHEON": '춘천',
-  //     "YANGYANG": '양양',
-  //     "GANGNEUNG": '강릉',
-  //     "WONJU" : '원주',
-  //     "SAMCHEOK": '삼척'
-  //   };
-  //   getLocationByAddress(match[selectLocation]);
-  // }, []);
+      } catch (err) {
+        console.error("Error fetching locations:", err);
+      }
+    };
+    fetchLocations();
+  }, []);
 
   return (
     <div className="DetailLocation">

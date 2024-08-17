@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const { kakao } = window;
 export default function MapView () {
-  const { locations, mapStep, setMapStep, setSelectLocation } = useContext(AppContext);
+  const { locations, mapStep, setMapStep, setSelectLocation, setSelectLocationId } = useContext(AppContext);
   const [centerMarker, setCenterMarker] = useState({
     lat: 0,
     lng: 0
@@ -29,8 +29,9 @@ export default function MapView () {
 
   const onClickDetailBtn = (e) => {
     // setMapStep(2);
+    setSelectLocationId(e.target.attributes.id.value);
     setSelectLocation(e.target.attributes.name.value);
-    navigate(`locations/${e.target.attributes.name.value}`);
+    navigate(`locations/${e.target.attributes.id.value}`);
   };
 
   useEffect(() => {
@@ -65,7 +66,7 @@ export default function MapView () {
                         <span className="spot">245 spots</span>
                       </div>
                     </div>
-                    <svg className="detailBtn" name={location.locationName} onClick={onClickDetailBtn} xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <svg className="detailBtn" id={location.locationId} name={location.locationName} onClick={onClickDetailBtn} xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                       <path d="M3.57129 9.79321L15.9629 9.79321" stroke="black"/>
                       <path d="M10.9211 4.28564L16.4285 9.79301L10.9211 15.3004" stroke="black"/>
                     </svg>

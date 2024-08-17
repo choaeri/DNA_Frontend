@@ -51,7 +51,7 @@ export default function OpenChat () {
     if(isLoggedIn) {
       if (!locationId) return;
   
-      const socket = new SockJS(`${process.env.REACT_APP_TOUR_API}/ws`);
+      const socket = new SockJS(`${process.env.REACT_APP_TOUR_WS}/ws`);
       const stompClientInstance = Stomp.over(socket);
       setStompClient(stompClientInstance);
   

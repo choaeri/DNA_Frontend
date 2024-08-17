@@ -1,7 +1,7 @@
 .DetailLocation {
   display: flex;
   width: 100%;
-  padding: 2rem 4rem 4rem;
+  padding: 3rem;
   overflow: hidden;
 }
 
@@ -9,8 +9,8 @@
   display: flex;
   bottom: 0;
   position: relative;
-  width: 78%;
-  height: 33rem;
+  width: 70%;
+  height: 37rem;
   margin-left: 4rem;
 }
 

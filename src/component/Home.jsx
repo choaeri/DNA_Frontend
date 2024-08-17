@@ -11,7 +11,7 @@ import Footer from "./Footer/Footer";
 
 export default function Home() {
   const { setLocations, viewMode, setViewMode } = useContext(AppContext);
-
+ 
   useEffect(() => {
   // 지역 조회 API 호출
   const fetchLocations = async () => {

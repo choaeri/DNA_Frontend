@@ -17,6 +17,8 @@ const AppProvider = ({ children }) => {
 	const [viewMode, setViewMode] = useState('list');
 	const [mapStep, setMapStep] = useState(1);
 	const [selectLocation, setSelectLocation] = useState("");
+	const [selectLocationId, setSelectLocationId] = useState("");
+	const [detailInfo, setDetailInfo] = useState(null);
 	const [fieldErrors, setFieldErrors] = useState({});
 
 	useEffect(() => {
@@ -38,6 +40,8 @@ const AppProvider = ({ children }) => {
 				viewMode,
 				mapStep,
 				selectLocation,
+				selectLocationId,
+				detailInfo,
 				fieldErrors,
 
 				setOpenLoginPage,
@@ -52,6 +56,8 @@ const AppProvider = ({ children }) => {
 				setViewMode,
 				setMapStep,
 				setSelectLocation,
+				setSelectLocationId,
+				setDetailInfo,
 				setFieldErrors
 			}}
 		>
