@@ -1,10 +1,11 @@
 import { Map } from 'react-kakao-maps-sdk';
-import LocationDetail from './LocationDetail/LocationDetail';
+import LocationDetail from './LocationDetail/LocationInfo';
 import LocationMap from "./LocationMap/LocationMap";
 import "./DetailLocation.css";
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/AppContext';
 import { axiosInstance } from '../../common/func/axios';
+import LocationInfo from './LocationDetail/LocationInfo';
 
 const { kakao } = window;
 export default function DetailLocation () {
@@ -33,7 +34,7 @@ export default function DetailLocation () {
 
   return (
     <div className="DetailLocation">
-      <LocationDetail />
+      <LocationInfo />
       <div className="mapArea">
         <Map
           className="map"

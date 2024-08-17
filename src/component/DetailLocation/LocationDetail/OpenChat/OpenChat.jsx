@@ -7,7 +7,7 @@ import SockJS from "sockjs-client";
 import "./OpenChat.css";
 
 export default function OpenChat () {
-  const { selectLocation } = useContext(AppContext);
+  const { selectLocation, detailInfo } = useContext(AppContext);
   const { isLoggedIn } = useLocalStorage();
   const [stompClient, setStompClient] = useState(null);
   const [message, setMessage] = useState('');
@@ -17,14 +17,12 @@ export default function OpenChat () {
   const messagesEndRef = useRef(null);
   const currentSubscription = useRef(null);
 
-  const locationId = selectLocation ?? selectLocation.id;
-
   // 채팅 메시지 전송
   const sendMessage = () => {
     if (message.trim() !== '') {
       stompClient.send('/pub/messages', {}, JSON.stringify({
         type: `CHAT`,
-        roomId: locationId,
+        roomId: detailInfo.locationId,
         message: message,
       }));
       setMessage('');
@@ -49,7 +47,7 @@ export default function OpenChat () {
   // 채팅방 입장
   useEffect(() => {
     if(isLoggedIn) {
-      if (!locationId) return;
+      if (!detailInfo.locationId) return;
   
       const socket = new SockJS(`${process.env.REACT_APP_TOUR_WS}/ws`);
       const stompClientInstance = Stomp.over(socket);
@@ -60,7 +58,7 @@ export default function OpenChat () {
           currentSubscription.current.unsubscribe();
         }
   
-        const subscription = stompClientInstance.subscribe(`/sub/rooms/${locationId}`, (data) => {
+        const subscription = stompClientInstance.subscribe(`/sub/rooms/${detailInfo.locationId}`, (data) => {
           const newMessage = JSON.parse(data.body);
           const messageTime = new Date();
           const timestamp = messageTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -74,7 +72,7 @@ export default function OpenChat () {
         // 입장 메시지 전송
         stompClientInstance.send('/pub/messages', {}, JSON.stringify({
           type: 'JOIN',
-          roomId: locationId
+          roomId: detailInfo.locationId
         }));
       });
   
@@ -82,7 +80,7 @@ export default function OpenChat () {
         // 퇴장 메시지 전송
         stompClientInstance.send('/pub/messages', {}, JSON.stringify({
         type: 'LEAVE',
-        roomId: locationId,
+        roomId: detailInfo.locationId,
         }));
 
         stompClientInstance.disconnect(() => {
@@ -90,7 +88,7 @@ export default function OpenChat () {
         });
       }
     }
-  }, [locationId]);
+  }, [detailInfo.locationId]);
 
   useEffect(() => {
     scrollToBottom();

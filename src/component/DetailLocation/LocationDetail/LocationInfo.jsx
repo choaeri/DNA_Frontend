@@ -1,10 +1,10 @@
 import { useContext } from "react"
 import { AppContext } from "../../../context/AppContext"
-import "./LocationDetail.css";
+import "./LocationInfo.css";
 import OpenChat from "./OpenChat/OpenChat";
 import { useNavigate } from "react-router-dom";
 
-export default function LocationDetail () {
+export default function LocationInfo () {
   const { detailInfo } = useContext(AppContext);
 
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ export default function LocationDetail () {
   return (
     <>
     { detailInfo !== null ? 
-      <div className="locationDetail">
+      <div className="LocationInfo">
         <div className="header">
           <svg onClick={() => navigate("/")} xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
             <path d="M23 13.7104L5.65181 13.7104" stroke="black" strokeWidth="1.5"/>
