@@ -46,27 +46,52 @@ export default function LoginCheck() {
     }
   };
 
+  const layout = {
+    labelCol: { span: 24 },
+    wrapperCol: { span: 24 }
+  };
+
+  const tailLayout = {
+    wrapperCol: { offset: 0, span: 24 }
+  };
+
   return (
-    <div>
-      {isFirstLogin === true ? (
-        <Card className='loginChkCnt' title={<span className="userTit">Username</span>} style={{ width: 300, margin: 'auto', marginTop: '50px' }}>
-          <Form>
-            <Form.Item
-              name="username"
-              rules={[{ required: true, message: '이름을 입력해 주세요!' }]}
-            >
-              <Input placeholder="Username" onChange={onUserNameHandler} />
-            </Form.Item>
-            <Form.Item>
-              <Button className='chkBtn' type="primary" htmlType="submit" onClick={onClickLoginCheck}>
+    <div className='Account'>
+      <div className="header"></div>
+      <div className="content">
+        <img src="/img/DNALogin.png" alt="Logo" />
+        {isFirstLogin === true ? (
+          <Card className="accountCnt signup" title={<span className="tit">Sign Up</span>}>
+            <Form {...layout}>
+              <Form.Item
+                label="Username"
+                name="username"
+                {...layout}
+                rules={[{ required: true, message: '이름을 입력해 주세요!' }]}
+              >
+                <Input placeholder="Username" onChange={onUserNameHandler} />
+              </Form.Item>
+              <Form.Item>
+                <Button className="accountBtn basic" type="primary" htmlType="submit" onClick={onClickLoginCheck} style={{ width: "100%", marginTop: '20px' }}>
+                  <span>Create Account</span>
+                </Button>
+              </Form.Item>
+              <Form.Item className="etcCtn" {...tailLayout}>
+              <span className="etc">Already have an account?</span>
+              <div className="etcBtn" onClick={() => navigate("/login")}>
                 <span>Log in</span>
-              </Button>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2.5 6.85498L11.1741 6.85498" stroke="black" strokeWidth="0.75"/>
+                  <path d="M7.64502 3L11.5002 6.85515L7.64502 10.7103" stroke="black" strokeWidth="0.75"/>
+                </svg>
+              </div>
             </Form.Item>
-          </Form>
-        </Card>
-      ) : (
-        <p></p> 
-      )}
+            </Form>
+          </Card>
+        ) : (
+          <p></p> 
+        )}
+      </div>
     </div>
   );
 }

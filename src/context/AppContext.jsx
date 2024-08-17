@@ -16,7 +16,7 @@ const AppProvider = ({ children }) => {
 	const [locations, setLocations] = useState([]);
 	const [viewMode, setViewMode] = useState('list');
 	const [mapStep, setMapStep] = useState(1);
-	const [selectLocation, setSelectLocation] = useState();
+	const [selectLocation, setSelectLocation] = useState("");
 	const [fieldErrors, setFieldErrors] = useState({});
 
 	useEffect(() => {

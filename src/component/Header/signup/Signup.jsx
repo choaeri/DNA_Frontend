@@ -106,7 +106,6 @@ export default function Signup() {
       <div className="content">
         <img src="/img/DNALogin.png" alt="Logo" />
         <Card className="accountCnt signup" title={<span className="tit">Sign Up</span>}>
-
           <Form {...layout} autoComplete={"false"}>
             <Form.Item {...tailLayout}>
               <button className="accountBtn google" onClick={() => handleSignup("google")}>
@@ -120,9 +119,9 @@ export default function Signup() {
               </button>
             </Form.Item>
             <Form.Item {...tailLayout}>
-              <button className="accountBtn google" onClick={() => handleSignup("kakao")}>
+              <button className="accountBtn kakao" onClick={() => handleSignup("kakao")}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M10 0C4.48 0 0 4.48 0 10c0 4.42 3.1 8.12 7.19 9.41.53.1.73-.23.73-.51v-1.74c-2.91.63-3.52-1.4-3.52-1.4-.48-1.24-1.18-1.57-1.18-1.57-.96-.66.07-.65.07-.65 1.06.07 1.62 1.09 1.62 1.09 1.02 1.74 2.67 1.24 3.32.95.1-.74.4-1.24.73-1.53-2.42-.28-4.97-1.21-4.97-5.39 0-1.19.42-2.16 1.11-2.93-.11-.28-.48-1.4.1-2.91 0 0 .91-.29 2.98 1.1a10.38 10.38 0 012.72-.36c.92 0 1.83.12 2.72.36 2.07-1.39 2.98-1.1 2.98-1.1.58 1.51.21 2.63.1 2.91.69.77 1.11 1.74 1.11 2.93 0 4.18-2.55 5.11-4.97 5.39.41.35.77 1.02.77 2.06v3.03c0 .28.2.61.73.51C16.9 18.12 20 14.42 20 10c0-5.52-4.48-10-10-10z" fill="#FEE500"/>
+                  <path fillRule="evenodd" clipRule="evenodd" d="M9.9795 2C5.01822 2 1 5.15718 1 9.09339C1 11.5945 2.68109 13.8087 5.18223 15.0797L4.32118 18.2779C4.28018 18.3599 4.32118 18.4829 4.40319 18.5649C4.44419 18.6059 4.5262 18.6469 4.5672 18.6469C4.6082 18.6469 4.6902 18.6059 4.73121 18.6059L8.38041 16.1458C8.91344 16.2278 9.44647 16.2688 10.0205 16.2688C14.9818 16.2688 19 13.0706 19 9.1754C19 5.15718 14.9818 2 9.9795 2Z" fill="black"/>
                 </svg>
                 <span>Sign up with Kakao</span>
               </button>

@@ -7,6 +7,7 @@
   align-items: center;
   z-index: 2;
   background-color: #fff;
+  border-bottom: 1px solid var(--Gray-7, #E1E4E9);
 }
 
 .Header {
@@ -99,6 +100,7 @@
 
 .Account .content .ant-card-head {
   padding: 0;
+  border: none;
 }
 
 .Account .content .ant-card-body {
@@ -113,7 +115,8 @@
   border-radius: none;
 }
 
-.Account .content .ant-card-body::before {
+.Account .content .ant-card-body::before,
+.Account .content .ant-card-body label.ant-form-item-required::before {
   content: none;
 }
 
@@ -146,12 +149,8 @@
   background: var(--Fill-fill-disabled, rgba(22, 88, 255, 0.03));
 }
 
-.Account .content .accountBtn.isg {
-  background-color: #000;
-}
-
-.Account .content .accountBtn.fb {
-  background-color: #1877F2;
+.Account .content .accountBtn.kakao {
+  background: #FEE500;
 }
 
 .Account .content .accountBtn svg {

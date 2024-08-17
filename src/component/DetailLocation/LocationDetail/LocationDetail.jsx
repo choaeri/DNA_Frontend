@@ -1,15 +1,18 @@
 import { useContext } from "react"
-import { AppContext } from "../../../../context/AppContext"
+import { AppContext } from "../../../context/AppContext"
 import "./LocationDetail.css";
 import OpenChat from "./OpenChat/OpenChat";
+import { useNavigate } from "react-router-dom";
 
 export default function LocationDetail () {
   const { setMapStep, selectLocation } = useContext(AppContext);
 
+  const navigate = useNavigate();
+
   return (
     <div className="locationDetail">
       <div className="header">
-        <svg onClick={() => setMapStep(1)} xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <svg onClick={() => navigate("/")} xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
           <path d="M23 13.7104L5.65181 13.7104" stroke="black" strokeWidth="1.5"/>
           <path d="M12.7102 21.4207L4.9999 13.7103L12.7102 6.00004" stroke="black" strokeWidth="1.5"/>
         </svg>

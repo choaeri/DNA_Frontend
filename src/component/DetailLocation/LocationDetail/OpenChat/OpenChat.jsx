@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import useLocalStorage from "../../../../../utils/useLocalStorage";
-import { axiosInstance } from "../../../../../common/func/axios";
-import { AppContext } from "../../../../../context/AppContext";
+import useLocalStorage from "../../../../utils/useLocalStorage";
+import { axiosInstance } from "../../../../common/func/axios";
+import { AppContext } from "../../../../context/AppContext";
 import { Stomp } from 'stompjs';
 import SockJS from "sockjs-client";
 import "./OpenChat.css";
@@ -103,50 +103,52 @@ export default function OpenChat () {
   return (
     <div className="chat">
       <span className="header">Open Talk</span>
-      { isLoggedIn ? (
+      <div className="chatCnt">
+        <div
+          dataSource={messages}
+          renderItem={(item, index) => {
+            const isSender = item.sender === username;
+            return (
+              item.type === 'CHAT' ?
+                <div key={index} style={{ justifyContent: isSender ? 'flex-end' : 'flex-start' }}>
+                  <div className={`message-container ${isSender ? 'sender' : 'receiver'}`}>
+                    <div className={`message ${isSender ? 'sender' : 'receiver'}`}>
+                      <strong>{item.sender}:</strong> {item.message}
+                    </div>
+                    <div className="timestamp">{item.timestamp}</div>
+                  </div>
+                </div>
+              : <div key={index} style={{ justifyContent: 'center' }}>
+                  <div className="system-message">
+                    {item.message}
+                  </div>
+                </div>
+            )
+          }}
+        />
+        <div ref={messagesEndRef} />
+      </div>
+      <div className="chatMessage">
+        { isLoggedIn ? 
         <>
-          <div className="chatCnt">
-            <div
-              dataSource={messages}
-              renderItem={(item, index) => {
-                const isSender = item.sender === username;
-                return (
-                  item.type === 'CHAT' ?
-                    <div key={index} style={{ justifyContent: isSender ? 'flex-end' : 'flex-start' }}>
-                      <div className={`message-container ${isSender ? 'sender' : 'receiver'}`}>
-                        <div className={`message ${isSender ? 'sender' : 'receiver'}`}>
-                          <strong>{item.sender}:</strong> {item.message}
-                        </div>
-                        <div className="timestamp">{item.timestamp}</div>
-                      </div>
-                    </div>
-                  : <div key={index} style={{ justifyContent: 'center' }}>
-                      <div className="system-message">
-                        {item.message}
-                      </div>
-                    </div>
-                )
-              }}
-            />
-            <div ref={messagesEndRef} />
-          </div>
-          <div className="chatMessage">
-            <input
-              className="input-box"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-              placeholder="Join chat under the name of ‘Sandy’"
-            />
-            <button className="send-button" onClick={sendMessage}>
-              전송
-            </button>
-          </div>
-        </> ) :
-        <div>
-          <span>Please Login</span>
-        </div> 
-      }
+          <input
+            className="inputBox"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+            placeholder="Join chat under the name of ‘Sandy’"
+          /> 
+          <button className="sendBtn" onClick={sendMessage}>
+            Send
+          </button>
+        </> :
+          <input
+            className="inputBox"
+            disabled="disabled"
+            placeholder="Please Login"
+          />
+        }
+      </div>
     </div>
   )
 };

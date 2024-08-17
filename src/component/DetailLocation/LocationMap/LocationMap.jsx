@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { AppContext } from "../../../../context/AppContext"
+import { AppContext } from "../../../context/AppContext"
 import "./LocationMap.css";
 import { MapMarker } from "react-kakao-maps-sdk";
 
@@ -97,11 +97,11 @@ export default function LocationMap () {
           >
             {info && info.content === marker.content && (
               <div className="markerCnt">
-                {locations.map((location) => {
+                {/* {locations.map((location) => {
                   if(selectLocation === location.locationName) {
                     return <img alt={location.locationName} src={location.thumbNail}></img> 
                   };
-                })}
+                })} */}
                 <span className="tit">{marker.content}</span>
                 <span className="review">295 reviews</span>
               </div>
