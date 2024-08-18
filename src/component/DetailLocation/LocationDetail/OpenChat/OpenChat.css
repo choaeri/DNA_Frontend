@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .chat .header {
   overflow: hidden;
   color: var(--Gray1, #000);
@@ -15,20 +16,25 @@
   font-style: normal;
   font-weight: 600;
   line-height: 160%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
 .chat .chatCnt {
-  display: inline-flex;
+  display: flex; 
+  flex-direction: column; 
   width: 100%;
   height: 60%;
   overflow-y: auto;
-  padding: 8px 14px 0px 0px;
-  align-items: center;
+  padding: 8px 14px 0 0;
   border-top: 1px solid var(--Gray-7, #E1E4E9);
   background: #FFF;
   margin-bottom: 1rem;
 }
+
 .chat .chatMessage {
-  display: inline-flex;
+  display: flex; 
   padding: 10px 16px 11px;
   align-items: center;
   border-radius: 60px;
@@ -38,6 +44,7 @@
   color: var(--Gray-6, #B6B9BE);
   text-overflow: ellipsis;
 }
+
 .chat .chatMessage .inputBox {
   align-items: center;
   border: none;
@@ -49,11 +56,13 @@
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 160%; /* 19.2px */
+  line-height: 160%;
 }
+
 .chat .chatMessage .inputBox:focus {
   outline: none;
 }
+
 .chat .chatMessage .sendBtn {
   display: inline-flex;
   height: var(--Button-Size-button-size-sm, 32px);
@@ -67,3 +76,44 @@
   margin-left: auto;
 }
 
+.chat .message-wrapper {
+  display: flex;
+  width: 100%; /* 전체 너비 사용 */
+}
+
+.chat .message-wrapper.sender {
+  justify-content: flex-end; /* 발신자일 경우 오른쪽 정렬 */
+}
+
+.chat .message-wrapper.receiver {
+  justify-content: flex-start; /* 수신자일 경우 왼쪽 정렬 */
+}
+
+.chat .message-container {
+  max-width: 70%; /* 최대 너비 설정 */
+  padding: 8px 12px; /* 여백 설정 */
+  border-radius: 20px; /* 모서리 둥글게 */
+  margin-bottom: 8px; /* 메시지 간 간격 추가 */
+  color: #333; /* 텍스트 색상 */
+  display: flex; /* 플렉스 박스 사용 */
+  flex-direction: column; /* 세로 방향으로 정렬 */
+}
+
+.chat .message-container.sender {
+  align-items: flex-end; /* 발신자일 경우 오른쪽 정렬 */
+}
+
+.chat .message-container.receiver {
+  align-items: flex-start; /* 수신자일 경우 왼쪽 정렬 */
+}
+
+.chat .timestamp {
+  font-size: 10px; /* 타임스탬프 폰트 크기 */
+  color: #999; /* 타임스탬프 색상 */
+  margin-top: 4px; /* 타임스탬프와 메시지 간 간격 추가 */
+}
+
+.chat .system-message {
+  text-align: center; /* 시스템 메시지 중앙 정렬 */
+  margin: 8px 0; /* 여백 추가 */
+}

@@ -2,17 +2,16 @@ import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import { useContext, useState, useEffect } from "react";
 import { axiosInstance } from "../../../common/func/axios";
 import { AppContext } from "../../../context/AppContext";
+import { useNavigate } from "react-router-dom";
 import "./ListView.css"
-import LocationModal from "./LocationModal/LocationModal";
 import useLocalStorage from "../../../utils/useLocalStorage";
 
 export default function ListView() {
   const { isLoggedIn } = useLocalStorage();
-  const { locations } = useContext(AppContext);
+  const { locations, setSelectLocation, setSelectLocationId } = useContext(AppContext);
   const [isLiked, setIsLiked] = useState({});
   const [likeCount, setLikeCount] = useState({});
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState(null);
+  const navigate = useNavigate();
 
   // 좋아요 수 조회 요청
   const fetchLikeCount = async (locationId) => {
@@ -56,27 +55,19 @@ export default function ListView() {
     }
   };
 
-  // 모달 열기
-  const showModal = (location) => {
-    setSelectedLocation(location);
-    setIsModalVisible(true);
-  };
-
-  // 모달 닫기
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
   useEffect(() => {
     locations.forEach((location) => {
       fetchLocationLike(location.locationId);
       fetchLikeCount(location.locationId);
     });
   }, [locations]);
+
+
+  const onClickDetailBtn = (e) => {
+    setSelectLocationId(e.target.attributes.id.value);
+    setSelectLocation(e.target.attributes.name.value);
+    navigate(`locations/${e.target.attributes.id.value}`);
+  };
 
   return (
     <div className="CardContent">
@@ -105,13 +96,25 @@ export default function ListView() {
               )}
               <span style={{ marginLeft: '8px' }}>{likeCount[location.locationId]}</span>
             </div>
-            <div className="locationCnt" onClick={() => showModal(location)}>
+            
+            <div className="locationCnt">
               <div className="header">
                 <span className="location">{location.locationName}</span>
-                <svg className="modalBtn" xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29" fill="none">
+                <svg 
+                  className="modalBtn" 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="28" 
+                  height="29" 
+                  viewBox="0 0 28 29" 
+                  fill="none"
+                  id={location.locationId}
+                  name={location.locationName}
+                  onClick={onClickDetailBtn}
+                >
                   <path d="M5 14.2103L22.3482 14.2103" stroke="black"/>
                   <path d="M15.2898 6.5L23.0001 14.2103L15.2898 21.9206" stroke="black"/>
                 </svg>
+                
               </div>
               <div className="detail">
                 <div className="item">
@@ -137,14 +140,6 @@ export default function ListView() {
           </div>
         ))}
       </div>
-      {selectedLocation && (
-        <LocationModal 
-          visible={isModalVisible} 
-          location={selectedLocation} 
-          onOk={handleOk} 
-          onCancel={handleCancel} 
-        />
-      )}
     </div>
   );
 };
