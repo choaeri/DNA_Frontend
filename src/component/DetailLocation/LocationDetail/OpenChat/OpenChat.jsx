@@ -106,7 +106,7 @@ export default function OpenChat() {
         }
       };
     }
-  }, [detailInfo.locationId]);
+  }, [detailInfo.locationId, isLoggedIn]);
 
   // 채팅 메시지 전송
   const sendMessage = () => {
