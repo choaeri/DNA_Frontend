@@ -19,7 +19,7 @@ export default function LoginCheck() {
   useEffect(() => {
     const fetchFirstLogin = async () => {
       try {
-        const response = await axiosInstance.get('/api/auth/login/check');
+        const response = await axiosInstance.get('/api/auth/first-social-login');
         setIsFirstLogin(response.data.isFirstLogin);
       } catch (error) {
         console.error('Failed to fetch isFirstLogin:', error);
