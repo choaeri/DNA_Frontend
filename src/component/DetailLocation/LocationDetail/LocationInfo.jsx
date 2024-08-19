@@ -47,7 +47,7 @@ export default function LocationInfo() {
 
       await axiosInstance.post(`/api/locations/${detailInfo.locationId}/workation-schedules`, createWorkationScheduleRequest);
 
-      setIsModalVisible(false); // 모달 닫기
+      window.location.reload();
     } catch (errorInfo) {
       console.log('Validation Failed:', errorInfo);
     }
