@@ -68,49 +68,64 @@ export default function OpenChat() {
 
         currentSubscription.current = subscription;
 
-        // 입장 메시지 전송
-        stompClientInstance.send(
-          "/pub/messages",
-          {},
-          JSON.stringify({
-            type: "JOIN",
-            roomId: detailInfo.locationId,
-          })
-        );
+        // 입장 메시지를 전송하는 함수 호출
+        sendJoinMessage(stompClientInstance);
       });
 
-      // 새로고침 및 페이지 이동 시 퇴장 메시지 전송
+      // 페이지 새로고침 시 퇴장 메시지 전송
       const handleBeforeUnload = () => {
-        if (stompClientInstance) {
-          stompClientInstance.send(
-            "/pub/messages",
-            {},
-            JSON.stringify({
-              type: "LEAVE",
-              roomId: detailInfo.locationId,
-            })
-          );
-        }
+        sendLeaveMessage(stompClientInstance);
       };
 
       window.addEventListener("beforeunload", handleBeforeUnload);
 
       return () => {
-        handleBeforeUnload();
-        window.removeEventListener("beforeunload", handleBeforeUnload);
-
         if (stompClientInstance) {
+          // 퇴장 메시지 전송
+          sendLeaveMessage(stompClientInstance);
           stompClientInstance.disconnect(() => {
             setMessages([]); // 메시지 상태 초기화
           });
         }
+        window.removeEventListener("beforeunload", handleBeforeUnload);
       };
     }
   }, [detailInfo.locationId, isLoggedIn]);
 
+  // 입장 메시지 전송 함수
+  const sendJoinMessage = (stompClientInstance) => {
+    const messageTime = new Date();
+    stompClientInstance.send(
+      "/pub/messages",
+      {},
+      JSON.stringify({
+        type: "JOIN",
+        roomId: detailInfo.locationId,
+        createdAt: messageTime.toISOString(),
+      })
+    );
+  };
+
+  // 퇴장 메시지 전송 함수
+  const sendLeaveMessage = (stompClientInstance) => {
+    if (stompClientInstance) {
+      const messageTime = new Date();
+      stompClientInstance.send(
+        "/pub/messages",
+        {},
+        JSON.stringify({
+          type: "LEAVE",
+          roomId: detailInfo.locationId,
+          createdAt: messageTime.toISOString(),
+        })
+      );
+    }
+  };
+
   // 채팅 메시지 전송
   const sendMessage = () => {
     if (stompClient && stompClient.connected && message.trim() !== "") {
+      const messageTime = new Date();
       stompClient.send(
         "/pub/messages",
         {},
@@ -118,6 +133,7 @@ export default function OpenChat() {
           type: "CHAT",
           roomId: detailInfo.locationId,
           message: message,
+          createdAt: messageTime.toISOString(),
         })
       );
       setMessage("");
@@ -133,7 +149,6 @@ export default function OpenChat() {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
 
   return (
     <div className="chat">
