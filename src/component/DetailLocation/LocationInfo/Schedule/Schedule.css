@@ -1,0 +1,23 @@
+.schedule {
+  margin: 33px 0;
+}
+
+.schedule .schdBtn {
+  display: flex;
+  width: 172px;
+  height: var(--Button-Size-button-size-md, 40px);
+  padding: 0px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: var(--button-padding-gap-button-gap-md, 2px);
+  border-radius: var(--Border-Radius-rounded-full, 9999px);
+  background: var(--Gray1, #000);
+}
+
+.schedule .schdBtn span {
+  color: var(--Foreground-fg-inverse, #FFF);
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  line-height: 160%;
+}
