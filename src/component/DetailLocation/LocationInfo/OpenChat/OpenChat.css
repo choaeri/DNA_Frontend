@@ -44,6 +44,11 @@
   border-top: 1px solid var(--Gray-7, #E1E4E9);
   background: #FFF;
   margin-bottom: 1rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.chat .chatCnt::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 .chat .chatCnt.login {
   height: 60%;
@@ -133,18 +138,57 @@
   flex-direction: column; /* 세로 방향으로 정렬 */
 }
 
+.chat .message-container {
+  display: flex;
+  flex-direction: column;
+}
+.chat .message-container .userCnt,
+.chat .message-container .msgCnt {
+  display: flex;
+}
+.chat .message-container .userCnt svg {
+  width: 12px;
+  height: 12px;
+}
+.chat .message-container .userCnt .user {
+  overflow: hidden;
+  color: var(--Gray-5, #808388);
+  text-overflow: ellipsis;
+  font-family: "Pretendard Variable";
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  margin-left: 4px;
+}
+.chat .message-container .msgCnt .msg {
+  overflow: hidden;
+  color: var(--Gray1, #000);
+  text-overflow: ellipsis;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+
+.chat .message-container .msgCnt .timestamp {
+  overflow: hidden;
+  color: var(--Gray-6, #B6B9BE);
+  text-overflow: ellipsis;
+  font-family: "Pretendard Variable";
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  margin-left: 8px; /* 타임스탬프와 메시지 간 간격 추가 */
+}
+
 .chat .message-container.sender {
   align-items: flex-end; /* 발신자일 경우 오른쪽 정렬 */
 }
-
 .chat .message-container.receiver {
   align-items: flex-start; /* 수신자일 경우 왼쪽 정렬 */
-}
-
-.chat .timestamp {
-  font-size: 10px; /* 타임스탬프 폰트 크기 */
-  color: #999; /* 타임스탬프 색상 */
-  margin-top: 4px; /* 타임스탬프와 메시지 간 간격 추가 */
 }
 
 .chat .system-message {
