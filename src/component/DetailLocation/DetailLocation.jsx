@@ -1,11 +1,11 @@
 import { Map } from 'react-kakao-maps-sdk';
-import LocationDetail from './LocationDetail/LocationInfo';
+import LocationDetail from './LocationInfo/LocationInfo';
 import LocationMap from "./LocationMap/LocationMap";
 import "./DetailLocation.css";
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/AppContext';
 import { axiosInstance } from '../../common/func/axios';
-import LocationInfo from './LocationDetail/LocationInfo';
+import LocationInfo from './LocationInfo/LocationInfo';
 import { useParams } from 'react-router-dom';
 
 export default function DetailLocation () {

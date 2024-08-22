@@ -5,6 +5,7 @@ import { AppContext } from "../../../../context/AppContext";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import "./OpenChat.css";
+import { useNavigate } from "react-router-dom";
 
 export default function OpenChat() {
   const { detailInfo } = useContext(AppContext);
@@ -17,6 +18,8 @@ export default function OpenChat() {
 
   const messagesEndRef = useRef(null);
   const currentSubscription = useRef(null);
+
+  const navigate = useNavigate();
 
   // 사용자 이름 조회 API 호출
   useEffect(() => {
@@ -151,42 +154,42 @@ export default function OpenChat() {
   };
 
   return (
-    <div className="chat">
+    <div className="chat" style={isLoggedIn ? { height: "248px" } : { height: "fit-content" }}>
       <div className="header">
         Open Talk
-        <span className="participantCount">({participantCount}명 참여 중)</span>
+        {isLoggedIn ? <span className="participantCount">({participantCount} people)</span> : null}
       </div>
-      <div className="chatCnt">
-        {messages.map((item, index) => {
-          const isSender = item.sender === username;
-          return item.type === "CHAT" ? (
-            <div
-              key={index}
-              style={{ justifyContent: isSender ? "flex-end" : "flex-start" }}
-              className="message-wrapper"
-            >
-              <div
-                className={`message-container ${
-                  isSender ? "sender" : "receiver"
-                }`}
-              >
-                <div className={`message ${isSender ? "sender" : "receiver"}`}>
-                  <strong>{item.sender}:</strong> {item.message}
+      { isLoggedIn ? 
+        <>
+          <div className="chatCnt login">
+            {messages.map((item, index) => {
+              const isSender = item.sender === username;
+              return item.type === "CHAT" ? (
+                <div
+                  key={index}
+                  style={{ justifyContent: isSender ? "flex-end" : "flex-start" }}
+                  className="message-wrapper"
+                >
+                  <div
+                    className={`message-container ${
+                      isSender ? "sender" : "receiver"
+                    }`}
+                  >
+                    <div className={`message ${isSender ? "sender" : "receiver"}`}>
+                      <strong>{item.sender}:</strong> {item.message}
+                    </div>
+                    <div className="timestamp">{item.timestamp}</div>
+                  </div>
                 </div>
-                <div className="timestamp">{item.timestamp}</div>
-              </div>
-            </div>
-          ) : (
-            <div key={index} style={{ justifyContent: "center" }}>
-              <div className="system-message">{item.message}</div>
-            </div>
-          );
-        })}
-        <div ref={messagesEndRef} />
-      </div>
-      <div className="chatMessage">
-        {isLoggedIn ? (
-          <>
+              ) : (
+                <div key={index} style={{ justifyContent: "center" }}>
+                  <div className="system-message">{item.message}</div>
+                </div>
+              );
+            })}
+            <div ref={messagesEndRef} />
+          </div>
+          <div className="chatMessage login">
             <input
               className="inputBox"
               value={message}
@@ -197,15 +200,19 @@ export default function OpenChat() {
             <button className="sendBtn" onClick={sendMessage}>
               Send
             </button>
-          </>
-        ) : (
-          <input
-            className="inputBox"
-            disabled="disabled"
-            placeholder="Please Login"
-          />
-        )}
-      </div>
+          </div>
+        </> :
+        <>
+          <div className="chatCnt logout">
+            <span>please log in and talk to people</span>
+          </div>
+          <div className="chatMessage logout">
+            <button className="sendBtn" onClick={() => navigate("/login")}>
+              Log in
+            </button>
+          </div>
+        </>
+      }
     </div>
   );
 }
