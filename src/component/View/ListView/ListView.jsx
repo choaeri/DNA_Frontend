@@ -14,12 +14,10 @@ export default function ListView() {
   }, [locations]);
 
 
-  const onClickDetailBtn = (e) => {
-    if(e.target.attributes) {
-      setSelectLocationId(e.target.attributes.id.value);
-      setSelectLocationName(e.target.attributes.name.value);
-      navigate(`locations/${e.target.attributes.id.value}`);
-    };
+  const onClickDetailBtn = (location) => {
+    setSelectLocationId(location.locationId);
+    setSelectLocationName(location.locationName);
+    navigate(`locations/${location.locationId}`);
   };
 
   return (
@@ -48,9 +46,7 @@ export default function ListView() {
                   height="29" 
                   viewBox="0 0 28 29" 
                   fill="none"
-                  id={location.locationId}
-                  name={location.locationName}
-                  onClick={onClickDetailBtn}
+                  onClick={() => onClickDetailBtn(location)}
                 >
                   <path d="M5 14.2103L22.3482 14.2103" stroke="black"/>
                   <path d="M15.2898 6.5L23.0001 14.2103L15.2898 21.9206" stroke="black"/>
