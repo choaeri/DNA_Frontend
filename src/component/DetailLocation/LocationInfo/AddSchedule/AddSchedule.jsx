@@ -2,11 +2,11 @@ import { DatePicker, Modal, Form } from "antd"; // DatePicker와 Modal 추가
 import { useContext, useEffect, useState } from "react";
 import { axiosInstance } from "../../../../common/func/axios";
 import { AppContext } from "../../../../context/AppContext";
-import "./Schedule.css";
+import "./AddSchedule.css";
 
 const { RangePicker } = DatePicker;
 
-export default function Schedule () {
+export default function AddSchedule () {
   const { detailInfo } = useContext(AppContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [scheduledDates, setScheduledDates] = useState([]);
