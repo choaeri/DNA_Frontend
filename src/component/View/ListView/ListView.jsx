@@ -8,7 +8,7 @@ import useLocalStorage from "../../../utils/useLocalStorage";
 
 export default function ListView() {
   const { isLoggedIn } = useLocalStorage();
-  const { locations, setSelectLocation, setSelectLocationId } = useContext(AppContext);
+  const { locations, setSelectLocationName, setSelectLocationId } = useContext(AppContext);
   const [isLiked, setIsLiked] = useState({});
   const [likeCount, setLikeCount] = useState({});
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ export default function ListView() {
 
   const onClickDetailBtn = (e) => {
     setSelectLocationId(e.target.attributes.id.value);
-    setSelectLocation(e.target.attributes.name.value);
+    setSelectLocationName(e.target.attributes.name.value);
     navigate(`locations/${e.target.attributes.id.value}`);
   };
 

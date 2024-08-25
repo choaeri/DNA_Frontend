@@ -17,20 +17,22 @@ export default function Schedule () {
   };
 
   const handleOk = async () => {
-    try {
-      const selectedDates = await form.validateFields(); // 선택된 날짜 유효성 검사
-      const { dates } = selectedDates; // 선택된 날짜 배열 가져오기
-      const createWorkationScheduleRequest = {
-        startDate: dates[0].format('YYYY-MM-DD'), // 시작 날짜 포맷
-        endDate: dates[1].format('YYYY-MM-DD')    // 종료 날짜 포맷
+    if(detailInfo !== null) {
+      try {
+        const selectedDates = await form.validateFields(); // 선택된 날짜 유효성 검사
+        const { dates } = selectedDates; // 선택된 날짜 배열 가져오기
+        const createWorkationScheduleRequest = {
+          startDate: dates[0].format('YYYY-MM-DD'), // 시작 날짜 포맷
+          endDate: dates[1].format('YYYY-MM-DD')    // 종료 날짜 포맷
+        };
+  
+        await axiosInstance.post(`/api/locations/${detailInfo.locationId}/workation-schedules`, createWorkationScheduleRequest);
+  
+        window.location.reload();
+      } catch (errorInfo) {
+        console.log('Validation Failed:', errorInfo);
       };
-
-      await axiosInstance.post(`/api/locations/${detailInfo.locationId}/workation-schedules`, createWorkationScheduleRequest);
-
-      window.location.reload();
-    } catch (errorInfo) {
-      console.log('Validation Failed:', errorInfo);
-    }
+    };
   };
 
   const handleCancel = () => {
