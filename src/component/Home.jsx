@@ -7,6 +7,7 @@ import ListView from "./View/ListView/ListView";
 import MapView from "./View/MapView/MapView";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
+import AllReviews from './AllReviews/AllReviews';
 
 
 export default function Home() {
@@ -46,6 +47,7 @@ export default function Home() {
         >
           { viewMode === 'list' ? <ListView /> : <MapView /> }
         </div>
+        <AllReviews />
         <div className="ViewBtn">
           <button 
             className="list" 
