@@ -15,9 +15,11 @@ export default function ListView() {
 
 
   const onClickDetailBtn = (e) => {
-    setSelectLocationId(e.target.attributes.id.value);
-    setSelectLocationName(e.target.attributes.name.value);
-    navigate(`locations/${e.target.attributes.id.value}`);
+    if(e.target.attributes) {
+      setSelectLocationId(e.target.attributes.id.value);
+      setSelectLocationName(e.target.attributes.name.value);
+      navigate(`locations/${e.target.attributes.id.value}`);
+    };
   };
 
   return (

@@ -28,10 +28,11 @@ export default function MapView () {
   };
 
   const onClickDetailBtn = (e) => {
-    // setMapStep(2);
-    setSelectLocationId(e.target.attributes.id.value);
-    setSelectLocationName(e.target.attributes.name.value);
-    navigate(`locations/${e.target.attributes.id.value}`);
+    if(e.target.attributes) {
+      setSelectLocationId(e.target.attributes.id.value);
+      setSelectLocationName(e.target.attributes.name.value);
+      navigate(`locations/${e.target.attributes.id.value}`);
+    };
   };
 
   useEffect(() => {
