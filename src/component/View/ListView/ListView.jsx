@@ -1,64 +1,15 @@
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import { useContext, useState, useEffect } from "react";
-import { axiosInstance } from "../../../common/func/axios";
 import { AppContext } from "../../../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import "./ListView.css"
-import useLocalStorage from "../../../utils/useLocalStorage";
 
 export default function ListView() {
-  const { isLoggedIn } = useLocalStorage();
   const { locations, setSelectLocationName, setSelectLocationId } = useContext(AppContext);
-  const [isLiked, setIsLiked] = useState({});
-  const [likeCount, setLikeCount] = useState({});
   const navigate = useNavigate();
-
-  // 좋아요 수 조회 요청
-  const fetchLikeCount = async (locationId) => {
-    const apiUrl = `/api/locations/${locationId}/like/count`;
-    try {
-      const response = await axiosInstance.get(apiUrl);
-      setLikeCount((prev) => ({ ...prev, [locationId]: response.data.likeCount }));
-    } catch (error) {
-      // 에러 처리
-    }
-  };
-
-  // 좋아요 여부 조회 요청
-  const fetchLocationLike = async (locationId) => {
-    if (isLoggedIn) {
-      const apiUrl = `/api/locations/${locationId}/like`;
-      try {
-        const response = await axiosInstance.get(apiUrl);
-        setIsLiked((prev) => ({ ...prev, [locationId]: response.data.isLiked }));
-      } catch (error) {
-        // 에러 처리
-      }
-    } else {
-      setIsLiked((prev) => ({ ...prev, [locationId]: false }));
-    }
-  };
-
-  // 좋아요 요청
-  const onClickLike = async (locationId) => {
-    const apiUrl = `/api/locations/${locationId}/like`;
-    const method = isLiked[locationId] ? "DELETE" : "POST";
-    try {
-      await axiosInstance({
-        url: apiUrl,
-        method,
-      });
-      fetchLocationLike(locationId);
-      fetchLikeCount(locationId);
-    } catch (error) {
-      // 에러 처리
-    }
-  };
 
   useEffect(() => {
     locations.forEach((location) => {
-      fetchLocationLike(location.locationId);
-      fetchLikeCount(location.locationId);
     });
   }, [locations]);
 
@@ -83,18 +34,6 @@ export default function ListView() {
           > 
             <img alt={location.locationName} src={location.thumbNail}></img>
             <div style={{ display: 'flex', alignItems: 'center', position: "absolute" }}>
-              {isLiked[location.locationId] ? (
-                <HeartFilled 
-                  onClick={() => onClickLike(location.locationId)} 
-                  style={{ color: 'red', cursor: 'pointer' }} 
-                />
-              ) : (
-                <HeartOutlined 
-                  onClick={() => onClickLike(location.locationId)} 
-                  style={{ color: 'gray', cursor: 'pointer' }} 
-                />
-              )}
-              <span style={{ marginLeft: '8px' }}>{likeCount[location.locationId]}</span>
             </div>
             
             <div className="locationCnt">
