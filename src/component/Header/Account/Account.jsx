@@ -1,4 +1,5 @@
 import Header from "../Header";
+import "./Account.css";
 
 export default function Account () {
   return (

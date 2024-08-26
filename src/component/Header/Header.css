@@ -60,6 +60,7 @@
   color: #ffffff;
 }
 
+/* login, signup */
 .Account {
   display: flex;
   flex-direction: column;

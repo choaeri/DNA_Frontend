@@ -7,6 +7,8 @@ import Recommend from './component/Recommend/Recommend';
 import LoginCheck from './component/Header/loginCheck/LoginCheck';
 import DetailLocation from './component/DetailLocation/DetailLocation';
 import Account from './component/Header/Account/Account';
+import Likes from './component/Header/Likes/Likes';
+import Schedule from './component/Header/Schedule/Schedule';
 
 function App() {
 
@@ -18,7 +20,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/users/login/check" element={<LoginCheck />} />
-          <Route path="/account" element={<Account />} />
+          <Route path="/mypage/account" element={<Account />} />
+          <Route path="/mypage/likes" element={<Likes />} />
+          <Route path="/mypage/schedule" element={<Schedule />} />
           <Route path="/recommend" element={<Recommend />} />
           <Route path={`/locations/:locationId`} element={<DetailLocation />} />
         </Routes>

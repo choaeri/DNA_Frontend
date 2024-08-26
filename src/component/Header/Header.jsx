@@ -51,9 +51,9 @@ export default function Header () {
   const dropdownMenu = (
     <Menu>
       <Menu.Item>Recommended Areas</Menu.Item>
-      <Menu.Item>Likes</Menu.Item>
-      <Menu.Item>Schedule</Menu.Item>
-      <Menu.Item onClick={() => navigate("/account")}>Account</Menu.Item>
+      <Menu.Item onClick={() => navigate("/mypage/likes")}>Likes</Menu.Item>
+      <Menu.Item onClick={() => navigate("/mypage/schedule")}>Schedule</Menu.Item>
+      <Menu.Item onClick={() => navigate("/mypage/account")}>Account</Menu.Item>
       <Menu.Item onClick={onClickLogoutButton}>Logout</Menu.Item>
     </Menu>
   );
@@ -72,7 +72,6 @@ export default function Header () {
           <>
             <Dropdown
               overlay={dropdownMenu}
-              trigger={['click']}
             >
               <a onClick={(e) => e.preventDefault()}>
                 <Space>
