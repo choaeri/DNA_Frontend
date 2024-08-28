@@ -4,6 +4,7 @@ import "./LocationInfo.css";
 import OpenChat from "./OpenChat/OpenChat";
 import { useNavigate } from "react-router-dom";
 import AddSchedule from "./AddSchedule/AddSchedule";
+import Reviews from "./Reviews/Reviews";
 
 export default function LocationInfo() {
   const { detailInfo } = useContext(AppContext);
@@ -61,9 +62,8 @@ export default function LocationInfo() {
           <span>surfing</span>
           <span>quiet</span>
         </div>
-
+        <Reviews />
         <AddSchedule />
-  
         <OpenChat />
       </div> : null
     }

@@ -1,0 +1,30 @@
+.Reviews {
+  display: flex;
+  padding: var(--button-padding-gap-button-padding-md, 16px) var(--button-padding-gap-button-padding-md, 16px) var(--Input-Radius-input-radius-lg, 12px) 20px;
+  flex-direction: column;
+  gap: var(--Input-Radius-input-radius-lg, 12px);
+  margin-top: 20px;
+  border-radius: 16px;
+  border: 1px solid var(--Gray-7, #E1E4E9);
+  background: #FFF;
+}
+
+.Reviews .header {
+  display: flex;
+}
+
+.Reviews .header span {
+  overflow: hidden;
+  color: var(--Gray1, #000);
+  text-overflow: ellipsis;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 160%;
+}
+.Reviews .header svg {
+  margin-left: auto;
+  width: var(--button-padding-gap-button-padding-md, 16px);
+  height: var(--button-padding-gap-button-padding-md, 16px);
+}

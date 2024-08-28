@@ -19,6 +19,8 @@ const AppProvider = ({ children }) => {
 	const [selectLocationId, setSelectLocationId] = useState("");
 	const [detailInfo, setDetailInfo] = useState(null);
 	const [isBookmarked, setIsBookmarked] = useState();
+	const [openReviewModal, setOpenReviewModal] = useState(false);
+	const [isPopup, setIsPopup] = useState();
 	const [fieldErrors, setFieldErrors] = useState({});
 
 	useEffect(() => {
@@ -42,6 +44,8 @@ const AppProvider = ({ children }) => {
 				selectLocationId,
 				detailInfo,
 				isBookmarked,
+				openReviewModal,
+				isPopup,
 				fieldErrors,
 
 				setOpenLoginPage,
@@ -58,6 +62,8 @@ const AppProvider = ({ children }) => {
 				setSelectLocationId,
 				setDetailInfo,
 				setIsBookmarked,
+				setOpenReviewModal,
+				setIsPopup,
 				setFieldErrors
 			}}
 		>
