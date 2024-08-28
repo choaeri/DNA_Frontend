@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./ListView.css"
 
 export default function ListView() {
-  const { locations, setSelectLocationName, setSelectLocationId } = useContext(AppContext);
+  const { locations, setSelectLocationName } = useContext(AppContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,7 +15,6 @@ export default function ListView() {
 
 
   const onClickDetailBtn = (location) => {
-    setSelectLocationId(location.locationId);
     setSelectLocationName(location.locationName);
     navigate(`locations/${location.locationId}`);
   };

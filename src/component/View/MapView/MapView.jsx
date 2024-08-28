@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const { kakao } = window;
 export default function MapView () {
-  const { locations, setSelectLocationName, setSelectLocationId } = useContext(AppContext);
+  const { locations, setSelectLocationName } = useContext(AppContext);
   const [centerMarker, setCenterMarker] = useState({
     lat: 0,
     lng: 0
@@ -28,7 +28,6 @@ export default function MapView () {
   };
 
   const onClickDetailBtn = (location) => {
-    setSelectLocationId(location.locationId);
     setSelectLocationName(location.locationName);
     navigate(`locations/${location.locationId}`);
   };

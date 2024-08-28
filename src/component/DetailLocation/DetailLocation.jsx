@@ -9,7 +9,7 @@ import LocationInfo from './LocationInfo/LocationInfo';
 import { useParams } from 'react-router-dom';
 
 export default function DetailLocation () {
-  const {setDetailInfo, selectLocationId} = useContext(AppContext);
+  const {setDetailInfo} = useContext(AppContext);
   const [centerMarker, setCenterMarker] = useState({
     lat: 0,
     lng: 0

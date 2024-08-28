@@ -16,7 +16,6 @@ const AppProvider = ({ children }) => {
 	const [locations, setLocations] = useState([]);
 	const [viewMode, setViewMode] = useState('list');
 	const [selectLocationName, setSelectLocationName] = useState("");
-	const [selectLocationId, setSelectLocationId] = useState("");
 	const [detailInfo, setDetailInfo] = useState(null);
 	const [isBookmarked, setIsBookmarked] = useState();
 	const [openReviewModal, setOpenReviewModal] = useState(false);
@@ -41,7 +40,6 @@ const AppProvider = ({ children }) => {
 				locations,
 				viewMode,
 				selectLocationName,
-				selectLocationId,
 				detailInfo,
 				isBookmarked,
 				openReviewModal,
@@ -59,7 +57,6 @@ const AppProvider = ({ children }) => {
 				setLocations,
 				setViewMode,
 				setSelectLocationName,
-				setSelectLocationId,
 				setDetailInfo,
 				setIsBookmarked,
 				setOpenReviewModal,
