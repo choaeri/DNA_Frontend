@@ -8,11 +8,13 @@ import MapView from "./View/MapView/MapView";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import AllReviews from './AllReviews/AllReviews';
+import Popup from "./Popup/Popup";
+import LoginPopup from './LoginPopup/LoginPopup';
 
 
 export default function Home() {
-  const { setLocations, viewMode, setViewMode } = useContext(AppContext);
- 
+  const { setLocations, viewMode, setViewMode, errMessageCheck, isLoginPopup, setIsLoginPopup } = useContext(AppContext);
+
   useEffect(() => {
   // 지역 조회 API 호출
   const fetchLocations = async () => {
@@ -26,15 +28,17 @@ export default function Home() {
         setLocations([]);
       }
     } catch (err) {
+      errMessageCheck(err.response.data.errorMessage);
       console.error("Error fetching locations:", err);
     }
   };
-
   fetchLocations();
   }, []); 
 
   return (
     <div className="DNAHome">
+      <Popup />
+      <LoginPopup />
       <Header />
       <div className="Content">
         <Recommend />

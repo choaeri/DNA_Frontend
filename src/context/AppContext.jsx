@@ -1,4 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
+import useLocalStorage from '../utils/useLocalStorage';
+import { axiosInstance } from '../common/func/axios';
+import { useNavigate } from 'react-router-dom';
 
 const AppContext = createContext({
 	
@@ -24,10 +27,32 @@ const AppProvider = ({ children }) => {
 	const [writeReviewsModal, setWriteReviewsModal] = useState(false);
 	const [fieldErrors, setFieldErrors] = useState({});
 
+  const { processLogout, processOnPopupCheck } = useLocalStorage();
+
+  const navigate = useNavigate();
+
 	const errMessageCheck = (errorMessage) => {
 		if(errorMessage === "만료된 토큰입니다. 다시 로그인해주세요.") {
 			setIsLoginPopup(true);
+			processLogout();
 		}
+	};
+
+	const popupCheck = () => {
+		// 사용자 팝업 상태 조회 API 호출
+		const fetchPopup = async () => {
+			try {
+				const res = await axiosInstance.get("/api/users/popup-status");
+				const data = res.data;
+				if(data.popupStatus === "review-writing") {
+					processOnPopupCheck();
+				};
+				navigate("/");
+			} catch(err) {
+				console.log(err);
+			}
+		};
+		fetchPopup();
 	};
 
 	return (
@@ -53,6 +78,7 @@ const AppProvider = ({ children }) => {
 				fieldErrors,
 
 				errMessageCheck,
+				popupCheck,
 
 				setOpenLoginPage,
 				setLoginUserName,

@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { axiosInstance } from '../../../common/func/axios';
 import { useNavigate } from "react-router-dom";
 import { Card, Form, Input, Button } from 'antd';
 import useLocalStorage from '../../../utils/useLocalStorage';
 import "./LoginCheck.css";
+import { AppContext } from '../../../context/AppContext';
 
 export default function LoginCheck() {
-  const { processLogin } = useLocalStorage();
+  const {popupCheck} = useContext(AppContext);
   const [isFirstLogin, setIsFirstLogin] = useState(null); // useState로 상태 정의
   const [userName, setUserName] = useState('');
+  const { processLogin } = useLocalStorage();
 
   const navigate = useNavigate(); 
 
@@ -40,7 +42,7 @@ export default function LoginCheck() {
     try {
       await axiosInstance.patch('/api/auth/name', newUsernameRequest);
       processLogin();
-      navigate('/'); // 홈으로 이동
+      popupCheck();
     } catch (error) {
       console.error('Failed to submit name:', error);
     }

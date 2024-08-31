@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "../../../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Form, Input, notification } from "antd";
@@ -10,7 +10,8 @@ export default function Login() {
   const { processLogin } = useLocalStorage();
   const { loginUserName, setLoginUserName, 
           loginPassword, setLoginPassword,
-          fieldErrors, setFieldErrors } = useContext(AppContext);
+          fieldErrors, setFieldErrors, 
+          popupCheck } = useContext(AppContext);
 
   const navigate = useNavigate();
 
@@ -44,7 +45,8 @@ export default function Login() {
           icon: successLogin,
         });
         processLogin();
-        navigate("/");
+        
+        popupCheck();
       })
       .catch((error) => {
         if (error.response) {
