@@ -33,7 +33,7 @@ export default function LoginCheck() {
   useEffect(() => {
     if (isFirstLogin === false) {
       processLogin();
-      navigate('/'); 
+      popupCheck();
     }
   }, [isFirstLogin, navigate]);
 
