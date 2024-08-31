@@ -1,0 +1,140 @@
+.popupSection {
+    display: flex;
+    flex-direction: column;
+     height: 100%;
+     width: 100%;
+     justify-content: center;
+     align-items: center;
+     position: absolute;
+     z-index: 2;
+  }
+  
+  .popupModal {
+     position: relative;
+    width: 30%;
+    height: 43%;
+     background-color: #fff;
+     overflow-x: hidden;
+     border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+     /* 스크롤바 삭제 */
+     -ms-overflow-style: none; /* IE and Edge */
+     scrollbar-width: none; /* Firefox */
+  }
+  .popupModal::-webkit-scrollbar {
+     display: none; /* Chrome, Safari, Opera*/
+  }
+  
+  .popupHeader {
+    display: flex;
+    padding: 16px 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 16px 16px 0px 0px;
+  }
+  .popupHeader span {
+    color: var(--Gray1, #000);
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
+  }
+  .popupHeader .closeBtn {
+     position: sticky;
+     top: 0;
+     left: 95%;
+     border: none;
+     color: #ffffff;
+     justify-content: flex-end;
+  }
+  
+  .popupCnt {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0px 40px 36px 40px;
+    align-items: flex-start;
+    gap: 28px;
+  }
+  
+  .popupCnt .expCnt,
+  .popupCnt .schedCnt {
+    display: flex;
+  }
+  
+  .popupCnt .schedCnt {
+    display: flex;
+    width: 100%;
+    padding: var(--Input-Radius-input-radius-lg, 12px);
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--Gray-8, #ECEEF4);
+    background: var(--Gray-9, #F8FAFF);
+  }
+  .popupCnt .schedCnt .info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .popupCnt .expCnt {
+    justify-content: center;
+    align-items: center;
+  }
+  .popupCnt .expCnt .icon {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    border: 1px solid var(--Gray-7, #E1E4E9);
+  }
+  .popupCnt .expCnt svg {
+    width: var(--button-padding-gap-button-padding-xl, 20px);
+    height: var(--button-padding-gap-button-padding-xl, 20px);
+  }
+  .popupCnt .expCnt span {
+    color: var(--Gray-4, #4F5257);
+    font-family: "Pretendard Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
+    margin-left: 12px;
+  }
+  
+  .line {
+    width: 100%;
+    height: 1px;
+    background: var(--Gray-7, #E1E4E9);
+  }
+  
+  .btnCnt {
+    padding: 1rem;
+  }
+  .btnCnt .writeBtn {
+    display: flex;
+    height: var(--Button-Size-button-size-lg, 48px);
+    padding: 0px var(--button-padding-gap-button-padding-xl, 24px);
+    justify-content: center;
+    align-items: center;
+    gap: var(--button-padding-gap-button-gap-lg, 4px);
+    border-radius: var(--Border-Radius-rounded-full, 9999px);
+    background: var(--Gray1, #000);
+    margin-left: auto;
+  }
+  .btnCnt .writeBtn span {
+    color: var(--Foreground-fg-inverse, #FFF);
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
+  }

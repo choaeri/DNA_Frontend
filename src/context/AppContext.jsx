@@ -20,11 +20,14 @@ const AppProvider = ({ children }) => {
 	const [isBookmarked, setIsBookmarked] = useState();
 	const [openReviewModal, setOpenReviewModal] = useState(false);
 	const [isPopup, setIsPopup] = useState();
+	const [isLoginPopup, setIsLoginPopup] = useState(false);
 	const [writeReviewsModal, setWriteReviewsModal] = useState(false);
 	const [fieldErrors, setFieldErrors] = useState({});
 
-	const errMessageCheck = () => {
-
+	const errMessageCheck = (errorMessage) => {
+		if(errorMessage === "만료된 토큰입니다. 다시 로그인해주세요.") {
+			setIsLoginPopup(true);
+		}
 	};
 
 	return (
@@ -45,6 +48,7 @@ const AppProvider = ({ children }) => {
 				isBookmarked,
 				openReviewModal,
 				isPopup,
+				isLoginPopup,
 				writeReviewsModal,
 				fieldErrors,
 
@@ -65,6 +69,7 @@ const AppProvider = ({ children }) => {
 				setIsBookmarked,
 				setOpenReviewModal,
 				setIsPopup,
+				setIsLoginPopup,
 				setWriteReviewsModal,
 				setFieldErrors
 			}}
