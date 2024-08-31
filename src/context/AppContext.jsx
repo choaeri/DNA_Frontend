@@ -20,11 +20,12 @@ const AppProvider = ({ children }) => {
 	const [isBookmarked, setIsBookmarked] = useState();
 	const [openReviewModal, setOpenReviewModal] = useState(false);
 	const [isPopup, setIsPopup] = useState();
+	const [writeReviewsModal, setWriteReviewsModal] = useState(false);
 	const [fieldErrors, setFieldErrors] = useState({});
 
-	useEffect(() => {
-		console.log(fieldErrors)
-	}, [fieldErrors])
+	const errMessageCheck = () => {
+
+	};
 
 	return (
 		<AppContext.Provider
@@ -44,7 +45,10 @@ const AppProvider = ({ children }) => {
 				isBookmarked,
 				openReviewModal,
 				isPopup,
+				writeReviewsModal,
 				fieldErrors,
+
+				errMessageCheck,
 
 				setOpenLoginPage,
 				setLoginUserName,
@@ -61,6 +65,7 @@ const AppProvider = ({ children }) => {
 				setIsBookmarked,
 				setOpenReviewModal,
 				setIsPopup,
+				setWriteReviewsModal,
 				setFieldErrors
 			}}
 		>
