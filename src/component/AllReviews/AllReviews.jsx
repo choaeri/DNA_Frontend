@@ -2,20 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "./AllReviews.css";
 import { axiosInstance } from '../../common/func/axios';
 
-const ReviewCard = ({ review }) => {
-  return (
-    <div className="review-card">
-      <h3>{review.username}</h3>
-      <p>위치: {review.locationName}</p>
-      <p>시작 날짜: {review.startDate}</p>
-      <p>종료 날짜: {review.endDate}</p>
-      <p>내용: {review.content}</p>
-      <p>작성일: {new Date(review.createdAt).toLocaleString()}</p>
-    </div>
-  );
-};
-
-const ReviewsList = () => {
+export default function AllReviews () {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -36,7 +23,6 @@ const ReviewsList = () => {
           console.error("Fetched data is not an array:", data);
         }
       } catch (err) {
-        console.error("Error fetching reviews:", err);
       }
     };
 
@@ -48,12 +34,17 @@ const ReviewsList = () => {
       {reviews.length > 0 && (
         <div className="reviews-grid">
           {reviews.map((review) => (
-            <ReviewCard key={review.reviewId} review={review} />
+            <div className="review-card" key={review.reviewId}>
+              <h3>{review.username}</h3>
+              <p>위치: {review.locationName}</p>
+              <p>시작 날짜: {review.startDate}</p>
+              <p>종료 날짜: {review.endDate}</p>
+              <p>내용: {review.content}</p>
+              <p>작성일: {new Date(review.createdAt).toLocaleString()}</p>
+            </div>
           ))}
         </div>
       )}
     </div>
   );
 };
-
-export default ReviewsList;
