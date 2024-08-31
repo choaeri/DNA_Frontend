@@ -5,7 +5,7 @@ import { axiosInstance } from "../../common/func/axios";
 import "./WriteReviews.css";
 
 export default function WriteReviews({ scheduleId }) { // scheduleId를 props로 받음
-  const { writeReviewsModal, setWriteReviewsModal } = useContext(AppContext);
+  const { writeReviewsModal, setWriteReviewsModal, errMessageCheck } = useContext(AppContext);
   const [form] = Form.useForm();
 
   const handleSubmit = async (values) => {
@@ -20,6 +20,7 @@ export default function WriteReviews({ scheduleId }) { // scheduleId를 props로
       form.resetFields(); // 폼 리셋
       window.location.reload();
     } catch (error) {
+      errMessageCheck(error.response.data.errorMessage);
       console.error("리뷰 제출 중 오류 발생:", error);
     }
   };

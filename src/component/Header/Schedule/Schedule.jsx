@@ -8,7 +8,7 @@ import { Modal } from "@mui/material";
 
 export default function Schedule() {
   const [schedules, setSchedules] = useState([]);
-  const { setWriteReviewsModal } = useContext(AppContext);
+  const { setWriteReviewsModal, errMessageCheck } = useContext(AppContext);
   const [confirmDeleteModal, setConfirmDeleteModal] = useState(false);
   const [scheduleToDelete, setScheduleToDelete] = useState(null);
   const [selectedScheduleId, setSelectedScheduleId] = useState(null); // 추가된 상태
@@ -25,6 +25,7 @@ export default function Schedule() {
           setSchedules([]);
         }
       } catch (err) {
+        errMessageCheck(err.response.data.errorMessage);
         console.error("Error fetching schedules:", err);
       }
     };
@@ -48,6 +49,7 @@ export default function Schedule() {
       setSchedules(schedules.filter(schedule => schedule.scheduleId !== scheduleToDelete));
       setConfirmDeleteModal(false);
     } catch (err) {
+      errMessageCheck(err.response.data.errorMessage);
       console.error("Error deleting schedule:", err);
     }
   };

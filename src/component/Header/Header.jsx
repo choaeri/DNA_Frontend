@@ -3,8 +3,11 @@ import { axiosInstance } from "../../common/func/axios";
 import "./Header.css";
 import useLocalStorage from '../../utils/useLocalStorage';
 import { Dropdown, Menu, Space } from "antd";
+import { useContext } from "react";
+import { AppContext } from "../../context/AppContext";
 
 export default function Header () {
+  const {errMessageCheck} = useContext(AppContext);
   const { isLoggedIn, processLogout } = useLocalStorage();
   const navigate = useNavigate();
 
@@ -26,6 +29,7 @@ export default function Header () {
       processLogout();
       window.location.reload();
     } catch (err) {
+      errMessageCheck(err.response.data.errorMessage);
       console.error("Error during logout:", err);
     }
   };
@@ -61,7 +65,7 @@ export default function Header () {
   return (
     <div className="Header">
       <div className="logo" onClick={goToHome} style={{ cursor: 'pointer' }}>
-        <img src="img/DNALogo.png" alt="Logo" className="logoImage" />
+        <img src="/img/DNALogo.png" alt="Logo" className="logoImage" />
       </div>
       <div className="account">
         { !isLoggedIn ? 

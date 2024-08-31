@@ -9,7 +9,7 @@ export default function Signup() {
   const [form] = Form.useForm();
   const { signUpUserName, setSignUpUserName,
           signUpPassword, setSignUpPassword,
-          signUpEmail, setSignUpEmail } = useContext(AppContext);
+          signUpEmail, setSignUpEmail, errMessageCheck } = useContext(AppContext);
   const [passwordCheck, setPasswordCheck] = useState("");
   const [isUsernameAvailable, setIsUsernameAvailable] = useState(null);
   const [verificationCode, setVerificationCode] = useState("");
@@ -43,6 +43,7 @@ export default function Signup() {
       notification.success({ message: '회원 가입 더럽게 힘드네!' });
       navigate("/login");
     } catch (error) {
+      errMessageCheck(error.response.data.errorMessage);
       notification.error({ message: '회원 가입 실패' });
     }
   };
@@ -63,6 +64,7 @@ export default function Signup() {
         notification.error({ message: 'Username is already taken!' });
       }
     } catch (error) {
+      errMessageCheck(error.response.data.errorMessage);
       notification.error({ message: 'Error checking username!' });
     }
   };
@@ -75,6 +77,7 @@ export default function Signup() {
       notification.success({ message: 'Verification code sent to your email!' });
       setIsCodeSent(true); 
     } catch (error) {
+      errMessageCheck(error.response.data.errorMessage);
       notification.error({ message: 'Error sending verification code!' });
     }
   };
@@ -96,6 +99,7 @@ export default function Signup() {
         notification.error({ message: 'Invaild verification code!' });
       }
     } catch (error) {
+      errMessageCheck(error.response.data.errorMessage);
       notification.error({ message: 'Invaild verification code!' });
     }
   };

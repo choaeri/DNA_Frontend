@@ -9,7 +9,7 @@ import LocationInfo from './LocationInfo/LocationInfo';
 import { useParams } from 'react-router-dom';
 
 export default function DetailLocation () {
-  const {setDetailInfo} = useContext(AppContext);
+  const {setDetailInfo, errMessageCheck} = useContext(AppContext);
   const [centerMarker, setCenterMarker] = useState({
     lat: 0,
     lng: 0
@@ -27,6 +27,7 @@ export default function DetailLocation () {
           lng: data.longitude
         })
       } catch (err) {
+        errMessageCheck(err.response.data.errorMessage);
         console.error("Error fetching locations:", err);
       }
     };

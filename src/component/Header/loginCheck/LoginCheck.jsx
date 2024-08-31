@@ -7,7 +7,7 @@ import "./LoginCheck.css";
 import { AppContext } from '../../../context/AppContext';
 
 export default function LoginCheck() {
-  const {popupCheck} = useContext(AppContext);
+  const {popupCheck, errMessageCheck} = useContext(AppContext);
   const [isFirstLogin, setIsFirstLogin] = useState(null); // useState로 상태 정의
   const [userName, setUserName] = useState('');
   const { processLogin } = useLocalStorage();
@@ -24,6 +24,7 @@ export default function LoginCheck() {
         const response = await axiosInstance.get('/api/auth/first-social-login');
         setIsFirstLogin(response.data.isFirstLogin);
       } catch (error) {
+        errMessageCheck(error.response.data.errorMessage);
         console.error('Failed to fetch isFirstLogin:', error);
       }
     };
@@ -44,6 +45,7 @@ export default function LoginCheck() {
       processLogin();
       popupCheck();
     } catch (error) {
+      errMessageCheck(error.response.data.errorMessage);
       console.error('Failed to submit name:', error);
     }
   };

@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "./AllReviews.css";
 import { axiosInstance } from '../../common/func/axios';
+import { AppContext } from '../../context/AppContext';
 
 export default function AllReviews () {
+  const {errMessageCheck} = useContext(AppContext);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -23,6 +25,7 @@ export default function AllReviews () {
           console.error("Fetched data is not an array:", data);
         }
       } catch (err) {
+        errMessageCheck(err.response.data.errorMessage);
       }
     };
 

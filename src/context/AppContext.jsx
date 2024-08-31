@@ -49,6 +49,7 @@ const AppProvider = ({ children }) => {
 				};
 				navigate("/");
 			} catch(err) {
+				errMessageCheck(err.response.data.errorMessage);
 				console.log(err);
 			}
 		};

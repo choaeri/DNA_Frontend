@@ -7,7 +7,7 @@ import useLocalStorage from "../../utils/useLocalStorage";
 import { axiosInstance } from "../../common/func/axios";
 
 export default function Popup () {
-  const {isPopup, setIsPopup} = useContext(AppContext);
+  const {isPopup, setIsPopup, errMessageCheck} = useContext(AppContext);
   const [reviews, setReviews] = useState([]);
   const { isLoggedIn, popupCheck, processOffPopupCheck } = useLocalStorage();
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ export default function Popup () {
         try {
           await axiosInstance.patch("/api/users/popup-status");
         } catch(err) {
+          errMessageCheck(err.response.data.errorMessage);
           console.log(err);
         };
 
@@ -31,6 +32,7 @@ export default function Popup () {
             setReviews(res.data);
           };
         } catch(err) {
+          errMessageCheck(err.response.data.errorMessage);
           console.log(err);
         };
       };

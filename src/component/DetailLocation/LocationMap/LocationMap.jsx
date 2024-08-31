@@ -26,7 +26,7 @@ const categoryMatch = {
 }
 
 export default function LocationMap () {
-  const {detailInfo, isBookmarked, setIsBookmarked} = useContext(AppContext);
+  const {detailInfo, isBookmarked, setIsBookmarked, errMessageCheck} = useContext(AppContext);
   const [markers, setMarkers] = useState(null);
   const [info, setInfo] = useState();
   const [selectCategory, setSelectCategory] = useState('');
@@ -39,6 +39,7 @@ export default function LocationMap () {
       const data = res.data;
       setMarkers(data);
     } catch (err) {
+      errMessageCheck(err.response.data.errorMessage);
       console.error("Error fetching locations:", err);
     };
   };
@@ -51,6 +52,7 @@ export default function LocationMap () {
       const data = response.data;
       setIsBookmarked(data.isBookmarked);
     } catch (error) {
+      errMessageCheck(error.response.data.errorMessage);
       console.log(error);
     };
   };
@@ -67,6 +69,7 @@ export default function LocationMap () {
         method,
       });
     } catch (error) {
+      errMessageCheck(error.response.data.errorMessage);
       console.log(error);
     }
   };

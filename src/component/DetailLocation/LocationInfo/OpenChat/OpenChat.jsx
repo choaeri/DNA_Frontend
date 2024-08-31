@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function OpenChat() {
-  const { detailInfo } = useContext(AppContext);
+  const { detailInfo, errMessageCheck } = useContext(AppContext);
   const { isLoggedIn } = useLocalStorage();
   const [stompClient, setStompClient] = useState(null);
   const [message, setMessage] = useState("");
@@ -80,6 +80,7 @@ export default function OpenChat() {
         const response = await axiosInstance.get("/api/users/name");
         setUsername(response.data.username);
       } catch (error) {
+        errMessageCheck(error.response.data.errorMessage);
         console.error("Failed to fetch username:", error);
       }
     };

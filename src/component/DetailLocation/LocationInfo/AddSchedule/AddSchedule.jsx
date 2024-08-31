@@ -7,7 +7,7 @@ import "./AddSchedule.css";
 const { RangePicker } = DatePicker;
 
 export default function AddSchedule () {
-  const { detailInfo } = useContext(AppContext);
+  const { detailInfo, errMessageCheck } = useContext(AppContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [scheduledDates, setScheduledDates] = useState([]);
   const [form] = Form.useForm(); // Form 인스턴스 생성
@@ -30,6 +30,7 @@ export default function AddSchedule () {
   
         window.location.reload();
       } catch (errorInfo) {
+        errMessageCheck(errorInfo.response.data.errorMessage);
         console.log('Validation Failed:', errorInfo);
       };
     };
@@ -61,6 +62,7 @@ export default function AddSchedule () {
         setScheduledDates(response.data.scheduledDates);
         console.log("Fetched scheduled dates:", response.data.scheduledDates);
       } catch (error) {
+        errMessageCheck(error.response.data.errorMessage);
         console.error("Error fetching scheduled dates:", error);
       }
     };

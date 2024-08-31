@@ -11,7 +11,7 @@ export default function Login() {
   const { loginUserName, setLoginUserName, 
           loginPassword, setLoginPassword,
           fieldErrors, setFieldErrors, 
-          popupCheck } = useContext(AppContext);
+          popupCheck, errMessageCheck } = useContext(AppContext);
 
   const navigate = useNavigate();
 
@@ -50,6 +50,7 @@ export default function Login() {
       })
       .catch((error) => {
         if (error.response) {
+          errMessageCheck(error.response.data.errorMessage);
           const {
             data: { errorMessage },
           } = error.response;
@@ -138,7 +139,7 @@ export default function Login() {
                 <span>Log in</span>
               </Button>
             </Form.Item>
-            <Form.Item className="etcCtn" {...tailLayout}>
+            {/* <Form.Item className="etcCtn" {...tailLayout}>
               <div className="etcBtn">
                 <span>Forgot</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -146,7 +147,7 @@ export default function Login() {
                   <path d="M7.64502 3L11.5002 6.85515L7.64502 10.7103" stroke="black" strokeWidth="0.75"/>
                 </svg>
               </div>
-            </Form.Item>
+            </Form.Item> */}
             <Form.Item className="etcCtn" {...tailLayout}>
               <span className="etc">Don’t have an account?</span>
               <div className="etcBtn" onClick={() => navigate("/signup")}>
