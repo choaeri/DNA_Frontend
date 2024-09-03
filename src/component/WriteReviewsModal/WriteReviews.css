@@ -1,42 +1,143 @@
 .modalSection {
     display: flex;
-    flex-direction: column;
+    height: 100%;
+    width: 100%;
     justify-content: center;
     align-items: center;
-    width: 400px; /* 모달 너비 */
-    padding: 20px;
-    background-color: white; /* 배경 색상 */
-    border-radius: 8px; /* 모서리 둥글게 */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    position: absolute;
+    z-index: 2;
 }
 
-.modalTitle {
-    font-size: 24px;
-    margin-bottom: 16px; /* 제목과 내용 간의 간격 */
-    font-weight: bold; /* 제목 두껍게 */
+.modalCnt{
+    position: relative;
+    width: 60%;
+    height: 87%;
+    background-color: #fff;
+    overflow-x: hidden;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    /* 스크롤바 삭제 */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.modalCnt::-webkit-scrollbar {
+	display: none; /* Chrome, Safari, Opera*/
 }
 
-.modalButton {
-    width: 100%; /* 버튼을 전체 너비로 */
+.modalCnt .header {
+    display: flex;
+    padding: 16px 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 16px 16px 0px 0px;
+    border-bottom: 1px solid var(--Gray-8, #ECEEF4);
+}
+.modalCnt .header .tit {
+    color: var(--Gray1, #000);
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
+}
+.modalCnt .header .closeBtn {
+    position: sticky;
+    top: 0;
+    left: 95%;
+    border: none;
+    color: #ffffff;
+    justify-content: flex-end;
 }
 
+.modalCnt .content {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 122px 156px;
+}
 
 .modalButton:hover {
     background-color: #303f9f; /* 버튼 호버 색상 */
 }
 
-.starRating {
+.modalCnt .content .location {
+    display: flex;
+    padding: var(--Input-Radius-input-radius-lg, 12px);
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--Gray-7, #E1E4E9);
+    background: var(--Gray-10, #FFF);
+}
+.modalCnt .content .location .lcnCtn {
+    display: flex;
+    align-items: center;
+    gap: var(--button-padding-gap-button-padding-xl, 24px);
+    align-self: stretch;
+}
+
+.modalCnt .content .rating {
     display: flex;
     justify-content: center;
-    margin: 10px 0; /* 별점과 다른 요소 간의 간격 */
+    padding: 60px 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
-
-.star {
-    font-size: 24px; /* 별 크기 */
+.modalCnt .content .rating .ant-rate {
+    font-size: 48px; /* 별 크기 */
     cursor: pointer;
-    color: gray; /* 비활성 별 색상 */
+    color: #000;
 }
 
-.star.selected {
-    color: gold; /* 선택된 별 색상 */
+.modalCnt .content .reviewContent span {
+    color: var(--Gray-5, #808388);
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
+}
+.modalCnt .content .reviewContent Input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    padding: 7px 0px;
+    gap: 8px;
+    border-bottom: 1px solid var(--Gray-7, #E1E4E9);
+    color: var(--Gray-6, #B6B9BE);
+    font-family: "Pretendard Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
+}
+
+.submitBtn {
+    display: flex;
+    padding: 26px 28px 26px 813px;
+    justify-content: flex-end;
+    align-items: center;
+}
+.modalCnt .submitBtn .wrtBtn {
+    display: flex;
+    height: var(--Button-Size-button-size-lg, 48px);
+    padding: 0px var(--button-padding-gap-button-padding-xl, 24px);
+    justify-content: center;
+    align-items: center;
+    gap: var(--button-padding-gap-button-gap-lg, 4px);
+    border-radius: var(--Border-Radius-rounded-full, 9999px);
+    border: none;
+    background: var(--Fill-fill-disabled, rgba(22, 88, 255, 0.03));
+    color: var(--Foreground-fg-disabled, rgba(11, 27, 55, 0.18));
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
 }

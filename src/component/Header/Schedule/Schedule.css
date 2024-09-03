@@ -9,7 +9,28 @@
   margin-top: 68px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* 가운데 정렬 */
+  padding: 32px 230px 127px;
+}
+.Schedule .schdCnt .header {
+  display: flex;
+  flex-direction: column;
+}
+.Schedule .schdCnt .header .tit,
+.Schedule .schdCnt .header .exp {
+  font-family: "Pretendard Variable";
+  font-style: normal;
+  line-height: 160%;
+}
+.Schedule .schdCnt .header .tit {
+  color: var(--Gray1, #000);
+  font-size: 24px;
+  font-weight: 600;
+}
+.Schedule .schdCnt .header .exp {
+  margin-top: 24px;
+  color: var(--Gray-5, #808388);
+  font-size: 12px;
+  font-weight: 400;
 }
 
 .Schedule .schdCnt .item {
@@ -21,13 +42,51 @@
 .Schedule .schdCnt .item .info {
   display: flex;
   flex-direction: column;
-  margin-left: 10px; /* 이미지와 정보 간의 간격 */
+  margin-left: 28px; /* 이미지와 정보 간의 간격 */
+}
+.Schedule .schdCnt .item .info .lcnName {
+  color: var(--Gray1, #000);
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%;
+}
+.Schedule .schdCnt .item .info .date {
+  display: flex;
+  align-items: center;
+  color: var(--Gray-6, #B6B9BE);
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+
+.wrtBtn {
+  display: flex;
+  height: 36px;
+  padding: 0px 20px;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  gap: var(--button-padding-gap-button-gap-md, 2px);
+  border-radius: var(--Border-Radius-rounded-full, 9999px);
+  border: 1px solid var(--Gray1, #000);
+  background: var(--Gray-10, #FFF);
+  color: var(--Gray-01, var(--Gray1, #000));
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%; /* 22.4px */
 }
 
 /* Schedule.css */
 .deleteButton {
-  margin-left: 10px; /* 아이템과의 간격 */
-  color: red; /* 삭제 버튼 색상 */
+  margin-left: 28px; /* 아이템과의 간격 */
+  width: var(--Button-Size-button-size-sm, 32px);
+  height: var(--Button-Size-button-size-sm, 32px);
   cursor: pointer;
 }
 
