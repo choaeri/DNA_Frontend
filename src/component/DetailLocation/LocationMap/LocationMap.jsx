@@ -1,14 +1,14 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import { AppContext } from "../../../context/AppContext"
 import "./LocationMap.css";
 import { MapMarker } from "react-kakao-maps-sdk";
 import { axiosInstance } from "../../../common/func/axios";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
-import useLocalStorage from "../../../utils/useLocalStorage";
+import WorkationDetail from "./WorkationDetail/WorkationDetail";
 
 const categoryMatch = {
   'workation': {
-    type: 'Workation',
+    type: 'Workation Office',
     img: "/img/restaurant.png",
   },
   'restaurant': {
@@ -26,14 +26,18 @@ const categoryMatch = {
 }
 
 export default function LocationMap () {
-  const {detailInfo, isBookmarked, setIsBookmarked, errMessageCheck} = useContext(AppContext);
+  const { detailInfo, 
+          isBookmarked, setIsBookmarked, 
+          setWorkationModal, 
+          errMessageCheck
+        } = useContext(AppContext);
   const [markers, setMarkers] = useState(null);
-  const [info, setInfo] = useState();
+  const [info, setInfo] = useState(null);
   const [selectCategory, setSelectCategory] = useState('');
-  const { isLoggedIn } = useLocalStorage();
 
   const onClickCategoryBtn = async (category) => {
     setSelectCategory(`${category}`);
+    setInfo(null);
     try {
       const res = await axiosInstance.get(`/api/locations/${detailInfo.locationId}/facilities/search?facilityType=${category}`);
       const data = res.data;
@@ -134,9 +138,18 @@ export default function LocationMap () {
                     )
                   }
                 </div>
-                <span className="type">{categoryMatch[marker.type].type}</span>
-                <span className="tit">{marker.facilityName}</span>
-                {/* <span className="review">295 reviews</span> */}
+                <div className="facInfo">
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <span className="type">{categoryMatch[marker.type].type}</span>
+                    <span className="tit">{marker.facilityName}</span>
+                  </div>
+                  { selectCategory === "workation" ? 
+                    <svg onClick={() => setWorkationModal(true)} xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13" fill="none">
+                      <path d="M8.64795 6.89795L4.89795 10.6479C4.79228 10.7536 4.64895 10.813 4.49951 10.813C4.35007 10.813 4.20675 10.7536 4.10107 10.6479C3.9954 10.5423 3.93604 10.399 3.93604 10.2495C3.93604 10.1001 3.9954 9.95675 4.10107 9.85107L7.4531 6.49998L4.10201 3.14795C4.04969 3.09562 4.00818 3.03351 3.97986 2.96514C3.95155 2.89678 3.93697 2.82351 3.93697 2.74951C3.93697 2.67551 3.95155 2.60224 3.97986 2.53388C4.00818 2.46551 4.04969 2.4034 4.10201 2.35107C4.15433 2.29875 4.21645 2.25724 4.28482 2.22893C4.35318 2.20061 4.42645 2.18604 4.50045 2.18604C4.57445 2.18604 4.64772 2.20061 4.71608 2.22893C4.78445 2.25724 4.84656 2.29875 4.89889 2.35107L8.64889 6.10107C8.70126 6.15339 8.7428 6.21554 8.77111 6.28394C8.79942 6.35235 8.81395 6.42567 8.81386 6.49971C8.81377 6.57374 8.79907 6.64703 8.7706 6.71537C8.74213 6.7837 8.70045 6.84575 8.64795 6.89795Z" fill="#292C30"/>
+                    </svg> : null
+                  }
+                </div>
+                { selectCategory === "workation" ? <WorkationDetail marker={marker} /> : null }
               </div>
             )}
           </MapMarker>

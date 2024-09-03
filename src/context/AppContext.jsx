@@ -25,6 +25,7 @@ const AppProvider = ({ children }) => {
 	const [isPopup, setIsPopup] = useState();
 	const [isLoginPopup, setIsLoginPopup] = useState(false);
 	const [writeReviewsModal, setWriteReviewsModal] = useState(false);
+	const [workationModal, setWorkationModal] = useState(false);
 	const [fieldErrors, setFieldErrors] = useState({});
 
   const { processLogout, processOnPopupCheck } = useLocalStorage();
@@ -60,44 +61,58 @@ const AppProvider = ({ children }) => {
 		<AppContext.Provider
 			value={{
 				openLoginPage,
+
 				loginUserName,
 				loginPassword,
+				
 				signUpUserName,
 				signUpId,
 				signUpPassword,
 				signUpEmail,
 				signUpVerifyCode,
+
 				locations,
 				viewMode,
 				selectLocationName,
 				detailInfo,
 				isBookmarked,
-				openReviewModal,
+				
 				isPopup,
 				isLoginPopup,
+				
+				openReviewModal,
+				workationModal,
 				writeReviewsModal,
+
 				fieldErrors,
 
 				errMessageCheck,
 				popupCheck,
 
 				setOpenLoginPage,
+
 				setLoginUserName,
 				setLoginPassword,
+
 				setSignUpUserName,
 				setSignUpId,
 				setSignUpPassword,
 				setSignUpEmail,
 				setSignUpVerifyCode,
+				
 				setLocations,
 				setViewMode,
 				setSelectLocationName,
 				setDetailInfo,
 				setIsBookmarked,
-				setOpenReviewModal,
+				
 				setIsPopup,
 				setIsLoginPopup,
+				
+				setOpenReviewModal,
+				setWorkationModal,
 				setWriteReviewsModal,
+
 				setFieldErrors
 			}}
 		>
