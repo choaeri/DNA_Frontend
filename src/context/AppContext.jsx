@@ -25,7 +25,7 @@ const AppProvider = ({ children }) => {
 	const [detailInfo, setDetailInfo] = useState(null);
 	const [isBookmarked, setIsBookmarked] = useState({});
 
-	const [isPopup, setIsPopup] = useState();
+	const [isPopup, setIsPopup] = useState(false);
 	const [isLoginPopup, setIsLoginPopup] = useState(false);
 	
 	const [openReviewModal, setOpenReviewModal] = useState(false);
