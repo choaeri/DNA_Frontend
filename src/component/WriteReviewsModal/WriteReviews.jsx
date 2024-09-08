@@ -37,7 +37,7 @@ export default function WriteReviews({ scheduleId }) { // scheduleId를 props로
     };
 
     try {
-      await axiosInstance.post(`/api/workation-schedules/${scheduleId}/reviews`, {
+      await axiosInstance.post(`/api/workation-schedules/${scheduleId}/workation-reviews`, {
         rating,
         content,
       });

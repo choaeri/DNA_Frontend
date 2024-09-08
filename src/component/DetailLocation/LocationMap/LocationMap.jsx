@@ -22,7 +22,7 @@ export default function LocationMap () {
     setSelectCategory(`${category}`);
     setInfo(null);
     try {
-      const res = await axiosInstance.get(`/api/locations/${detailInfo.locationId}/facilities/search?facilityType=${category}`);
+      const res = await axiosInstance.get(`/api/public/locations/${detailInfo.locationId}/facilities/search?facilityType=${category}`);
       const data = res.data;
       setMarkers(data);
     } catch (err) {

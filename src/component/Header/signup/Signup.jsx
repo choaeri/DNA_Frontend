@@ -39,7 +39,7 @@ export default function Signup() {
   const onFinish = (values) => {
     try {
       const data = { username: signUpUserName, email: signUpEmail, password: signUpPassword };
-      axiosInstance.post("/api/users", data);
+      axiosInstance.post("/api/public/users", data);
       notification.success({ message: '회원 가입 더럽게 힘드네!' });
       navigate("/login");
     } catch (error) {
@@ -52,7 +52,7 @@ export default function Signup() {
   const checkUsername = async () => {
     try {
       const data = { username: signUpUserName };
-      const response = await axiosInstance.post("/api/users/name/check", data);  
+      const response = await axiosInstance.post("/api/public/users/name/check", data);  
 
       if (!response.data.isDuplicate) {
         setIsUsernameAvailable(true);
@@ -73,7 +73,7 @@ export default function Signup() {
   const sendVerificationCode = async () => {
     try {
       const data = { email: signUpEmail };
-      await axiosInstance.post("/api/users/email/code/send", data);  
+      await axiosInstance.post("/api/public/users/email/code/send", data);  
       notification.success({ message: 'Verification code sent to your email!' });
       setIsCodeSent(true); 
     } catch (error) {
@@ -86,7 +86,7 @@ export default function Signup() {
   const verifyCode = async () => {
     try {
       const data = { email: signUpEmail, code: verificationCode };
-      const response = await axiosInstance.post("/api/users/email/code/verify", data);
+      const response = await axiosInstance.post("/api/public/users/email/code/verify", data);
       console.log(response.data);
 
       if (response.data.isVerified) {

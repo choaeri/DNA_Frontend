@@ -19,7 +19,7 @@ export default function Home() {
   // 지역 조회 API 호출
   const fetchLocations = async () => {
     try {
-      const res = await axiosInstance.get("/api/locations");
+      const res = await axiosInstance.get("/api/public/locations");
       const data = res.data;
       if (Array.isArray(data)) {
         setLocations(data);

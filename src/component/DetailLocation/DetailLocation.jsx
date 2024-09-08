@@ -19,7 +19,7 @@ export default function DetailLocation () {
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const res = await axiosInstance.get(`/api/locations/${locationId}`);
+        const res = await axiosInstance.get(`/api/public/locations/${locationId}`);
         const data = res.data;
         setDetailInfo(data);
         setCenterMarker({

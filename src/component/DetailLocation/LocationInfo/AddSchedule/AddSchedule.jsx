@@ -58,7 +58,7 @@ export default function AddSchedule () {
   useEffect(() => {
     const fetchScheduledDates = async () => {
       try {
-        const response = await axiosInstance.get("/api/workation-schedules/dates");
+        const response = await axiosInstance.get("/api/workation-schedules/scheduled-dates");
         setScheduledDates(response.data.scheduledDates);
         console.log("Fetched scheduled dates:", response.data.scheduledDates);
       } catch (error) {
