@@ -3,8 +3,8 @@ import "./AllReviews.css";
 import { axiosInstance } from '../../common/func/axios';
 import { AppContext } from '../../context/AppContext';
 
-export default function AllReviews () {
-  const {errMessageCheck} = useContext(AppContext);
+export default function AllReviews() {
+  const { errMessageCheck } = useContext(AppContext);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -39,15 +39,14 @@ export default function AllReviews () {
           {reviews.map((review) => (
             <div className="review-card" key={review.reviewId}>
               <h3>{review.username}</h3>
+              <p>별점: {review.rating}</p>
               <p>위치: {review.locationName}</p>
-              <p>시작 날짜: {review.startDate}</p>
-              <p>종료 날짜: {review.endDate}</p>
               <p>내용: {review.content}</p>
-              <p>작성일: {new Date(review.createdAt).toLocaleString()}</p>
+              <p>작성일: {new Date(...review.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</p> {/* "June 2024" 형식 */}
             </div>
           ))}
         </div>
       )}
     </div>
   );
-};
+}
