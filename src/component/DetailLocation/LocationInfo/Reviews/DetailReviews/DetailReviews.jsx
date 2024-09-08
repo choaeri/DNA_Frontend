@@ -1,10 +1,38 @@
-import { useContext } from "react";
+import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from "../../../../../context/AppContext";
 import "./DetailReviews.css";
 import { Modal } from "@mui/material";
+import { axiosInstance } from "../../../../../common/func/axios";
+
 
 export default function DetailReviews () {
-	const {openReviewModal, setOpenReviewModal} = useContext(AppContext);
+  const {errMessageCheck, openReviewModal, setOpenReviewModal, detailInfo} = useContext(AppContext);
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const res = await axiosInstance.get('/api/public/workation-reviews/all', {
+          params: {
+            page: 0,
+            size: 6,
+            sort: 'createdAt,desc', // 최신 작성일 기준으로 정렬
+          },
+        });
+
+        const data = res.data;
+        if (data && Array.isArray(data.content)) {
+          setReviews(data.content);
+        } else {
+          console.error("Fetched data is not an array:", data);
+        }
+      } catch (err) {
+        errMessageCheck(err.response.data.errorMessage);
+      }
+    };
+
+    fetchReviews();
+  }, []);
 
   return (
     <Modal 
