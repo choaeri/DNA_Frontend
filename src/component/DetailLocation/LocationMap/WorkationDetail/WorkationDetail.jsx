@@ -1,33 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "../../../../context/AppContext";
 import "./WorkationDetail.css";
 import { Modal } from "@mui/material";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
-import { axiosInstance } from "../../../../common/func/axios";
 
 export default function WorkationDetail(props) { 
   const { detailInfo, 
-          isBookmarked, setIsBookmarked,
+          isBookmarked, 
           workationModal, setWorkationModal,
-          errMessageCheck
+          onClickLike
         } = useContext(AppContext);
-
-  const onClickLike = async (e, facilityId) => {
-    setIsBookmarked(!isBookmarked);
-    const apiUrl = `/api/facilities/${facilityId}/bookmark`;
-    const method = isBookmarked ? "DELETE" : "POST";
-    try {
-      console.log(method);
-      console.log(apiUrl);
-      await axiosInstance({
-        url: apiUrl,
-        method,
-      });
-    } catch (error) {
-      errMessageCheck(error.response.data.errorMessage);
-      console.log(error);
-    }
-  };
 
   return (
     <Modal

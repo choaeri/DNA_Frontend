@@ -39,6 +39,29 @@ const AppProvider = ({ children }) => {
 		}
 	};
 
+	const onClickLike = async (e, facilityId) => {
+    const currentIsBookmarked = isBookmarked[facilityId];
+    const apiUrl = `/api/facilities/${facilityId}/bookmark`;
+    const method = isBookmarked ? "DELETE" : "POST";
+    try {
+      setIsBookmarked(prev => ({
+        ...prev,
+        [facilityId]: !currentIsBookmarked
+      }));
+      await axiosInstance({
+        url: apiUrl,
+        method,
+      });
+    } catch (error) {
+			setIsBookmarked(prev => ({
+        ...prev,
+        [facilityId]: currentIsBookmarked // 원래 상태로 되돌리기
+      }));
+      errMessageCheck(error.response.data.errorMessage);
+      console.log(error);
+    }
+  };
+
 	const popupCheck = () => {
 		// 사용자 팝업 상태 조회 API 호출
 		const fetchPopup = async () => {
@@ -56,6 +79,10 @@ const AppProvider = ({ children }) => {
 		};
 		fetchPopup();
 	};
+
+	useEffect(() => {
+		console.log(isBookmarked)
+	}, [isBookmarked])
 
 	return (
 		<AppContext.Provider
@@ -88,6 +115,7 @@ const AppProvider = ({ children }) => {
 
 				errMessageCheck,
 				popupCheck,
+				onClickLike,
 
 				setOpenLoginPage,
 

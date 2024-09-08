@@ -1,0 +1,67 @@
+.Likes {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Likes .bmkCnt {
+  margin-top: 68px;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 230px 127px;
+}
+.Likes .bmkCnt .header {
+  display: flex;
+  flex-direction: column;
+}
+.Likes .bmkCnt .header .tit {
+  color: var(--Gray1, #000);
+  font-family: "Pretendard Variable";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 160%;
+}
+
+.Likes .bmkCnt .content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--button-padding-gap-button-padding-md, 16px);
+}
+.Likes .bmkCnt .content .item {
+  display: flex;
+  margin-top: 35px;
+  width: 236px;
+  height: 118px;
+  padding: 14px 18px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-7, #E1E4E9);
+  background: #FFF;
+}
+.Likes .bmkCnt .content .item .like {
+  display: flex;
+  width: 100%;
+}
+.Likes .bmkCnt .content .item .type,
+.Likes .bmkCnt .content .item .like .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Pretendard Variable";
+  font-style: normal;
+  line-height: 160%;
+}
+.Likes .bmkCnt .content .item .type {
+  color: var(--Gray-4, #4F5257);
+  font-size: 12px;
+  font-weight: 400;
+}
+.Likes .bmkCnt .content .item .like .name {
+  color: var(--Gray1, #000);
+  font-size: 14px;
+  font-weight: 500;
+}

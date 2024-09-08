@@ -34,7 +34,7 @@
 
 .markerCnt {
   width: 180px;
-  height: 200px;
+  height: fit-content;
   padding: 0.7rem;
   border-radius: 4px;
   border: 1px solid var(--Gray1, #000);
@@ -76,4 +76,8 @@
   display: flex;
   margin-left: auto;
   height: auto;
+}
+
+.markerCnt .facInfo .likeCnt {
+  display: flex;
 }
