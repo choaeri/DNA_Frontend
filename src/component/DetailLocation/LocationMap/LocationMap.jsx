@@ -90,7 +90,7 @@ export default function LocationMap () {
                 <div className="markerCnt">
                   {/* {locations.map((location) => {
                     if(selectLocationName === location.locationName) {
-                      return <img alt={location.locationName} src={location.thumbNail}></img> 
+                      return <img alt={location.locationName} src={location.thumbnail}></img> 
                     };
                   })} */}
                   <div className="">

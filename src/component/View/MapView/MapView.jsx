@@ -51,7 +51,7 @@ export default function MapView () {
               }}
             >
               <div className="locationMarker" key={index}>
-                <img alt={location.locationName} src={location.thumbNail}></img>
+                <img alt={location.locationName} src={location.thumbnail}></img>
                 <div className="locationCnt">
                   <div className="detail">
                     <span className="location">{location.locationName}</span>

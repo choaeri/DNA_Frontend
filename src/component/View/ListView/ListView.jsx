@@ -31,7 +31,7 @@ export default function ListView() {
             key={index}
             className="card"
           > 
-            <img alt={location.locationName} src={location.thumbNail}></img>
+            <img alt={location.locationName} src={location.thumbnail}></img>
             <div style={{ display: 'flex', alignItems: 'center', position: "absolute" }}>
             </div>
             
