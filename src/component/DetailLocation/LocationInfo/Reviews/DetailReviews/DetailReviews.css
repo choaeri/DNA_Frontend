@@ -1,39 +1,40 @@
 .dtrSection {
   display: flex;
-	height: 100%;
-	width: 100%;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
-	z-index: 2;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 2;
 }
 
 .dtrModal {
-	position: relative;
+  position: relative;
   width: 60%;
   height: 85%;
-	background-color: #fff;
-	overflow-x: hidden;
-	border-radius: 1rem;
+  background-color: #fff;
+  overflow-x: hidden;
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
-	/* 스크롤바 삭제 */
-	-ms-overflow-style: none; /* IE and Edge */
-	scrollbar-width: none; /* Firefox */
+  /* 스크롤바 삭제 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
+
 .dtrModal::-webkit-scrollbar {
-	display: none; /* Chrome, Safari, Opera*/
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .dtrHeader {
   display: flex;
   padding: 16px 20px;
   align-items: center;
-  display: flex;
   justify-content: center;
   border-radius: 16px 16px 0px 0px;
   border-bottom: 1px solid var(--Gray-8, #ECEEF4);
 }
+
 .dtrHeader span {
   color: var(--Gray1, #000);
   text-align: center;
@@ -43,13 +44,14 @@
   font-weight: 500;
   line-height: 160%;
 }
+
 .dtrHeader .closeBtn {
-	position: sticky;
-	top: 0;
-	left: 95%;
-	border: none;
-	color: #ffffff;
-	justify-content: flex-end;
+  position: sticky;
+  top: 0;
+  left: 95%;
+  border: none;
+  color: #ffffff;
+  justify-content: flex-end;
 }
 
 .dtrCnt {
@@ -67,6 +69,7 @@
   border: 1px solid var(--Gray1, #000);
   background: var(--Gray-10, #FFF);
 }
+
 .dtrCnt .leftCnt .writeBtn span {
   color: var(--Gray-01, var(--Gray1, #000));
   font-family: "Pretendard Variable";

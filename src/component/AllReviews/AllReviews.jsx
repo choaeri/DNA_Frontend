@@ -32,6 +32,18 @@ export default function AllReviews() {
     fetchReviews();
   }, []);
 
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 0; i < rating; i++) {
+      stars.push(
+        <span key={i} className={i < rating ? "filledStar" : "emptyStar"}>
+          ★
+        </span>
+      );
+    }
+    return stars;
+  };
+
   return (
     <div className="reviews-list">
       {reviews.length > 0 && (
@@ -39,7 +51,7 @@ export default function AllReviews() {
           {reviews.map((review) => (
             <div className="review-card" key={review.reviewId}>
               <h3>{review.username}</h3>
-              <p>별점: {review.rating}</p>
+              <div className="reviewRating">Rating: {renderStars(review.rating)}</div>
               <p>위치: {review.locationName}</p>
               <p>내용: {review.content}</p>
               <p>작성일: {new Date(...review.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</p> {/* "June 2024" 형식 */}

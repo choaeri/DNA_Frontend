@@ -4,23 +4,22 @@ import "./DetailReviews.css";
 import { Modal } from "@mui/material";
 import { axiosInstance } from "../../../../../common/func/axios";
 
-
-export default function DetailReviews () {
-  const {errMessageCheck, openReviewModal, setOpenReviewModal, detailInfo} = useContext(AppContext);
+export default function DetailReviews() {
+  const { errMessageCheck, openReviewModal, setOpenReviewModal, detailInfo } = useContext(AppContext);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await axiosInstance.get('/api/public/workation-reviews/all', {
+        const res = await axiosInstance.get(`/api/public/locations/${detailInfo.locationId}/workation-reviews`, {
           params: {
             page: 0,
-            size: 6,
-            sort: 'createdAt,desc', // 최신 작성일 기준으로 정렬
+            size: 7,
+            sort: 'createdAt,desc',
           },
         });
-
         const data = res.data;
+        console.log(data);
         if (data && Array.isArray(data.content)) {
           setReviews(data.content);
         } else {
@@ -30,13 +29,25 @@ export default function DetailReviews () {
         errMessageCheck(err.response.data.errorMessage);
       }
     };
-
     fetchReviews();
-  }, []);
+  }, [detailInfo, errMessageCheck]);
+
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 0; i < rating; i++) {
+      stars.push(
+        <span key={i} className={i < rating ? "filledStar" : "emptyStar"}>
+          ★
+        </span>
+      );
+    }
+    return stars;
+  };
 
   return (
     <Modal 
-      open={openReviewModal} onClose={() => setOpenReviewModal(false)}
+      open={openReviewModal} 
+      onClose={() => setOpenReviewModal(false)}
     >
       <section className="dtrSection">
         <div className="dtrModal">
@@ -52,11 +63,21 @@ export default function DetailReviews () {
               <button className="writeBtn">
                 <span>Write a review</span>
               </button>
+              <div>★{detailInfo.averageRating.toFixed(2)}({detailInfo.reviewCount})</div>
             </div>
             <div className="line"></div>
+            <div className='rightCnt'>
+              {reviews.map((review, index) => (
+                <div key={index} className="reviewItem">
+                  <div className="reviewRating">Rating: {renderStars(review.rating)}</div>
+                  <div className="reviewContent">{review.content}</div>
+                  <div className="reviewAuthor">{review.author}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
     </Modal>
-  )
+  );
 }
