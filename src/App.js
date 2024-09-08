@@ -9,6 +9,7 @@ import DetailLocation from './component/DetailLocation/DetailLocation';
 import Account from './component/Header/Account/Account';
 import Likes from './component/Header/Likes/Likes';
 import Schedule from './component/Header/Schedule/Schedule';
+import Survey from './component/Recommend/Survey/Survey';
 
 function App() {
 
@@ -23,8 +24,8 @@ function App() {
           <Route path="/mypage/account" element={<Account />} />
           <Route path="/mypage/likes" element={<Likes />} />
           <Route path="/mypage/schedule" element={<Schedule />} />
-          <Route path="/recommend" element={<Recommend />} />
           <Route path={`/locations/:locationId`} element={<DetailLocation />} />
+          <Route path={`/survey`} element={<Survey />} />
         </Routes>
       </AppProvider>
     </BrowserRouter>

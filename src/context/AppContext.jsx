@@ -25,6 +25,9 @@ const AppProvider = ({ children }) => {
 	const [detailInfo, setDetailInfo] = useState(null);
 	const [isBookmarked, setIsBookmarked] = useState({});
 
+  const [markers, setMarkers] = useState(null);
+  const [info, setInfo] = useState(null);
+
 	const [isPopup, setIsPopup] = useState(false);
 	const [isLoginPopup, setIsLoginPopup] = useState(false);
 	
@@ -39,7 +42,7 @@ const AppProvider = ({ children }) => {
   const navigate = useNavigate();
 
 	const errMessageCheck = (errorMessage) => {
-		if(errorMessage === "만료된 토큰입니다. 다시 로그인해주세요.") {
+		if(errorMessage === "Expired token.") {
 			setIsLoginPopup(true);
 			processLogout();
 		}
@@ -105,6 +108,9 @@ const AppProvider = ({ children }) => {
 				selectLocationName,
 				detailInfo,
 				isBookmarked,
+
+				markers,
+				info,
 				
 				isPopup,
 				isLoginPopup,
@@ -135,6 +141,9 @@ const AppProvider = ({ children }) => {
 				setSelectLocationName,
 				setDetailInfo,
 				setIsBookmarked,
+
+				setMarkers,
+				setInfo,
 				
 				setIsPopup,
 				setIsLoginPopup,
