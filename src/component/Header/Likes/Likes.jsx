@@ -8,25 +8,43 @@ import "./Likes.css";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 
 export default function Likes () {
-  const {isBookmarked, onClickLike, errMessageCheck} = useContext(AppContext);
+  const { isBookmarked, setIsBookmarked, 
+          onClickLike, 
+          errMessageCheck
+        } = useContext(AppContext);
   const [bookmarkList, setBookmarkList] = useState();
   const { isLoggedIn } = useLocalStorage();
 
   useEffect(() => {
-    const fetchBookmark = async () => {
+    const fetchBookmarkList = async () => {
       const apiUrl = `/api/facilities/bookmark`;
       try {
         const res = await axiosInstance.get(apiUrl);
         const data = res.data;
         if (Array.isArray(data)) {
           setBookmarkList(data);
+          const newIsBookmarked = {};
+          
+          const fetchBookmark = async (facilityId) => {
+            const apiUrl = `/api/facilities/${facilityId}/bookmark`;
+            try {
+              const response = await axiosInstance.get(apiUrl);
+              const data = response.data;
+              newIsBookmarked[facilityId] = data.isBookmarked;
+            } catch (error) {
+              errMessageCheck(error.response.data.errorMessage);
+              console.log(error);
+            };
+          };
+          await Promise.all(data.map(item => fetchBookmark(item.facilityId)));
+          setIsBookmarked(newIsBookmarked);
         };
       } catch (error) {
         errMessageCheck(error.response.data.errorMessage);
         console.log(error);
       };
     };
-    fetchBookmark();
+    fetchBookmarkList();
   }, []);
 
   return (

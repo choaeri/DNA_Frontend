@@ -9,23 +9,29 @@ const AppContext = createContext({
 
 const AppProvider = ({ children }) => {
 	const [openLoginPage, setOpenLoginPage] = useState(false);
+
 	const [loginUserName, setLoginUserName] = useState("");
 	const [loginPassword, setLoginPassword] = useState("");
+
 	const [signUpUserName, setSignUpUserName] = useState("");
 	const [signUpId, setSignUpId] = useState("");
 	const [signUpPassword, setSignUpPassword] = useState("");
 	const [signUpEmail, setSignUpEmail] = useState("");
 	const [signUpVerifyCode, setSignUpVerifyCode] = useState("");
+
 	const [locations, setLocations] = useState([]);
 	const [viewMode, setViewMode] = useState('list');
 	const [selectLocationName, setSelectLocationName] = useState("");
 	const [detailInfo, setDetailInfo] = useState(null);
-	const [isBookmarked, setIsBookmarked] = useState();
-	const [openReviewModal, setOpenReviewModal] = useState(false);
+	const [isBookmarked, setIsBookmarked] = useState({});
+
 	const [isPopup, setIsPopup] = useState();
 	const [isLoginPopup, setIsLoginPopup] = useState(false);
+	
+	const [openReviewModal, setOpenReviewModal] = useState(false);
 	const [writeReviewsModal, setWriteReviewsModal] = useState(false);
 	const [workationModal, setWorkationModal] = useState(false);
+
 	const [fieldErrors, setFieldErrors] = useState({});
 
   const { processLogout, processOnPopupCheck } = useLocalStorage();
@@ -42,7 +48,7 @@ const AppProvider = ({ children }) => {
 	const onClickLike = async (e, facilityId) => {
     const currentIsBookmarked = isBookmarked[facilityId];
     const apiUrl = `/api/facilities/${facilityId}/bookmark`;
-    const method = isBookmarked ? "DELETE" : "POST";
+    const method = isBookmarked[facilityId] ? "DELETE" : "POST";
     try {
       setIsBookmarked(prev => ({
         ...prev,
@@ -79,10 +85,6 @@ const AppProvider = ({ children }) => {
 		};
 		fetchPopup();
 	};
-
-	useEffect(() => {
-		console.log(isBookmarked)
-	}, [isBookmarked])
 
 	return (
 		<AppContext.Provider

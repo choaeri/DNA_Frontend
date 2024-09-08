@@ -29,7 +29,7 @@ export default function WorkationDetail(props) {
             <span className="lcnName">{detailInfo.locationName}</span>
             <div className="facName">
               <span>{props.marker.facilityName}</span>
-              { isBookmarked ? (
+              { isBookmarked[props.marker.facilityId] ? (
                 <HeartFilled 
                   className="bmBtn"
                   onClick={(e) => onClickLike(e, props.marker.facilityId)} 
