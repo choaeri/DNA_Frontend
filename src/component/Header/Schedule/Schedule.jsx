@@ -12,6 +12,7 @@ export default function Schedule() {
   const [confirmDeleteModal, setConfirmDeleteModal] = useState(false);
   const [scheduleToDelete, setScheduleToDelete] = useState(null);
   const [selectedScheduleId, setSelectedScheduleId] = useState(null); // 추가된 상태
+  const [selectedLocationId, setSelectedLocationId] = useState(null); // 추가된 상태
 
   useEffect(() => {
     const fetchSchedules = async () => {
@@ -38,9 +39,12 @@ export default function Schedule() {
     setConfirmDeleteModal(true);
   };
 
-  const handleWriteReviewClick = (scheduleId) => {
+  const handleWriteReviewClick = (scheduleId, locationId) => {
     setSelectedScheduleId(scheduleId); // 선택된 스케줄 ID 설정
+    setSelectedLocationId(locationId)
     setWriteReviewsModal(true); // 모달 열기
+    console.log(scheduleId);
+    console.log(locationId);
   };
 
   const confirmDelete = async () => {
@@ -75,7 +79,7 @@ export default function Schedule() {
                 {schedule.startDate} - {schedule.endDate}
               </span>
             </div>
-            <button className="wrtBtn" disabled={schedule.hasReview} onClick={() => handleWriteReviewClick(schedule.scheduleId)}>Write a review</button>
+            <button className="wrtBtn" disabled={schedule.hasReview} onClick={() => handleWriteReviewClick(schedule.scheduleId, schedule.locationId)}>Write a review</button>
             <svg className="deleteButton" onClick={() => handleDeleteClick(schedule.scheduleId)} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
               <path d="M10.3433 10.6562L21.657 21.97" stroke="#B6B9BE" strokeWidth="1.5"/>
               <path d="M21.6567 10.6562L10.343 21.97" stroke="#B6B9BE" strokeWidth="1.5"/>
@@ -84,7 +88,7 @@ export default function Schedule() {
         ))}
       </div>
 
-      <WriteReviews scheduleId={selectedScheduleId} />
+      <WriteReviews scheduleId={selectedScheduleId} locationId={selectedLocationId} />
       
       {confirmDeleteModal && <div className="modalOverlay" onClick={() => setConfirmDeleteModal(false)} />}
       <Modal open={confirmDeleteModal} onClose={() => setConfirmDeleteModal(false)}>

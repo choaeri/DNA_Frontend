@@ -5,7 +5,7 @@ import { axiosInstance } from "../../common/func/axios";
 import "./WriteReviews.css";
 import { Modal } from "@mui/material";
 
-export default function WriteReviews({ scheduleId }) { // scheduleId를 props로 받음
+export default function WriteReviews({ scheduleId, locationId }) { // scheduleId를 props로 받음
   const { writeReviewsModal, setWriteReviewsModal, errMessageCheck } = useContext(AppContext);
   const [rating, setRating] = useState(0);
   const [content, setContent] = useState("");
@@ -38,6 +38,7 @@ export default function WriteReviews({ scheduleId }) { // scheduleId를 props로
 
     try {
       await axiosInstance.post(`/api/workation-schedules/${scheduleId}/workation-reviews`, {
+        locationId,
         rating,
         content,
       });
