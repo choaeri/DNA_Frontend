@@ -38,6 +38,11 @@
   align-items: center; /* 아이템 내부 정렬 */
   margin: 20px 0; /* 아이템 간의 간격 */
 }
+.Schedule .schdCnt .item img {
+  width: 140px;
+  height: 100px;
+  border-radius: 4px;
+}
 
 .Schedule .schdCnt .item .info {
   display: flex;

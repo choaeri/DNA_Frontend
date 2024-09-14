@@ -24,6 +24,7 @@ const AppProvider = ({ children }) => {
 	const [selectLocationName, setSelectLocationName] = useState("");
 	const [detailInfo, setDetailInfo] = useState(null);
 	const [isBookmarked, setIsBookmarked] = useState({});
+  const [schedules, setSchedules] = useState([]);
 
   const [markers, setMarkers] = useState(null);
   const [info, setInfo] = useState(null);

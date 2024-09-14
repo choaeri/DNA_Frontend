@@ -26,19 +26,19 @@ export default function WorkationDetail(props) {
             </svg>
           </div>
           <div className="content">
-            <span className="lcnName">{detailInfo.locationName}</span>
+            <span className="lcnName">{props.locationName}</span>
             <div className="facName">
-              <span>{props.marker.facilityName}</span>
-              { isBookmarked[props.marker.facilityId] ? (
+              <span>{props.facilityName}</span>
+              { isBookmarked[props.facilityId] ? (
                 <HeartFilled 
                   className="bmBtn"
-                  onClick={(e) => onClickLike(e, props.marker.facilityId)} 
+                  onClick={(e) => onClickLike(e, props.facilityId)} 
                   style={{ color: 'red', cursor: 'pointer' }} 
                 /> 
                 ) : (
                 <HeartOutlined 
                   className="bmBtn"
-                  onClick={(e) => onClickLike(e, props.marker.facilityId)} 
+                  onClick={(e) => onClickLike(e, props.facilityId)} 
                   style={{ color: 'black', cursor: 'pointer' }} 
                 />
                 )

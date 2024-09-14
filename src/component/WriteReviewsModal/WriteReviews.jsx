@@ -5,7 +5,7 @@ import { axiosInstance } from "../../common/func/axios";
 import "./WriteReviews.css";
 import { Modal } from "@mui/material";
 
-export default function WriteReviews({ scheduleId, locationId }) { // scheduleId를 props로 받음
+export default function WriteReviews(props) { // scheduleId를 props로 받음
   const { writeReviewsModal, setWriteReviewsModal, errMessageCheck } = useContext(AppContext);
   const [rating, setRating] = useState(0);
   const [content, setContent] = useState("");
@@ -36,8 +36,9 @@ export default function WriteReviews({ scheduleId, locationId }) { // scheduleId
       return;
     };
 
+    const locationId = props.selectedSchedule.locationId;
     try {
-      await axiosInstance.post(`/api/workation-schedules/${scheduleId}/workation-reviews`, {
+      await axiosInstance.post(`/api/workation-schedules/${props.selectedSchedule.scheduleId}/workation-reviews`, {
         locationId,
         rating,
         content,
@@ -72,7 +73,8 @@ export default function WriteReviews({ scheduleId, locationId }) { // scheduleId
           <div className="content">
             <div className="location">
               <div className="lcnCnt">
-                
+                <img src={props.selectedSchedule.locationThumbnail} alt={props.selectedSchedule.locationName} />
+                <span>{props.selectedSchedule.locationName}</span>
               </div>
             </div>
 
@@ -88,34 +90,6 @@ export default function WriteReviews({ scheduleId, locationId }) { // scheduleId
                 placeholder="It was a good combination of work and relaxation, and the atmosphere in this area was quiet and quiet."
               />
             </div>
-            {/* <Form
-              form={form}
-              onFinish={handleSubmit}
-              layout="vertical"
-            >
-              <Form.Item
-                name="rating"
-                rules={[{ required: true, message: "별점을 선택해주세요." }]}
-              >
-                <Rate />
-              </Form.Item>
-
-              <Form.Item
-                name="content"
-                rules={[{ required: true, message: "리뷰 내용을 입력해주세요." }]}
-              >
-                <Input.TextArea
-                  placeholder="It was a good combination of work and relaxation, and the atmosphere in this area was quiet and quiet."
-                  rows={5}
-                />
-              </Form.Item>
-              
-              <Form.Item>
-                <Button className="wrtBtn" type="primary" htmlType="submit">
-                  Write a review
-                </Button>
-              </Form.Item>
-            </Form> */}
           </div>
           <div className="submitBtn">
             <Button className="wrtBtn" type="primary" onClick={handleSubmit}>

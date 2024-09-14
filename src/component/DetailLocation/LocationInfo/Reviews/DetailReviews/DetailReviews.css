@@ -58,6 +58,14 @@
   display: flex;
 }
 
+.dtrCnt .leftCnt {
+  display: flex;
+  width: 146px;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 40px 60px;
+}
 .dtrCnt .leftCnt .writeBtn {
   display: inline-flex;
   height: 36px;
@@ -69,11 +77,22 @@
   border: 1px solid var(--Gray1, #000);
   background: var(--Gray-10, #FFF);
 }
-
 .dtrCnt .leftCnt .writeBtn span {
   color: var(--Gray-01, var(--Gray1, #000));
   font-family: "Pretendard Variable";
   font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%;
+}
+.dtrCnt .leftCnt svg {
+  width: 28px;
+  height: 28px;
+}
+.dtrCnt .leftCnt span {
+  color: var(--Gray1, #000);
+  font-family: "Pretendard Variable";
+  font-size: 32px;
   font-style: normal;
   font-weight: 500;
   line-height: 160%;

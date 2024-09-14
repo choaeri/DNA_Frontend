@@ -72,11 +72,24 @@
     border: 1px solid var(--Gray-7, #E1E4E9);
     background: var(--Gray-10, #FFF);
 }
-.modalCnt .content .location .lcnCtn {
+.modalCnt .content .location .lcnCnt {
     display: flex;
     align-items: center;
     gap: var(--button-padding-gap-button-padding-xl, 24px);
     align-self: stretch;
+}
+.modalCnt .content .location .lcnCnt img {
+    width: 72px;
+    height: var(--Button-Size-button-size-xl, 56px);
+    border-radius: 4px;
+}
+.modalCnt .content .location .lcnCnt span {
+    color: var(--Gray1, #000);
+    font-family: "Pretendard Variable";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
 }
 
 .modalCnt .content .rating {
