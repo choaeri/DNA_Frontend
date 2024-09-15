@@ -2,66 +2,99 @@ import { useState } from "react";
 import Header from "../../Header/Header";
 import './Survey.css';
 import { Container, Box } from '@mui/material';
+import { questions } from "./questions";
+import { axiosInstance } from "../../../common/func/axios";
+import { notification } from "antd";
+import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 export default function Survey () {
-  const questions = [
-    {
-      question: "What do you want to do the most during your trip",
-      options: [
-        "Shopping", "City Tour", "Plogging trip (eco-friendly)", "Visiting the filming location of the drama"
-      ]
-    },
-    {
-      question: "What do you want to do the most during your trip",
-      options: [
-        "소득 임금", "월급 100만원 미만", "월급 100만원 미만", "월급 100만원 미만", "월급 100만원 미만"
-      ]
-    },
-    {
-      question: "How many times do you travel in a year?",
-      type: "input"
-    }
-  ];
-  
   const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState({});
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [dto, setDto] = useState({
+    gender: null,
+    age: null,
+    income: null,
+    travelCompanions: null,
+    travelPreference: null,
+    newOrFamiliar: null,
+    comfortVsCost: null,
+    relaxationVsActivities: null,
+    knownVsUnknown: null,
+    photographyImportance: null,
+  });
+  const navigate = useNavigate();
   
-  const handleNext = () => {
+  const handleNext = async () => {
+    if (selectedOption === null) {
+      notification.open({
+        message: "Please select an option before proceeding.",
+        icon: <FrownOutlined style={{ color: "#ff3333" }} />,
+      });
+      return;
+    };
+    
     if (step < questions.length - 1) {
       setStep(step + 1);
+      setSelectedOption(null);
     } else {
-      console.log("Form completed", answers);
+      try {
+        await axiosInstance.post('/api/recommend/locations', dto);
+        notification.open({
+          message: "Thank you for completing the survey!",
+          icon: <SmileOutlined style={{ color: "#108ee9" }} />,
+        });
+        navigate("/mypage/recommend");
+
+      } catch (error) {
+        const {
+          data: { errorMessage },
+        } = error.response;
+
+        notification.open({
+          message: errorMessage,
+          icon: <FrownOutlined style={{ color: "#ff3333" }} />,
+        });
+      }
     }
   };
 
   const handleBack = () => {
     if (step > 0) {
       setStep(step - 1);
+      setSelectedOption(null);
     }
   };
 
-  const handleAnswer = (answer) => {
-    setAnswers(prevAnswers => {
-      const currentAnswers = prevAnswers[step] || [];
-      if (questions[step].type === "input") {
-        return {
-          ...prevAnswers,
-          [step]: [answer]
-        };
-      } else {
-        if (currentAnswers.includes(answer)) {
-          return {
-            ...prevAnswers,
-            [step]: currentAnswers.filter(item => item !== answer)
-          };
-        } else {
-          return {
-            ...prevAnswers,
-            [step]: [...currentAnswers, answer]
-          };
-        }
-      }
-    });
+  const getDtoKey = (questionIndex) => {
+    switch (questionIndex) {
+      case 0: return 'gender'; // 성별
+      case 1: return 'age'; // 나이
+      case 2: return 'income'; // 평균 월 소득
+      case 3: return 'travelCompanions'; // 여행 동반자 수
+      case 4: return 'travelPreference'; // 자연 vs 도시
+      case 5: return 'newOrFamiliar'; // 새로운 곳 vs 친숙한 곳
+      case 6: return 'comfortVsCost'; // 편안한 여행 vs 저렴한 여행
+      case 7: return 'relaxationVsActivities'; // 휴식 vs 활동
+      case 8: return 'knownVsUnknown'; // 잘 알려진 곳 vs 덜 알려진 곳
+      case 9: return 'photographyImportance'; // 여행 중 사진 촬영 중요성
+      default: return null;
+    }
+  };
+
+  const handleAnswer = (value) => {
+    if (questions[step].type === 'input') {
+      setDto((prevDto) => ({
+        ...prevDto,
+        [getDtoKey(step)]: value, // 숫자로 DTO에 저장
+      }));
+    } else {
+      setDto((prevDto) => ({
+        ...prevDto,
+        [getDtoKey(step)]: value + 1, // 정수형으로 DTO에 저장
+      }));
+    }
+    setSelectedOption(value); // 선택된 옵션 저장
   };
 
   const renderQuestion = () => {
@@ -73,11 +106,12 @@ export default function Survey () {
           <div className="question">
             {currentQuestion.question}
           </div>
-          <input
-            type="text"
-            onChange={(e) => handleAnswer(e.target.value)}
-            value={answers[step] || ""}
-          />
+          <div className="quesCnt">
+            <input
+              type="number"
+              onChange={(e) => handleAnswer(Number(e.target.value))}
+            />
+          </div>
         </Box>
       );
     }
@@ -87,13 +121,13 @@ export default function Survey () {
         <div className="question">
           {currentQuestion.question}
         </div>
-        <div className="quesBtnCnt">
+        <div className="quesCnt" style={currentQuestion.type === "vertical" ? {flexDirection: "column"} : null}>
           {currentQuestion.options.map((option, index) => (
             <button
               key={index}
               className="quesBtn"
-              style={answers[step]?.includes(option) ? {backgroundColor: "black", color: "white"} : null}
-              onClick={() => handleAnswer(option)}
+              style={selectedOption === index ? {backgroundColor: "black", color: "white"} : null}
+              onClick={() => handleAnswer(index)}
             >
               {option}
             </button>
