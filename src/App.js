@@ -24,6 +24,7 @@ function App() {
           <Route path="/mypage/account" element={<Account />} />
           <Route path="/mypage/likes" element={<Likes />} />
           <Route path="/mypage/schedule" element={<Schedule />} />
+          <Route path="/mypage/recommend" element={<Recommend />} />
           <Route path={`/locations/:locationId`} element={<DetailLocation />} />
           <Route path={`/survey`} element={<Survey />} />
         </Routes>
