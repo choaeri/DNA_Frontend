@@ -1,126 +1,16 @@
-import React, { useState, useContext } from 'react';
+import { useState } from "react";
 import Header from "../../Header/Header";
-import { AppContext } from "../../../context/AppContext";
+import './Survey.css';
+import { Container, Box } from '@mui/material';
+import { questions } from "./questions";
 import { axiosInstance } from "../../../common/func/axios";
-import { notification, Spin } from "antd";
+import { notification } from "antd";
 import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
-const questions = [
-  {
-    question: "What is your gender?",
-    options: [
-      "Male",
-      "Female", 
-    ]
-  },
-  {
-    question: "What is your age?",
-    options: [
-      "Open-ended (Numbers only)"
-    ]
-  },
-  {
-    question: "What is your average monthly income? Please select the appropriate option below.",
-    options: [
-      "No income",
-      "Less than 1 million KRW",
-      "1 million ~ less than 2 million KRW",
-      "2 million ~ less than 3 million KRW",
-      "3 million ~ less than 4 million KRW",
-      "4 million ~ less than 5 million KRW",
-      "5 million ~ less than 6 million KRW",
-      "6 million ~ less than 7 million KRW",
-      "7 million ~ less than 8 million KRW",
-      "8 million ~ less than 9 million KRW",
-      "9 million ~ less than 10 million KRW",
-      "10 million KRW or more"
-    ]
-  },
-  {
-    question: "How many people are you planning to travel with on your workation in Korea?",
-    options: [
-      "Open-ended (Numbers only)"
-    ]
-  },
-  {
-    question: "When traveling, do you prefer nature or the city?",
-    options: [
-      "Strongly prefer nature",
-      "Prefer nature",
-      "Slightly prefer nature",
-      "Neutral",
-      "Slightly prefer the city",
-      "Prefer the city",
-      "Strongly prefer the city"
-    ]
-  },
-  {
-    question: "Do you prefer new places or familiar places when traveling?",
-    options: [
-      "Strongly prefer new places",
-      "Prefer new places",
-      "Slightly prefer new places",
-      "Neutral",
-      "Slightly prefer familiar places",
-      "Prefer familiar places",
-      "Strongly prefer familiar places"
-    ]
-  },
-  {
-    question: "Do you prefer a comfortable but expensive trip or an inconvenient but cheap trip?",
-    options: [
-      "Strongly prefer a comfortable but expensive trip",
-      "Prefer a comfortable but expensive trip",
-      "Slightly prefer a comfortable but expensive trip",
-      "Neutral",
-      "Slightly prefer an inconvenient but cheap trip",
-      "Prefer an inconvenient but cheap trip",
-      "Strongly prefer an inconvenient but cheap trip"
-    ]
-  },
-  {
-    question: "During your travels, do you prefer relaxation/leisure or activities/experiences?",
-    options: [
-      "Strongly prefer relaxation/leisure",
-      "Prefer relaxation/leisure",
-      "Slightly prefer relaxation/leisure",
-      "Neutral",
-      "Slightly prefer activities/experiences",
-      "Prefer activities/experiences",
-      "Strongly prefer activities/experiences"
-    ]
-  },
-  {
-    question: "Do you prefer less-known destinations or well-known destinations?",
-    options: [
-      "Strongly prefer less-known destinations",
-      "Prefer less-known destinations",
-      "Slightly prefer less-known destinations",
-      "Neutral",
-      "Slightly prefer well-known destinations",
-      "Prefer well-known destinations",
-      "Strongly prefer well-known destinations"
-    ]
-  },
-  {
-    question: "How important is photography during your travels?",
-    options: [
-      "I think photography is not important",
-      "I somewhat think photography is not important",
-      "I think photography is slightly unimportant",
-      "Neutral",
-      "I think photography is slightly important",
-      "I think photography is important",
-      "I think photography is very important"
-    ]
-  },
-];
-
-
-export default function Survey() {
-  const {errMessageCheck} = useContext(AppContext);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+export default function Survey () {
+  const [step, setStep] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(null);
   const [dto, setDto] = useState({
     gender: null,
     age: null,
@@ -133,16 +23,47 @@ export default function Survey() {
     knownVsUnknown: null,
     photographyImportance: null,
   });
-  const [selectedOption, setSelectedOption] = useState(null); // 선택된 옵션 상태 추가
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false); // 로딩중
+  
+  const handleNext = async () => {
+    if (selectedOption === null) {
+      notification.open({
+        message: "Please select an option before proceeding.",
+        icon: <FrownOutlined style={{ color: "#ff3333" }} />,
+      });
+      return;
+    };
+    
+    if (step < questions.length - 1) {
+      setStep(step + 1);
+      setSelectedOption(null);
+    } else {
+      try {
+        await axiosInstance.post('/api/recommend/locations', dto);
+        notification.open({
+          message: "Thank you for completing the survey!",
+          icon: <SmileOutlined style={{ color: "#108ee9" }} />,
+        });
+        navigate("/mypage/recommend");
 
-  const handleOptionClick = (optionIndex) => {
-    setSelectedOption(optionIndex); // 선택된 옵션 저장
-    setDto((prevDto) => ({
-      ...prevDto,
-      [getDtoKey(currentQuestion)]: optionIndex + 1, // 정수형으로 DTO에 저장
-    }));
+      } catch (error) {
+        const {
+          data: { errorMessage },
+        } = error.response;
+
+        notification.open({
+          message: errorMessage,
+          icon: <FrownOutlined style={{ color: "#ff3333" }} />,
+        });
+      }
+    }
+  };
+
+  const handleBack = () => {
+    if (step > 0) {
+      setStep(step - 1);
+      setSelectedOption(null);
+    }
   };
 
   const getDtoKey = (questionIndex) => {
@@ -161,99 +82,101 @@ export default function Survey() {
     }
   };
 
-  const handleNext = async () => {
-    if (selectedOption === null) {
-      notification.open({
-        message: "Please select an option before proceeding.",
-        icon: <FrownOutlined style={{ color: "#ff3333" }} />,
-      });
-      return;
-    }
-
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-      setSelectedOption(null); // 다음 질문으로 넘어갈 때 선택 초기화
+  const handleAnswer = (value) => {
+    if (questions[step].type === 'input') {
+      setDto((prevDto) => ({
+        ...prevDto,
+        [getDtoKey(step)]: value, // 숫자로 DTO에 저장
+      }));
     } else {
-
-      setIsLoading(true);  // 로딩 시작
-
-      try {
-        await axiosInstance.post('/api/recommend/locations', dto);
-        notification.open({
-          message: "Thank you for completing the survey!",
-          icon: <SmileOutlined style={{ color: "#108ee9" }} />,
-        });
-        navigate("/mypage/recommend");
-
-      } catch (error) {
-        const {
-          data: { errorMessage },
-        } = error.response;
-
-        notification.open({
-          message: errorMessage,
-          icon: <FrownOutlined style={{ color: "#ff3333" }} />,
-        });
-      } finally {
-      
-        setIsLoading(false);  // 로딩 종료
-      
-      }
+      setDto((prevDto) => ({
+        ...prevDto,
+        [getDtoKey(step)]: value + 1, // 정수형으로 DTO에 저장
+      }));
     }
+    setSelectedOption(value); // 선택된 옵션 저장
   };
 
-  const handlePrevious = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
-      setSelectedOption(null); // 이전 질문으로 돌아갈 때 선택 초기화
-    }
-  };
+  const renderQuestion = () => {
+    const currentQuestion = questions[step];
 
+    if (currentQuestion.type === "input") {
+      return (
+        <Box>
+          <div className="question">
+            {currentQuestion.question}
+          </div>
+          <div className="quesCnt">
+            <input
+              type="number"
+              onChange={(e) => handleAnswer(Number(e.target.value))}
+            />
+          </div>
+        </Box>
+      );
+    }
+
+    return (
+      <Box>
+        <div className="question">
+          {currentQuestion.question}
+        </div>
+        <div className="quesCnt" style={currentQuestion.type === "vertical" ? {flexDirection: "column"} : null}>
+          {currentQuestion.options.map((option, index) => (
+            <button
+              key={index}
+              className="quesBtn"
+              style={selectedOption === index ? {backgroundColor: "black", color: "white"} : null}
+              onClick={() => handleAnswer(index)}
+            >
+              {option}
+            </button>
+          ))}
+        </div>
+      </Box>
+    );
+  };
 
   return (
-    <div className="Survey" style={styles.container}>
+    <div className="Survey">
       <Header />
-      <Spin 
-        spinning={isLoading} 
-        size="large" 
-        tip={<div className="spinTip" style={{ fontWeight: 'bold', fontSize: '16px' }}>You are being recommended a workation area.<br />Please wait a moment.</div>}
-      >
-        <div style={styles.innerContainer}>
-          <h1>Recommendation Workation Area</h1>
-          <p>{`${currentQuestion + 1} / ${questions.length}`}</p>
-          <div style={styles.progressBar}>
-            <div style={{ ...styles.progress, width: `${((currentQuestion + 1) / questions.length) * 100}%` }} />
-          </div>
-          <h2>{questions[currentQuestion].question}</h2>
-          <div>
-            {questions[currentQuestion].options.map((option, index) => (
-              <button 
-                key={index} 
-                onClick={() => handleOptionClick(index)} 
-                style={{
-                  ...styles.button,
-                  backgroundColor: selectedOption === index ? '#007bff' : '#f0f0f0', // 선택된 버튼 색상 변경
-                  color: selectedOption === index ? '#fff' : '#000' // 글자색 변경
-                }}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-          <div style={styles.navigationButtons}>
-            {currentQuestion > 0 && ( // 첫 질문에서 Previous 버튼 숨김
-              <button onClick={handlePrevious} style={styles.navButton}>
-                Previous
-              </button>
-            )}
-            {currentQuestion === questions.length - 1 ? (
-              <button onClick={handleNext} style={{ ...styles.navButton, backgroundColor: '#28a745' }}>Submit</button>
-            ) : (
-              <button onClick={handleNext} style={styles.navButton}>Next</button>
-            )}
-          </div>
+      <div className="survCnt">
+        <div className="header">
+          <span className="tit">Recommendation Workation Area</span>
+          <span className="exp">Do a test and get recommendations for areas that fit your tendencies (Select one)</span>
         </div>
-      </Spin>
+        <div className="content">
+          <Container>
+            <Box>
+              <div className="questionStep">
+                {step + 1} 
+                <span>/ {questions.length}</span>
+              </div>
+              {renderQuestion()}
+              <Box className="stepBtnCnt">
+                <button 
+                  className="backBtn" 
+                  onClick={handleBack} 
+                  disabled={step === 0} 
+                  onMouseOver={(e) => {
+                    step === 0
+                      ? (e.target.style.color = '#E1E4E9')
+                      : (e.target.style.color = '#000');
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.style.color = ''; // 마우스가 벗어났을 때 원래 색상으로 복귀
+                  }}
+                >
+                  Before
+                </button>
+                <button className="nextBtn" onClick={handleNext}>
+                  {step === questions.length - 1 ? "Submit" : "Next"}
+                </button>
+              </Box>
+            </Box>
+          </Container>
+        </div>
+      </div>
     </div>
   );
 }

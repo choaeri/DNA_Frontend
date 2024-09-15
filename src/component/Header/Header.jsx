@@ -54,7 +54,7 @@ export default function Header () {
 
   const dropdownMenu = (
     <Menu>
-      <Menu.Item>Recommended Areas</Menu.Item>
+      <Menu.Item onClick={() => navigate("/mypage/recommendAreas")}>Recommended Areas</Menu.Item>
       <Menu.Item onClick={() => navigate("/mypage/likes")}>Likes</Menu.Item>
       <Menu.Item onClick={() => navigate("/mypage/schedule")}>Schedule</Menu.Item>
       <Menu.Item onClick={() => navigate("/mypage/account")}>Account</Menu.Item>
