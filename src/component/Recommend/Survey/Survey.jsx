@@ -1,16 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Header from "../../Header/Header";
 import './Survey.css';
 import { Container, Box } from '@mui/material';
 import { questions } from "./questions";
 import { axiosInstance } from "../../../common/func/axios";
-import { notification } from "antd";
+import { notification, Spin } from "antd";
 import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 export default function Survey () {
   const [step, setStep] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // 로딩중
   const [dto, setDto] = useState({
     gender: null,
     age: null,
@@ -38,14 +39,14 @@ export default function Survey () {
       setStep(step + 1);
       setSelectedOption(null);
     } else {
+      setIsLoading(true);  // 로딩 시작
       try {
         await axiosInstance.post('/api/recommend/locations', dto);
         notification.open({
           message: "Thank you for completing the survey!",
           icon: <SmileOutlined style={{ color: "#108ee9" }} />,
         });
-        navigate("/mypage/recommend");
-
+        navigate("/mypage/recommendAreas");
       } catch (error) {
         const {
           data: { errorMessage },
@@ -55,6 +56,8 @@ export default function Survey () {
           message: errorMessage,
           icon: <FrownOutlined style={{ color: "#ff3333" }} />,
         });
+      } finally {
+        setIsLoading(false);  // 로딩 종료
       }
     }
   };
@@ -140,43 +143,49 @@ export default function Survey () {
   return (
     <div className="Survey">
       <Header />
-      <div className="survCnt">
-        <div className="header">
-          <span className="tit">Recommendation Workation Area</span>
-          <span className="exp">Do a test and get recommendations for areas that fit your tendencies (Select one)</span>
-        </div>
-        <div className="content">
-          <Container>
-            <Box>
-              <div className="questionStep">
-                {step + 1} 
-                <span>/ {questions.length}</span>
-              </div>
-              {renderQuestion()}
-              <Box className="stepBtnCnt">
-                <button 
-                  className="backBtn" 
-                  onClick={handleBack} 
-                  disabled={step === 0} 
-                  onMouseOver={(e) => {
-                    step === 0
-                      ? (e.target.style.color = '#E1E4E9')
-                      : (e.target.style.color = '#000');
-                  }}
-                  onMouseOut={(e) => {
-                    e.target.style.color = ''; // 마우스가 벗어났을 때 원래 색상으로 복귀
-                  }}
-                >
-                  Before
-                </button>
-                <button className="nextBtn" onClick={handleNext}>
-                  {step === questions.length - 1 ? "Submit" : "Next"}
-                </button>
+      <Spin 
+        spinning={isLoading} 
+        size="large" 
+        tip={<div className="spinTip" style={{ fontWeight: 'bold', fontSize: '16px' }}>You are being recommended a workation area.<br />Please wait a moment.</div>}
+      >
+        <div className="survCnt">
+          <div className="header">
+            <span className="tit">Recommendation Workation Area</span>
+            <span className="exp">Do a test and get recommendations for areas that fit your tendencies (Select one)</span>
+          </div>
+          <div className="content">
+            <Container>
+              <Box>
+                <div className="questionStep">
+                  {step + 1} 
+                  <span>/ {questions.length}</span>
+                </div>
+                {renderQuestion()}
+                <Box className="stepBtnCnt">
+                  <button 
+                    className="backBtn" 
+                    onClick={handleBack} 
+                    disabled={step === 0} 
+                    onMouseOver={(e) => {
+                      step === 0
+                        ? (e.target.style.color = '#E1E4E9')
+                        : (e.target.style.color = '#000');
+                    }}
+                    onMouseOut={(e) => {
+                      e.target.style.color = ''; // 마우스가 벗어났을 때 원래 색상으로 복귀
+                    }}
+                  >
+                    Before
+                  </button>
+                  <button className="nextBtn" onClick={handleNext}>
+                    {step === questions.length - 1 ? "Submit" : "Next"}
+                  </button>
+                </Box>
               </Box>
-            </Box>
-          </Container>
+            </Container>
+          </div>
         </div>
-      </div>
+      </Spin>
     </div>
   );
 };
