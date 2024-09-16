@@ -1,0 +1,34 @@
+.areaMarker {
+  display: flex;
+  width: 15rem;
+  height: 3rem;
+  padding: 10px;
+  z-index: 1;
+  align-items: center;
+  position: relative;
+  gap: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--Gray1, #000);
+  background: #FFF;
+  box-shadow: 0 1rem 2rem 0 rgba(0, 0, 0, 0.16);
+}
+
+.areaMarker svg {
+  position: absolute;
+  left: 2%;
+  top: -27%;
+  width: var(--Button-Size-button-size-sm, 32px);
+  height: var(--Button-Size-button-size-sm, 32px);
+}
+.areaMarker img {
+  width: 3rem;
+  height: 3rem;
+}
+.areaMarker .locationName {
+  color: var(--Gray-01, var(--Gray1, #000));
+  font-family: "Syne";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}

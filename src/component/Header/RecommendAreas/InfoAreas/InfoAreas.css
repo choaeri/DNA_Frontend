@@ -1,0 +1,61 @@
+.InfoAreas {
+  display: flex;
+  flex-direction: column;
+  width: 374px;
+  margin-top: 35px;
+}
+
+.InfoAreas .stepCnt {
+  display: flex;
+  align-items: center;
+}
+.InfoAreas .stepCnt span {
+  color: var(--Gray-5, #808388);
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+.InfoAreas .stepCnt svg {
+  width: var(--button-padding-gap-button-padding-md, 16px);
+  height: var(--button-padding-gap-button-padding-md, 16px);
+}
+
+.InfoAreas .infoCnt .tit {
+  display: flex;
+  align-items: center;
+}
+.InfoAreas .infoCnt .tit span {
+  color: var(--Gray1, #000);
+  font-family: "Syne";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+.InfoAreas .infoCnt .tit svg {
+  width: 28px;
+  height: 28px;
+  margin-left: 8px;
+}
+
+.InfoAreas .infoCnt .label {
+  display: flex;
+  padding: 7px 14px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 190px;
+  margin-top: 23px;
+  border-radius: 4px;
+  background: var(--Gray-2, #15181C);
+}
+.InfoAreas .infoCnt .label span {
+  color: var(--Gray-10, #FFF);
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%;
+}

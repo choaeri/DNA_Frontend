@@ -1,5 +1,4 @@
 import { Map } from 'react-kakao-maps-sdk';
-import LocationDetail from './LocationInfo/LocationInfo';
 import LocationMap from "./LocationMap/LocationMap";
 import "./DetailLocation.css";
 import { useContext, useEffect, useState } from 'react';
