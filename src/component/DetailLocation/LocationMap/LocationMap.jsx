@@ -23,17 +23,17 @@ export default function LocationMap () {
     setInfo(null);
     let data; 
     try {
-        if (category === "workation") { 
-            const res = await axiosInstance.get(`/api/public/locations/${detailInfo.locationId}/workation-offices/search`);
-            data = res.data; 
-        } else {
-            const res = await axiosInstance.get(`/api/public/locations/${detailInfo.locationId}/facilities/search?facilityType=${category}`);
-            data = res.data; 
-        }
+      if (category === "workation") { 
+        const res = await axiosInstance.get(`/api/public/locations/${detailInfo.locationId}/workation-offices/search`);
+        data = res.data; 
+      } else {
+        const res = await axiosInstance.get(`/api/public/locations/${detailInfo.locationId}/facilities/search?facilityType=${category}`);
+        data = res.data; 
+      }
         setMarkers(data); 
     } catch (err) {
-        errMessageCheck(err.response.data.errorMessage);
-        console.error("Error fetching locations:", err);
+      errMessageCheck(err.response.data.errorMessage);
+      console.error("Error fetching locations:", err);
     }
 };
 
@@ -59,7 +59,7 @@ export default function LocationMap () {
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path d="M17.3664 9.61381L10.4914 0.863807C10.433 0.789392 10.3583 0.729231 10.2732 0.687863C10.1881 0.646495 10.0947 0.625 10 0.625C9.9054 0.625 9.81199 0.646495 9.72686 0.687863C9.64174 0.729231 9.56712 0.789392 9.50864 0.863807L2.63364 9.61381C2.54722 9.72389 2.50024 9.85979 2.50024 9.99974C2.50024 10.1397 2.54722 10.2756 2.63364 10.3857L9.50864 19.1357C9.56712 19.2101 9.64174 19.2703 9.72686 19.3116C9.81199 19.353 9.9054 19.3745 10 19.3745C10.0947 19.3745 10.1881 19.353 10.2732 19.3116C10.3583 19.2703 10.433 19.2101 10.4914 19.1357L17.3664 10.3857C17.4529 10.2756 17.4998 10.1397 17.4998 9.99974C17.4998 9.85979 17.4529 9.72389 17.3664 9.61381ZM10.625 12.1544V3.05678L15.8922 9.7599L10.625 12.1544ZM9.37504 12.1544L4.10786 9.7599L9.37504 3.05678V12.1544ZM9.37504 13.5271V16.9427L5.20082 11.6302L9.37504 13.5271Z" fill="#1D2024"/>
           </svg>
-          <span className="item work">Workation</span>
+          <span className="item work">Workation Office</span>
         </button>  
         <button onClick={() => onClickCategoryBtn("restaurant")}> 
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

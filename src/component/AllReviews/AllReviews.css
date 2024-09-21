@@ -1,22 +1,66 @@
-.reviews-list {
+.AllReviews {
   display: flex;
   flex-direction: column;
+  padding: 120px 229px;
+  align-items: flex-start;
+  gap: 10px;
+  background: #FFFDED;
+}
+.AllReviews .tit {
+  color: var(--Gray1, #000);
+  font-family: "Syne";
+  font-size: 54px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: -1.62px;
+  margin-bottom: 60px;
+}
+
+.AllReviews .card {
+  display: flex;
+  flex-direction: column;
+  width: 313px;
+  padding: var(--button-padding-gap-button-padding-xl, 24px) var(--Button-Size-button-size-sm, 32px);
+  gap: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--Gray-7, #E1E4E9);
+}
+.AllReviews .card .info {
+  display: flex;
+}
+.AllReviews .card .info span {
+  color: var(--Gray-5, #808388);
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+
+.AllReviews .card .content {
+  overflow: hidden;
+  color: var(--Gray-4, #4F5257);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  margin-bottom: 12px;
+}
+
+.AllReviews .card .userCnt {
+  display: flex;
   align-items: center;
 }
-
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3개의 열로 구성 */
-  gap: 20px; /* 카드 간의 간격 */
-  max-width: 1200px; /* 최대 너비 설정 */
-  width: 100%; /* 전체 너비 사용 */
+.AllReviews .card .userCnt .userName {
+  color: var(--Gray-5, #808388);
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  margin-left: 6px;
 }
-
-.review-card {
-  border: 1px solid #ccc; /* 카드 테두리 */
-  border-radius: 5px; /* 모서리 둥글게 */
-  padding: 15px; /* 내부 여백 */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-  background-color: #fff; /* 배경색 */
-}
-  
