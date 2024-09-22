@@ -1,3 +1,7 @@
+.LocationInfo {
+  width: 295px;
+}
+
 .LocationInfo .header,
 .LocationInfo .detail .item {
   display: flex;
@@ -18,11 +22,6 @@
   font-weight: 400;
   line-height: 120%;
   letter-spacing: -1.62px;
-}
-.LocationInfo .title svg {
-  width: 28px;
-  height: 28px;
-  margin-left: 12px;
 }
 
 .LocationInfo .detail {

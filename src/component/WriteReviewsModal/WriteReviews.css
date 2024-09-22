@@ -145,9 +145,8 @@
     align-items: center;
     gap: var(--button-padding-gap-button-gap-lg, 4px);
     border-radius: var(--Border-Radius-rounded-full, 9999px);
-    border: none;
-    background: var(--Fill-fill-disabled, rgba(22, 88, 255, 0.03));
-    color: var(--Foreground-fg-disabled, rgba(11, 27, 55, 0.18));
+    background: var(--Gray1, #000);
+    color: #fff;
     font-family: "Pretendard Variable";
     font-size: 14px;
     font-style: normal;

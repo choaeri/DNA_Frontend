@@ -59,3 +59,36 @@
   font-weight: 500;
   line-height: 160%;
 }
+
+.InfoAreas .infoCnt .keyword {
+  display: flex;
+  margin-top: 14px;
+}
+.InfoAreas .infoCnt .keyword span {
+  display: flex;
+  padding: 1px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-right: 0.5rem;
+  border-radius: 2px;
+  background: var(--Gray-8, #ECEEF4);
+  color: var(--Gray-5, #808388);
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+
+.InfoAreas .infoCnt .desp {
+  margin-top: 1rem;
+}
+.InfoAreas .infoCnt .desp span {
+  color: var(--Gray-3, #292C30);
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}

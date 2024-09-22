@@ -24,10 +24,6 @@ export default function LocationInfo() {
   
         <div className="title">
           <span>{detailInfo.locationName}</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29" fill="none">
-            <path d="M5 14.2102L22.3482 14.2102" stroke="black" strokeWidth="1.5"/>
-            <path d="M15.2898 6.5L23.0001 14.2103L15.2898 21.9206" stroke="black" strokeWidth="1.5"/>
-          </svg>
         </div>
   
         <div className="detail">
@@ -58,9 +54,9 @@ export default function LocationInfo() {
         </div>
   
         <div className="keyword">
-          <span>quiet</span>
-          <span>surfing</span>
-          <span>quiet</span>
+          {detailInfo.keyword.split(', ').map((obj, idx) => {
+            return <span key={idx}>{obj}</span>
+          })}
         </div>
         <Reviews />
         <AddSchedule />

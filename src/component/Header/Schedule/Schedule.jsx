@@ -5,6 +5,7 @@ import "./Schedule.css";
 import { AppContext } from "../../../context/AppContext";
 import WriteReviews from "../../WriteReviewsModal/WriteReviews";
 import { Modal } from "@mui/material";
+import { Button } from "antd";
 
 export default function Schedule() {
   const { schedules, setSchedules, setWriteReviewsModal, errMessageCheck } = useContext(AppContext);
@@ -80,7 +81,7 @@ export default function Schedule() {
                 {schedule.startDate} - {schedule.endDate}
               </span>
             </div>
-            <button className="wrtBtn" disabled={schedule.hasReview} onClick={() => handleWriteReviewClick(schedule)}>Write a review</button>
+            <Button className="wrtBtn" disabled={schedule.hasReview} onClick={() => handleWriteReviewClick(schedule)}>Write a review</Button>
             <svg className="deleteButton" onClick={() => handleDeleteClick(schedule.scheduleId, schedule.locationId)} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
               <path d="M10.3433 10.6562L21.657 21.97" stroke="#B6B9BE" strokeWidth="1.5"/>
               <path d="M21.6567 10.6562L10.343 21.97" stroke="#B6B9BE" strokeWidth="1.5"/>

@@ -92,7 +92,7 @@ export default function WriteReviews(props) { // scheduleId를 props로 받음
             </div>
           </div>
           <div className="submitBtn">
-            <Button className="wrtBtn" type="primary" onClick={handleSubmit}>
+            <Button className="wrtBtn" onClick={handleSubmit}>
               Write a review
             </Button>
           </div>
