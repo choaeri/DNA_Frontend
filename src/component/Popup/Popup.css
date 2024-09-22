@@ -10,29 +10,25 @@
 }
 
 .popupModal {
-	position: relative;
+  position: relative;
   width: 35%;
   height: 51%;
-	background-color: #fff;
-	overflow-x: hidden;
-	border-radius: 1rem;
+  background-color: #fff;
+  overflow: hidden; /* Prevent scrolling on the modal */
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
-	/* 스크롤바 삭제 */
-	-ms-overflow-style: none; /* IE and Edge */
-	scrollbar-width: none; /* Firefox */
-}
-.popupModal::-webkit-scrollbar {
-	display: none; /* Chrome, Safari, Opera*/
 }
 
 .popupHeader {
   display: flex;
   padding: 16px 20px;
   align-items: center;
-  display: flex;
   justify-content: center;
   border-radius: 16px 16px 0px 0px;
+  position: sticky; /* Make header sticky */
+  top: 0; /* Stick to the top */
+  z-index: 1; /* Ensure it stays above other content */
 }
 .popupHeader span {
   color: var(--Gray1, #000);
@@ -55,10 +51,17 @@
 .popupCnt {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: calc(100% - 100px); 
   padding: 0px 40px 36px 40px;
   align-items: flex-start;
   gap: 28px;
+  overflow-y: auto;
+  /* 스크롤바 삭제 */
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+.popupCnt::-webkit-scrollbar {
+	display: none; /* Chrome, Safari, Opera*/
 }
 
 .popupCnt .expCnt,
@@ -68,7 +71,8 @@
 
 .popupCnt .schedCnt {
   display: flex;
-  width: 100%;
+  width: 93%;
+  height: auto;
   padding: var(--Input-Radius-input-radius-lg, 12px);
   flex-direction: column;
   align-items: center;
@@ -79,13 +83,17 @@
 }
 .popupCnt .schedCnt .info {
   display: flex;
-  flex-direction: column;
 }
 .popupCnt .schedCnt .info .locationThumbnail {
   width: 50px; /* 원하는 너비 */
   height: 50px; /* 원하는 높이 */
   object-fit: cover; /* 비율 유지 */
   border-radius: 5px; /* 모서리 둥글게 */
+}
+.popupCnt .schedCnt .info .details {
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
 }
 .popupCnt .schedCnt .info .lcnName {
   color: var(--Gray1, #000);
@@ -138,10 +146,14 @@
   background: var(--Gray-7, #E1E4E9);
 }
 
-.btnCnt {
+.popupModal .btnCnt {
   padding: 1rem;
+  position: sticky;
+  bottom: 0;
+  background: #fff;
+  z-index: 1;
 }
-.btnCnt .writeBtn {
+.popupModal .btnCnt .writeBtn {
   display: flex;
   height: var(--Button-Size-button-size-lg, 48px);
   padding: 0px var(--button-padding-gap-button-padding-xl, 24px);
@@ -152,7 +164,7 @@
   background: var(--Gray1, #000);
   margin-left: auto;
 }
-.btnCnt .writeBtn span {
+.popupModal .btnCnt .writeBtn span {
   color: var(--Foreground-fg-inverse, #FFF);
   font-family: "Pretendard Variable";
   font-size: 14px;

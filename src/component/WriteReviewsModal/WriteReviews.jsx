@@ -6,7 +6,7 @@ import "./WriteReviews.css";
 import { Modal } from "@mui/material";
 
 export default function WriteReviews(props) { // scheduleId를 props로 받음
-  const { schedules, setSchedules, writeReviewsModal, setWriteReviewsModal, errMessageCheck } = useContext(AppContext);
+  const { writeReviewsModal, setWriteReviewsModal, errMessageCheck } = useContext(AppContext);
   const [rating, setRating] = useState(0);
   const [content, setContent] = useState("");
 
@@ -27,21 +27,7 @@ export default function WriteReviews(props) { // scheduleId를 props로 받음
   //   }
   // };
 
-  const confirmDelete = async () => {
-    try {
-      await axiosInstance.delete(`/api/workation-schedules/${props.selectedSchedule.scheduleId}`, {
-        params: {
-            locationId: props.selectedSchedule.scheduleId 
-        }
-    });
-      setSchedules(schedules.filter(schedule => schedule.scheduleId !== props.selectedSchedule.scheduleId));
-    } catch (err) {
-      errMessageCheck(err.response.data.errorMessage);
-      console.error("Error deleting schedule:", err);
-    }
-  };
-
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     if (!rating) {
       notification.error({ message: '별점 내용을 입력해주세요.' });
       return;
@@ -62,7 +48,6 @@ export default function WriteReviews(props) { // scheduleId를 props로 받음
       setWriteReviewsModal(false);
       setRating(0); // 별점 초기화
       setContent(""); // 내용 초기화
-      confirmDelete();
       window.location.reload();
     } catch (error) {
       errMessageCheck(error.response.data.errorMessage);

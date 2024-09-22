@@ -13,15 +13,15 @@ export default function LoginPopup () {
       <Modal 
         open={isLoginPopup} onClose={() => setIsLoginPopup(false)}
       >
-        <section className="popupSection">
-          <div className="popupModal">
-            <div className="popupHeader">
+        <section className="loginPopupSection">
+          <div className="loginPopupModal">
+            <div className="loginPopupHeader">
               <svg className="closeBtn" onClick={() => setIsLoginPopup(false)} xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                 <path d="M12.929 13.0713L27.0711 27.2134" stroke="black" strokeWidth="2"/>
                 <path d="M27.071 13.0713L12.9289 27.2134" stroke="black" strokeWidth="2"/>
               </svg>
             </div>
-            <div className="popupCnt">
+            <div className="loginPopupCnt">
               <div className="expCnt">
                 <div className="icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

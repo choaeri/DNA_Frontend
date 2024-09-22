@@ -25,6 +25,7 @@ const AppProvider = ({ children }) => {
 	const [detailInfo, setDetailInfo] = useState(null);
 	const [isBookmarked, setIsBookmarked] = useState({});
   const [schedules, setSchedules] = useState([]);
+  const [disabled, setDisabled] = useState(false);
 
   const [markers, setMarkers] = useState(null);
   const [info, setInfo] = useState(null);
@@ -110,6 +111,7 @@ const AppProvider = ({ children }) => {
 				detailInfo,
 				isBookmarked,
 				schedules,
+				disabled,
 
 				markers,
 				info,
@@ -144,6 +146,7 @@ const AppProvider = ({ children }) => {
 				setDetailInfo,
 				setIsBookmarked,
 				setSchedules,
+				setDisabled,
 
 				setMarkers,
 				setInfo,
