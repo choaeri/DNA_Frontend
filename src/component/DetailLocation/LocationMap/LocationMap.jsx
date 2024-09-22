@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { AppContext } from "../../../context/AppContext"
 import "./LocationMap.css";
-import { MapMarker } from "react-kakao-maps-sdk";
+import { MapMarker, MarkerClusterer } from "react-kakao-maps-sdk";
 import { axiosInstance } from "../../../common/func/axios";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import WorkationDetail from "./WorkationDetail/WorkationDetail";
@@ -39,7 +39,13 @@ export default function LocationMap () {
 
   const onClickMarker = async (marker) => {
     setInfo(marker);
-    const apiUrl = `/api/facilities/${marker.facilityId}/bookmark`;
+
+    let apiUrl;
+    if (marker.type == "Workation Office") {
+      apiUrl = `/api/workation-offices/${marker.facilityId}/bookmark`;
+    } else {
+      apiUrl = `/api/facilities/${marker.facilityId}/bookmark`;
+    }
     try {
       const response = await axiosInstance.get(apiUrl);
       const data = response.data;
@@ -97,12 +103,12 @@ export default function LocationMap () {
                   <div>
                     { isBookmarked && isBookmarked[info.facilityId] ? (
                       <HeartFilled 
-                        onClick={(e) => onClickLike(e, info.facilityId)} 
+                        onClick={(e) => onClickLike(e, info.facilityId, info.type)} 
                         style={{ color: 'red', cursor: 'pointer' }} 
                       /> 
                       ) : (
                       <HeartOutlined 
-                        onClick={(e) => onClickLike(e, info.facilityId)} 
+                        onClick={(e) => onClickLike(e, info.facilityId, info.type)} 
                         style={{ color: 'black', cursor: 'pointer' }} 
                       />
                       )
@@ -128,14 +134,15 @@ export default function LocationMap () {
                       <span className="type">{categoryMatch[info.type].type}</span>
                       <div className="likeCnt">
                         <span className="tit">{info.facilityName}</span>
+
                           { isBookmarked && isBookmarked[info.facilityId] ? (
                             <HeartFilled 
-                              onClick={(e) => onClickLike(e, info.facilityId)} 
+                              onClick={(e) => onClickLike(e, info.facilityId, info.type)} 
                               style={{ color: 'red', cursor: 'pointer', marginLeft: "auto" }} 
                             /> 
                             ) : (
                             <HeartOutlined 
-                              onClick={(e) => onClickLike(e, info.facilityId)} 
+                              onClick={(e) => onClickLike(e, info.facilityId, info.type)} 
                               style={{ color: 'black', cursor: 'pointer', marginLeft: "auto" }} 
                             />
                             )
