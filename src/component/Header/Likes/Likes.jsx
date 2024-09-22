@@ -10,11 +10,13 @@ import WorkationDetail from "../../DetailLocation/LocationMap/WorkationDetail/Wo
 
 export default function Likes () {
   const { isBookmarked, setIsBookmarked, 
+          isBookmarkedOffice, setIsBookmarkedOffice,
           setWorkationModal,
           onClickLike, 
           errMessageCheck
         } = useContext(AppContext);
   const [bookmarkList, setBookmarkList] = useState();
+  const [bookmarkOfficeList, setBookmarkOfficeList] = useState();
   const { isLoggedIn } = useLocalStorage();
           
   const newIsBookmarked = {};
@@ -24,6 +26,20 @@ export default function Likes () {
       const response = await axiosInstance.get(apiUrl);
       const data = response.data;
       newIsBookmarked[facilityId] = data.isBookmarked;
+    } catch (error) {
+      errMessageCheck(error.response.data.errorMessage);
+      console.log(error);
+    };
+  };
+
+  const newIsBookmarkedOffice = {};
+  const fetchBookmarkOffice = async (facilityId) => {
+    const apiUrl = `/api/workation-offices/${facilityId}/bookmark`;
+    try {
+      const response = await axiosInstance.get(apiUrl);
+      const data = response.data;
+      console.log(data);
+      newIsBookmarkedOffice[facilityId] = data.isBookmarked;
     } catch (error) {
       errMessageCheck(error.response.data.errorMessage);
       console.log(error);
@@ -55,7 +71,34 @@ export default function Likes () {
         console.log(error);
       };
     };
+  
+    const fetchBookmarkOfficeList = async () => {
+      const apiUrl = `/api/workation-offices/bookmark`;
+      try {
+        const res = await axiosInstance.get(apiUrl);
+        const data = res.data;
+        if (Array.isArray(data)) {
+          const groupedBookmarks = data.reduce((acc, bookmark) => {
+            const location = bookmark.locationName;
+            if (!acc[location]) {
+              acc[location] = [];
+            }
+            acc[location].push(bookmark);
+            return acc;
+          }, {});          
+          setBookmarkOfficeList(groupedBookmarks);
+          
+          await Promise.all(data.map(item => fetchBookmarkOffice(item.officeId)));
+          setIsBookmarkedOffice(newIsBookmarkedOffice);
+        };
+      } catch (error) {
+        errMessageCheck(error.response.data.errorMessage);
+        console.log(error);
+      };
+    };
+
     fetchBookmarkList();
+    fetchBookmarkOfficeList();
   }, []);
 
   return (

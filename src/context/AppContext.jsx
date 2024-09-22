@@ -22,6 +22,7 @@ const AppProvider = ({ children }) => {
 	const [selectLocationName, setSelectLocationName] = useState('');
 	const [detailInfo, setDetailInfo] = useState(null);
 	const [isBookmarked, setIsBookmarked] = useState({});
+	const [isBookmarkedOffice, setIsBookmarkedOffice] = useState({});
 	const [schedules, setSchedules] = useState([]);
 	const [disabled, setDisabled] = useState(false);
 
@@ -49,9 +50,10 @@ const AppProvider = ({ children }) => {
 	};
 
 	const onClickLike = async (e, facilityId, type) => {
+		console.log(type);
 		const currentIsBookmarked = isBookmarked[facilityId];
 		let apiUrl;
-		if ((type = 'Workation Office')) {
+		if (type == 'Workation Office') {
 			apiUrl = `/api/workation-offices/${facilityId}/bookmark`;
 		} else {
 			apiUrl = `/api/facilities/${facilityId}/bookmark`;
