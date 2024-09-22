@@ -10,7 +10,6 @@ import WorkationDetail from "../../DetailLocation/LocationMap/WorkationDetail/Wo
 
 export default function Likes () {
   const { isBookmarked, setIsBookmarked, 
-          isBookmarkedOffice, setIsBookmarkedOffice,
           setWorkationModal,
           onClickLike, 
           errMessageCheck
@@ -89,7 +88,7 @@ export default function Likes () {
           setBookmarkOfficeList(groupedBookmarks);
           
           await Promise.all(data.map(item => fetchBookmarkOffice(item.officeId)));
-          setIsBookmarkedOffice(newIsBookmarkedOffice);
+          setIsBookmarked(newIsBookmarkedOffice);
         };
       } catch (error) {
         errMessageCheck(error.response.data.errorMessage);
