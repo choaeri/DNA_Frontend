@@ -109,6 +109,7 @@ const AppProvider = ({ children }) => {
 				selectLocationName,
 				detailInfo,
 				isBookmarked,
+				schedules,
 
 				markers,
 				info,
@@ -142,6 +143,7 @@ const AppProvider = ({ children }) => {
 				setSelectLocationName,
 				setDetailInfo,
 				setIsBookmarked,
+				setSchedules,
 
 				setMarkers,
 				setInfo,

@@ -7,8 +7,7 @@ import WriteReviews from "../../WriteReviewsModal/WriteReviews";
 import { Modal } from "@mui/material";
 
 export default function Schedule() {
-  const [schedules, setSchedules] = useState([]);
-  const { setWriteReviewsModal, errMessageCheck } = useContext(AppContext);
+  const { schedules, setSchedules, setWriteReviewsModal, errMessageCheck } = useContext(AppContext);
   const [confirmDeleteModal, setConfirmDeleteModal] = useState(false);
   const [deleteScheduleId, setDeleteScheduleId] = useState(null);
   const [deleteLocationId, setDeleteLocationId] = useState(null);
