@@ -1,3 +1,4 @@
+import AddSchedule from '../../../DetailLocation/LocationInfo/AddSchedule/AddSchedule';
 import './InfoAreas.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -111,9 +112,7 @@ export default function InfoAreas(props) {
 						<div className="desp">
 							<span>{currentArea.description}</span>
 						</div>
-						<button className="schdBtn">
-							<span>Add to Schedule</span>
-						</button>
+						<AddSchedule />
 					</div>
 				</div>
 			) : null}
