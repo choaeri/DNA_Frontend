@@ -17,6 +17,7 @@ export default function OpenChat() {
   const [username, setUsername] = useState("");
   const [participantCount, setParticipantCount] = useState(0);
   const [chatRoomMessages, setChatRoomMessages] = useState([]);
+  const connectionEstablished = useRef(false);
 
   const messagesEndRef = useRef(null);
   const currentSubscription = useRef(null);
@@ -112,6 +113,8 @@ export default function OpenChat() {
       setStompClient(stompClientInstance);
 
       stompClientInstance.connect({}, () => {
+        connectionEstablished.current = true;
+
         if (currentSubscription.current) {
           currentSubscription.current.unsubscribe();
         }
@@ -126,10 +129,8 @@ export default function OpenChat() {
               minute: "2-digit",
             });
 
-            // 참여 인원 수 업데이트
             setParticipantCount(newMessage.participantCount);
 
-            // 메시지 상태 업데이트 (JOIN과 LEAVE 타입 제외)
             if (newMessage.type !== "JOIN" && newMessage.type !== "LEAVE") {
               setMessages((prevMessages) => [
                 ...prevMessages,
@@ -141,23 +142,24 @@ export default function OpenChat() {
 
         currentSubscription.current = subscription;
 
-        // 입장 메시지를 전송하는 함수 호출
+        // 연결이 완전히 설정된 후 입장 메시지 전송
         sendJoinMessage(stompClientInstance);
       });
 
-      // 페이지 새로고침 시 퇴장 메시지 전송
       const handleBeforeUnload = () => {
-        sendLeaveMessage(stompClientInstance);
+        if (connectionEstablished.current) {
+          sendLeaveMessage(stompClientInstance);
+        }
       };
 
       window.addEventListener("beforeunload", handleBeforeUnload);
 
       return () => {
-        if (stompClientInstance) {
-          // 퇴장 메시지 전송
+        if (stompClientInstance && connectionEstablished.current) {
           sendLeaveMessage(stompClientInstance);
           stompClientInstance.disconnect(() => {
-            setMessages([]); // 메시지 상태 초기화
+            setMessages([]);
+            connectionEstablished.current = false;
           });
         }
         window.removeEventListener("beforeunload", handleBeforeUnload);
