@@ -17,23 +17,31 @@
   margin-bottom: 60px;
 }
 
-.AllReviews .card {
+.AllReviews .cont {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+.AllReviews .cont .card {
   display: flex;
   flex-direction: column;
-  width: 313px;
+  width: 17rem;
   padding: var(--button-padding-gap-button-padding-xl, 24px) var(--Button-Size-button-size-sm, 32px);
   gap: 10px;
   border-radius: 4px;
   border: 1px solid var(--Gray-7, #E1E4E9);
 }
-.AllReviews .card .info {
+.AllReviews .cont .card .info {
   display: flex;
   align-items: center;
 }
-.AllReviews .card .info .filledStar {
+.AllReviews .cont .card .info .filledStar {
   color: #000;
 }
-.AllReviews .card .info span {
+.AllReviews .cont .card .info span {
   color: var(--Gray-5, #808388);
   font-family: "Pretendard Variable";
   font-size: 12px;
@@ -43,11 +51,11 @@
   margin-left: 1px;
 }
 
-.AllReviews .card .content {
+.AllReviews .cont .card .content {
   overflow: hidden;
   color: var(--Gray-4, #4F5257);
   text-overflow: ellipsis;
-  white-space: nowrap;
+  word-wrap: break-word;
   font-family: "Pretendard Variable";
   font-size: 14px;
   font-style: normal;
@@ -56,11 +64,11 @@
   margin-bottom: 12px;
 }
 
-.AllReviews .card .userCnt {
+.AllReviews .cont .card .userCnt {
   display: flex;
   align-items: center;
 }
-.AllReviews .card .userCnt .userName {
+.AllReviews .cont .card .userCnt .userName {
   color: var(--Gray-5, #808388);
   font-family: "Pretendard Variable";
   font-size: 12px;

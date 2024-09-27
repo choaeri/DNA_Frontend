@@ -177,7 +177,7 @@ export default function OpenChat() {
     <div className="chat" style={isLoggedIn ? { height: "248px" } : { height: "fit-content" }}>
       <div className="header">
         Open Talk
-        {isLoggedIn ? <span className="participantCount">({participantCount} people)</span> : null}
+        {isLoggedIn ? <span className="participantCount">{participantCount} people</span> : null}
       </div>
       { isLoggedIn ? 
         <>

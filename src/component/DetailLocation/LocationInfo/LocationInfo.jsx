@@ -5,6 +5,7 @@ import OpenChat from "./OpenChat/OpenChat";
 import { useNavigate } from "react-router-dom";
 import AddSchedule from "./AddSchedule/AddSchedule";
 import Reviews from "./Reviews/Reviews";
+import { locationMatch } from "../../../common/func/match";
 
 export default function LocationInfo() {
   const { detailInfo } = useContext(AppContext);
@@ -23,7 +24,7 @@ export default function LocationInfo() {
         </div>
   
         <div className="title">
-          <span>{detailInfo.locationName}</span>
+          <span>{locationMatch[detailInfo.locationName]}</span>
         </div>
   
         <div className="detail">

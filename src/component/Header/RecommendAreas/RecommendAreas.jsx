@@ -64,7 +64,7 @@ export default function RecommendAreas () {
                   <Map
                     className="map"
                     center={centerMarker}
-                    level={11}
+                    level={12}
                   >
                     <MapAreas 
                       step={step}

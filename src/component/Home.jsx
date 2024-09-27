@@ -13,7 +13,7 @@ import LoginPopup from './LoginPopup/LoginPopup';
 
 
 export default function Home() {
-  const { setLocations, viewMode, setViewMode, errMessageCheck, isLoginPopup, setIsLoginPopup } = useContext(AppContext);
+  const { setLocations, setFacilityCount, viewMode, setViewMode, errMessageCheck, isLoginPopup, setIsLoginPopup } = useContext(AppContext);
 
   useEffect(() => {
   // 지역 조회 API 호출
@@ -32,7 +32,19 @@ export default function Home() {
       console.error("Error fetching locations:", err);
     }
   };
+
+  // 시설 수 API 호출
+  const fetchFacilitiesCount = async () => {
+    try {
+      const res = await axiosInstance.get(`/api/public/locations/facilities/count`);
+      setFacilityCount(res.data);
+    } catch (err) {
+      errMessageCheck(err.response.data.errorMessage);
+      console.error("Error fetching locations:", err);
+    }
+  };
   fetchLocations();
+  fetchFacilitiesCount();
   }, []); 
 
   return (

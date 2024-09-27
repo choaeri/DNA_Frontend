@@ -135,7 +135,7 @@ export default function Login() {
               <Input.Password placeholder="Password" value={loginPassword} onChange={onPasswordHandler} autoComplete="new-password"/>
             </Form.Item>
             <Form.Item {...tailLayout}>
-              <Button className="accountBtn basic" onClick={onClickLoginBtn} htmlType="submit" style={{ width: "100%" }}>
+              <Button className="accountBtn basic" onClick={onClickLoginBtn} style={{ width: "100%" }}>
                 <span>Log in</span>
               </Button>
             </Form.Item>

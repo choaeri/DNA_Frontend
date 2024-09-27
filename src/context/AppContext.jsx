@@ -23,11 +23,9 @@ const AppProvider = ({ children }) => {
 	const [selectLocationName, setSelectLocationName] = useState('');
 	const [detailInfo, setDetailInfo] = useState(null);
 	const [isBookmarked, setIsBookmarked] = useState({});
+	const [isWorkationBookmarked, setIsWorkationBookmarked] = useState();
 	const [schedules, setSchedules] = useState([]);
 	const [disabled, setDisabled] = useState(false);
-
-	const [markers, setMarkers] = useState(null);
-	const [info, setInfo] = useState(null);
 
 	const [isPopup, setIsPopup] = useState(false);
 	const [isLoginPopup, setIsLoginPopup] = useState(false);
@@ -50,31 +48,51 @@ const AppProvider = ({ children }) => {
 	};
 
 	const onClickLike = async (e, facilityId, type) => {
-		console.log(type);
-		const currentIsBookmarked = isBookmarked[facilityId];
 		let apiUrl;
+		let method;
+		let currentIsBookmarked;
 		if (type == 'Workation Office') {
 			apiUrl = `/api/workation-offices/${facilityId}/bookmark`;
+			method = isWorkationBookmarked[facilityId] ? 'DELETE' : 'POST';
+			currentIsBookmarked = isWorkationBookmarked[facilityId];
+			try {
+				setIsWorkationBookmarked((prev) => ({
+					...prev,
+					[facilityId]: !currentIsBookmarked,
+				}));
+				await axiosInstance({
+					url: apiUrl,
+					method,
+				});
+			} catch (error) {
+				setIsWorkationBookmarked((prev) => ({
+					...prev,
+					[facilityId]: currentIsBookmarked, // 원래 상태로 되돌리기
+				}));
+				errMessageCheck(error.response.data.errorMessage);
+				console.log(error);
+			}
 		} else {
 			apiUrl = `/api/facilities/${facilityId}/bookmark`;
-		}
-		const method = isBookmarked[facilityId] ? 'DELETE' : 'POST';
-		try {
-			setIsBookmarked((prev) => ({
-				...prev,
-				[facilityId]: !currentIsBookmarked,
-			}));
-			await axiosInstance({
-				url: apiUrl,
-				method,
-			});
-		} catch (error) {
-			setIsBookmarked((prev) => ({
-				...prev,
-				[facilityId]: currentIsBookmarked, // 원래 상태로 되돌리기
-			}));
-			errMessageCheck(error.response.data.errorMessage);
-			console.log(error);
+			method = isBookmarked[facilityId] ? 'DELETE' : 'POST';
+			currentIsBookmarked = isBookmarked[facilityId];
+			try {
+				setIsBookmarked((prev) => ({
+					...prev,
+					[facilityId]: !currentIsBookmarked,
+				}));
+				await axiosInstance({
+					url: apiUrl,
+					method,
+				});
+			} catch (error) {
+				setIsBookmarked((prev) => ({
+					...prev,
+					[facilityId]: currentIsBookmarked, // 원래 상태로 되돌리기
+				}));
+				errMessageCheck(error.response.data.errorMessage);
+				console.log(error);
+			}
 		}
 	};
 
@@ -116,11 +134,9 @@ const AppProvider = ({ children }) => {
 				selectLocationName,
 				detailInfo,
 				isBookmarked,
+				isWorkationBookmarked,
 				schedules,
 				disabled,
-
-				markers,
-				info,
 
 				isPopup,
 				isLoginPopup,
@@ -152,11 +168,9 @@ const AppProvider = ({ children }) => {
 				setSelectLocationName,
 				setDetailInfo,
 				setIsBookmarked,
+				setIsWorkationBookmarked,
 				setSchedules,
 				setDisabled,
-
-				setMarkers,
-				setInfo,
 
 				setIsPopup,
 				setIsLoginPopup,

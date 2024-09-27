@@ -57,7 +57,6 @@ export default function Header () {
       <Menu.Item onClick={() => navigate("/mypage/recommendAreas")}>Recommended Areas</Menu.Item>
       <Menu.Item onClick={() => navigate("/mypage/likes")}>Likes</Menu.Item>
       <Menu.Item onClick={() => navigate("/mypage/schedule")}>Schedule</Menu.Item>
-      <Menu.Item onClick={() => navigate("/mypage/account")}>Account</Menu.Item>
       <Menu.Item onClick={onClickLogoutButton}>Logout</Menu.Item>
     </Menu>
   );

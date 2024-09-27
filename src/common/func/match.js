@@ -1,7 +1,22 @@
+const locationMatch = {
+  'sokcho': 'Sokcho',
+  'chuncheon': 'Chuncheon',
+  'yangyang': 'Yangyang',
+  'gangneung': 'Gangneung',
+  'yeongwol': 'Yeongwol',
+  'samcheok': 'Samcheok',
+  'hoengseong': 'Hoengseong',
+  'jeongseon': 'Jeongseon',
+  'hongcheon': 'Hongcheon',
+  'inje': 'Inje',
+  'goseong': 'Goseong',
+  'pyeongchang': 'Pyeongchang'
+}
+
 const categoryMatch = {
-  'workation': {
+  'Workation Office': {
     type: 'Workation Office',
-    img: "/img/restaurant.png",
+    img: "/img/workation.png",
   },
   'restaurant': {
     type: 'Restaurant',
@@ -13,8 +28,8 @@ const categoryMatch = {
   },
   'accommodation': {
     type: 'Accommodation',
-    img: "/img/cafe.png"
+    img: "/img/accommodation.png"
   }
 };
 
-export { categoryMatch };
+export { categoryMatch, locationMatch };

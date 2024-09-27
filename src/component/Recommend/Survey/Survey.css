@@ -90,6 +90,19 @@
   border: 1px solid var(--Gray-7, #E1E4E9);
   background: var(--Gray-10, #FFF);
 }
+.Survey .survCnt .content .quesCnt input {
+  display: flex;
+  width: 160px;
+  flex-direction: column;
+  align-items: flex-start;
+  border: none;
+  border-bottom: #B6B9BE;
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
 .Survey .survCnt .content .stepBtnCnt {
   display: inline-flex;
   justify-content: center;

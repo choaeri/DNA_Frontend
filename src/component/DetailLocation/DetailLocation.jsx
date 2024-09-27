@@ -13,6 +13,7 @@ export default function DetailLocation () {
     lat: 0,
     lng: 0
   });
+  const [count, setCount] = useState();
   const {locationId} = useParams();
 
   useEffect(() => {
@@ -30,7 +31,18 @@ export default function DetailLocation () {
         console.error("Error fetching locations:", err);
       }
     };
+    
+    const fetchFacilitiesCount = async () => {
+      try {
+        const res = await axiosInstance.get(`/api/public/locations/${locationId}/facilities/count`);
+        setCount(res.data);
+      } catch (err) {
+        errMessageCheck(err.response.data.errorMessage);
+        console.error("Error fetching locations:", err);
+      }
+    };
     fetchLocations();
+    fetchFacilitiesCount();
   }, []);
 
   return (

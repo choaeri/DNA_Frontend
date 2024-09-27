@@ -29,11 +29,59 @@
   height: var(--button-padding-gap-button-padding-md, 16px);
 }
 
-.reviewItem {
-  border-bottom: 1px solid #e0e0e0; /* 구분선 색상 */
-  padding: 10px 0; /* 여백 추가 */
+.Reviews .reviewStats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+.Reviews .reviewStats svg {
+  width: 1rem;
+  height: 1rem;
+}
+.Reviews .reviewStats span {
+  font-family: "Pretendard Variable";
+  font-style: normal;
+  line-height: 160%;
+}
+.Reviews .reviewStats .avg {
+  color: var(--Gray1, #000);
+  font-size: 18px;
+  font-weight: 600;
+}
+.Reviews .reviewStats .count {
+  color: var(--Gray-4, #4F5257);
+  text-align: right;
+  font-size: 14px;
+  font-weight: 400;
 }
 
+.Reviews .reviewList {
+  display: flex;
+  padding-right: 4px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.Reviews .reviewList .reviewItem {
+  display: flex;
+  padding: var(--Input-Radius-input-radius-lg, 12px) 0px;
+  flex-direction: column;
+  width: 100%;
+  border-bottom: 1px solid var(--Gray-8, #ECEEF4);
+}
+.Reviews .reviewList .reviewItem .info {
+  display: flex;
+}
+.Reviews .reviewList .reviewItem .info .reviewRating {
+  margin-right: 6px;
+}
+.Reviews .reviewList .reviewItem .info .reviewRating svg {
+  width: 10px;
+  height: 10px;
+}
+.Reviews .reviewList .reviewItem .info .reviewUsername {
+  margin-left: auto;
+}
 .reviewItem:last-child {
   border-bottom: none; /* 마지막 아이템은 선을 없앰 */
 }

@@ -55,7 +55,7 @@
 .modalCnt .content {
     display: flex;
     flex-direction: column;
-    padding: 40px 122px 156px;
+    padding: 40px 122px 70px;
 }
 
 .modalButton:hover {

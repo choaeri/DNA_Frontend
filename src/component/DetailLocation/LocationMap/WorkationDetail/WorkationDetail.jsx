@@ -6,13 +6,14 @@ import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import { axiosInstance } from "../../../../common/func/axios";
 
 export default function WorkationDetail(props) { 
-  const { detailInfo, 
-          isBookmarked, 
+  const { isWorkationBookmarked, 
           workationModal, setWorkationModal,
           onClickLike, errMessageCheck
         } = useContext(AppContext);
   const [office, setOffice] = useState(null);
-  const officeId = props.facilityId;
+  const officeId = props.officeId ? props.officeId : null;
+  const officeName = props.officeName ? props.officeName : null;
+  debugger
 
   useEffect(() => {
     const fetchOffice = async () => {
@@ -20,6 +21,7 @@ export default function WorkationDetail(props) {
         const res = await axiosInstance.get(`/api/public/workation-offices/${officeId}`);
         const data = res.data;
         setOffice(data);
+        debugger
       } catch (err) {
         errMessageCheck(err.response.data.errorMessage);
       }
@@ -44,17 +46,17 @@ export default function WorkationDetail(props) {
           <div className="content">
             <span className="lcnName">{props.locationName}</span>
             <div className="facName">
-              <span>{props.facilityName}</span>
-              { isBookmarked[props.facilityId] ? (
+              <span>{officeName}</span>
+              { isWorkationBookmarked[officeId] ? (
                 <HeartFilled 
                   className="bmBtn"
-                  onClick={(e) => onClickLike(e, props.facilityId)} 
+                  onClick={(e) => onClickLike(e, officeId)} 
                   style={{ color: 'red', cursor: 'pointer' }} 
                 /> 
                 ) : (
                 <HeartOutlined 
                   className="bmBtn"
-                  onClick={(e) => onClickLike(e, props.facilityId)} 
+                  onClick={(e) => onClickLike(e, officeId)} 
                   style={{ color: 'black', cursor: 'pointer' }} 
                 />
                 )

@@ -80,7 +80,7 @@ export default function AddSchedule () {
       </button>
       {/* Modal 추가 */}
       <Modal
-        title="Select Dates"
+        title="Add to schedule"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}

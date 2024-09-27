@@ -3,6 +3,7 @@
   width: 100%;
   padding: 3rem;
   overflow: hidden;
+  align-items: center;
 }
 
 .DetailLocation .mapArea {
@@ -10,7 +11,7 @@
   bottom: 0;
   position: relative;
   width: 70%;
-  height: 37rem;
+  height: 35rem;
   margin-left: 4rem;
 }
 
