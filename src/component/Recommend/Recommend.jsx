@@ -29,7 +29,7 @@ export default function Recommend () {
         <p>Find the perfect workation spot for you</p>
         <RightCircleFilled className="recommendBtn" />
       </div>
-      {isLoginPopup && <LoginPopup message={'Please Login'} />}
+      {isLoginPopup && <LoginPopup message={'Please log in to access this feature.'} />}
     </div>
   );
 };

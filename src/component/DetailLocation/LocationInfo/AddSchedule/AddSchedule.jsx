@@ -83,7 +83,7 @@ export default function AddSchedule () {
       <button className="schdBtn" onClick={showModal}>
         <span>Add to Schedule</span>
       </button>
-      {isLoginPopup && <LoginPopup message={'Please Login'} />}
+      {isLoginPopup && <LoginPopup message={'Please log in to access this feature.'} />}
       {/* Modal 추가 */}
       <Modal
         title="Add to schedule"
