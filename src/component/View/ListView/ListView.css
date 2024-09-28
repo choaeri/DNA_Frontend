@@ -38,11 +38,14 @@
   float: left;
   margin-right: 4rem;
 }
+.CardContent .content.beach {
+  background: linear-gradient(180deg, rgba(172, 194, 254, 0.2) 0%, rgba(255, 255, 255, 0.20) 90.25%);
+}
 .CardContent .content.mount {
-  background: linear-gradient(180deg, rgba(174, 247, 186, 0.20) 0%, rgba(255, 255, 255, 0.20) 68.25%);
+  background: linear-gradient(180deg, rgba(174, 247, 186, 0.20) 0%, rgba(255, 255, 255, 0.20) 90.25%);
 }
 .CardContent .content.culture {
-  background: linear-gradient(180deg, rgba(255, 219, 171, 0.2) 0%, rgba(255, 255, 255, 0.20) 68.25%);
+  background: linear-gradient(180deg, rgba(255, 219, 171, 0.2) 0%, rgba(255, 255, 255, 0.20) 90.25%);
 }
 .CardContent .content .cardCnt {
   display: flex;
