@@ -8,7 +8,7 @@
   z-index: 2;
 }
 
-.wknCnt{
+.wknCnt {
   position: relative;
   width: 60%;
   height: 87%;
@@ -17,22 +17,22 @@
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  /* 스크롤바 삭제 */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
 .wknCnt::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera*/
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .wknCnt .header {
   display: flex;
   padding: 16px 20px;
   align-items: center;
-  display: flex;
   justify-content: center;
   border-radius: 16px 16px 0px 0px;
 }
+
 .wknCnt .header .closeBtn {
   position: sticky;
   top: 0;
@@ -51,6 +51,7 @@
   border-radius: 0px 0px 16px 16px;
   background: #FFF;
 }
+
 .wknCnt .content .lcnName {
   color: var(--Gray-5, #808388);
   font-family: "Pretendard Variable";
@@ -59,10 +60,12 @@
   font-weight: 400;
   line-height: 160%;
 }
+
 .wknCnt .content .facName {
   display: flex;
   width: 100%;
 }
+
 .wknCnt .content .facName span {
   color: var(--Gray1, #000);
   font-family: "Pretendard Variable";
@@ -71,19 +74,51 @@
   font-weight: 500;
   line-height: 160%;
 }
+
 .wknCnt .content .facName .bmBtn {
   margin-left: auto;
 }
 
 .wknCnt .content .facImg {
-  display: flex;
-  flex-wrap: wrap;
+  display: flex; /* Flexbox 사용 */
+  justify-content: space-between; /* 양쪽 정렬 */
 }
-.wknCnt .content .facImg img {
-  width: 15rem;
-  border-radius: 5px;
+
+.wknCnt .content .facImg .leftImage {
+  width: 43%; /* 왼쪽 이미지 비율 유지 */
+  height: 97%; /* 원하는 세로 비율로 설정 (예: 70%) */
+  display: flex; /* 이미지 중앙 정렬을 위해 flex 사용 */
+  align-items: center; /* 수직 중앙 정렬 */
+}
+
+.wknCnt .content .facImg .leftImage img {
+  width: 100%; /* 왼쪽 이미지 너비 */
+  height: 100%; /* 높이를 100%로 설정하여 컨테이너에 맞춤 */
+  object-fit: cover; /* 비율 유지 */
+}
+
+.wknCnt .content .facImg .rightImages {
   display: flex;
-  padding: 9px;
+  flex-direction: column; /* 세로로 나열 */
+  width: 55%; /* 오른쪽 이미지 비율 */
+}
+
+.wknCnt .content .facImg .rightRow {
+  display: flex; /* 행을 flex로 설정 */
+  justify-content: space-between; /* 이미지 간격 조정 */
+  margin-bottom: 10px; /* 행 간격 */
+}
+
+.wknCnt .content .facImg .rightRow img {
+  width: 48%; /* 오른쪽 이미지 너비 (2장 배치) */
+  border-radius: 5px;
+  object-fit: cover; /* 비율 유지 */
+}
+
+.wknCnt .content .facImg .leftImage img {
+  width: 100%; /* 왼쪽 이미지 너비 */
+  border-radius: 5px;
+  object-fit: cover; /* 비율 유지 */
 }
 
 .wknCnt .content .facInfo {
@@ -92,6 +127,7 @@
   align-items: flex-start;
   gap: 4px;
 }
+
 .wknCnt .content .facInfo .exp {
   color: var(--Gray-3, #292C30);
   font-family: "Pretendard Variable";
