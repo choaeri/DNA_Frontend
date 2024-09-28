@@ -19,7 +19,6 @@ export default function DetailReviews() {
           },
         });
         const data = res.data;
-        console.log(data);
         if (data && Array.isArray(data.content)) {
           setReviews(data.content);
         } else {

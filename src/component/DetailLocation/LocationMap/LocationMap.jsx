@@ -45,12 +45,13 @@ export default function LocationMap() {
 
 	const onClickMarker = async (marker) => {
 		setInfo(marker);
-		debugger
+		console.log(marker);
 		
+		console.log(marker.type === 'Workation Office');
+
 		if (marker.type === 'Workation Office') {
 			try {
 				const response = await axiosInstance.get(`/api/workation-offices/${marker.facilityId}/bookmark`);
-				debugger
 				const data = response.data;
 				setIsWorkationBookmarked({
 					[marker.facilityId]: data.isBookmarked,
@@ -151,6 +152,9 @@ export default function LocationMap() {
 					onClick={() => onClickMarker(marker)}
 				>
 					{ info && info.facilityId === marker.facilityId && (
+
+
+
 							selectCategory === 'Workation Office' ? (
 								<div className="markerCnt">
 									<div>
@@ -199,6 +203,13 @@ export default function LocationMap() {
 									/>
 								</div>
 							) : (
+
+
+
+
+
+
+
 								<div className="markerCnt">
 									<div className="facInfo">
 										<div

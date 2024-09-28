@@ -82,7 +82,6 @@ export default function OpenChat() {
         setUsername(response.data.username);
       } catch (error) {
         errMessageCheck(error.response.data.errorMessage);
-        console.error("Failed to fetch username:", error);
       }
     };
 
@@ -97,7 +96,6 @@ export default function OpenChat() {
         if (Array.isArray(data)) {
           setChatRoomMessages(data);
         }
-        console.log(chatRoomMessages);
       } catch (error) {}
     };
 

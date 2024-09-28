@@ -5,15 +5,12 @@ import { Modal } from "@mui/material";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import { axiosInstance } from "../../../../common/func/axios";
 
-export default function WorkationDetail(props) { 
+export default function WorkationDetail({ locationName, officeName, officeId }) {
   const { isWorkationBookmarked, 
           workationModal, setWorkationModal,
           onClickLike, errMessageCheck
         } = useContext(AppContext);
   const [office, setOffice] = useState(null);
-  const officeId = props.officeId ? props.officeId : null;
-  const officeName = props.officeName ? props.officeName : null;
-  debugger
 
   useEffect(() => {
     const fetchOffice = async () => {
@@ -21,19 +18,20 @@ export default function WorkationDetail(props) {
         const res = await axiosInstance.get(`/api/public/workation-offices/${officeId}`);
         const data = res.data;
         setOffice(data);
-        debugger
+    
+      
       } catch (err) {
         errMessageCheck(err.response.data.errorMessage);
       }
     };
     fetchOffice();
-  }, [errMessageCheck]);
+  }, [officeId, errMessageCheck]); 
 
   return (
     <Modal
       open={workationModal}
       onClose={() => setWorkationModal(false)}
-      centered // 모달을 화면 중앙에 위치
+      centered 
     >
       <section className="wknSection">
         <div className="wknCnt">
@@ -44,23 +42,24 @@ export default function WorkationDetail(props) {
             </svg>
           </div>
           <div className="content">
-            <span className="lcnName">{props.locationName}</span>
+            <span className="lcnName">{locationName}</span>
             <div className="facName">
               <span>{officeName}</span>
-              { isWorkationBookmarked[officeId] ? (
-                <HeartFilled 
-                  className="bmBtn"
-                  onClick={(e) => onClickLike(e, officeId)} 
-                  style={{ color: 'red', cursor: 'pointer' }} 
-                /> 
+              { isWorkationBookmarked && isWorkationBookmarked[officeId] !== undefined ? (
+                isWorkationBookmarked[officeId] ? (
+                  <HeartFilled 
+                    className="bmBtn"
+                    onClick={(e) => onClickLike(e, officeId)} 
+                    style={{ color: 'red', cursor: 'pointer' }} 
+                  /> 
                 ) : (
-                <HeartOutlined 
-                  className="bmBtn"
-                  onClick={(e) => onClickLike(e, officeId)} 
-                  style={{ color: 'black', cursor: 'pointer' }} 
-                />
+                  <HeartOutlined 
+                    className="bmBtn"
+                    onClick={(e) => onClickLike(e, officeId)} 
+                    style={{ color: 'black', cursor: 'pointer' }} 
+                  />
                 )
-              }
+              ) : null } 
             </div>
             <div className="facInfo">
               <div className="item">

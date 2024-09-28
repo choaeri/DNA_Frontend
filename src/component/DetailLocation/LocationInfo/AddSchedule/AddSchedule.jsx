@@ -60,10 +60,8 @@ export default function AddSchedule () {
       try {
         const response = await axiosInstance.get("/api/workation-schedules/scheduled-dates");
         setScheduledDates(response.data.scheduledDates);
-        console.log("Fetched scheduled dates:", response.data.scheduledDates);
       } catch (error) {
         errMessageCheck(error.response.data.errorMessage);
-        console.error("Error fetching scheduled dates:", error);
       }
     };
 
