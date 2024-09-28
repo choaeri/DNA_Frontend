@@ -98,6 +98,35 @@
   line-height: 160%;
 }
 
+.dtrCnt .leftCnt .ratingDistribution {
+  margin-top: 20px;
+}
+.dtrCnt .leftCnt .ratingDistribution .ratingBar {
+  display: flex;
+  align-items: center;
+}
+.dtrCnt .leftCnt .ratingDistribution .ratingBar .ratingLabel {
+  color: var(--Gray-3, #292C30);
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  margin-right: 10px;
+}
+.dtrCnt .leftCnt .ratingDistribution .ratingBar .barContainer {
+  width: 134px;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+}
+.dtrCnt .leftCnt .ratingDistribution .ratingBar .barContainer .bar {
+  height: 100%;
+  background-color: #000;
+  border-radius: 5px;
+}
+
 .dtrCnt .line {
   width: 1px;
   height: 534px;
@@ -109,6 +138,15 @@
   display: flex;
   flex-direction: column;
   padding: 40px 60px;
+}
+.dtrCnt .rightCnt .count {
+  color: var(--Gray1, #000);
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  margin-bottom: 24px;
 }
 .dtrCnt .rightCnt .reviewItem {
   display: flex;

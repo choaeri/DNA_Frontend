@@ -44,7 +44,6 @@ export default function Likes() {
     try {
       const response = await axiosInstance.get(apiUrl);
       const data = response.data;
-      console.log(data);
       newIsBookmarkedOffice[facilityId] = data.isBookmarked;
     } catch (error) {
       errMessageCheck(error.response.data.errorMessage);

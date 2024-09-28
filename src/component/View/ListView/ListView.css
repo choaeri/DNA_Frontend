@@ -61,7 +61,7 @@
 }
 .CardContent .content .cardCnt .card:nth-child(odd) img {
   width: 250px;
-  height: 23rem;
+  height: 380px;
   flex-shrink: 0;
 }
 .CardContent .content .cardCnt .card:nth-child(odd) .locationCnt {

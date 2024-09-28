@@ -6,9 +6,13 @@ import { axiosInstance } from '../../../../../common/func/axios';
 import { dataMatch } from '../../../../../common/func/match';
 
 export default function DetailReviews() {
-	const { errMessageCheck, openReviewModal, setOpenReviewModal, detailInfo } =
-		useContext(AppContext);
+	const { errMessageCheck, 
+					openReviewModal, setOpenReviewModal, 
+					detailInfo } = useContext(AppContext);
 	const [reviews, setReviews] = useState([]);
+	const [ratingDistribution, setRatingDistribution] = useState({
+		1: 0, 2: 0, 3: 0, 4: 0, 5: 0
+	});
 
 	useEffect(() => {
 		const fetchReviews = async () => {
@@ -26,6 +30,7 @@ export default function DetailReviews() {
 				const data = res.data;
 				if (data && Array.isArray(data.content)) {
 					setReviews(data.content);
+					calculateRatingDistribution(data.content);
 				} else {
 					console.error('Fetched data is not an array:', data);
 				}
@@ -46,6 +51,35 @@ export default function DetailReviews() {
 			);
 		}
 		return stars;
+	};
+
+	const calculateRatingDistribution = (reviewsData) => {
+		const distribution = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+		reviewsData.forEach(review => {
+			distribution[review.rating] = (distribution[review.rating] || 0) + 1;
+		});
+		setRatingDistribution(distribution);
+	};
+
+	const renderRatingDistribution = () => {
+		const maxCount = Math.max(...Object.values(ratingDistribution));
+		return (
+			<div className="ratingDistribution">
+				{[5, 4, 3, 2, 1].map(rating => (
+					<div key={rating} className="ratingBar">
+						<span className="ratingLabel">{rating}</span>
+						<div className="barContainer">
+							<div
+								className="bar"
+								style={{
+									width: `${(ratingDistribution[rating] / maxCount) * 100}%`
+								}}
+							></div>
+						</div>
+					</div>
+				))}
+			</div>
+		);
 	};
 
 	return (
@@ -94,9 +128,11 @@ export default function DetailReviews() {
 									{detailInfo.averageRating === 0 ? detailInfo.averageRating.toFixed(0) : detailInfo.averageRating.toFixed(2)}({detailInfo.reviewCount})
 								</span>
 							</div>
+							{renderRatingDistribution()}
 						</div>
 						<div className="line"></div>
 						<div className="rightCnt">
+							<span className='count'>All {reviews.length}</span>
 							{reviews.map((review, index) => (
 								<div key={index} className="reviewItem">
 									<div className="reviewUser">

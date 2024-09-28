@@ -69,19 +69,33 @@
   width: 100%;
   border-bottom: 1px solid var(--Gray-8, #ECEEF4);
 }
-.Reviews .reviewList .reviewItem .info {
+
+.Reviews .reviewList .reviewItem .reviewUser {
   display: flex;
+  gap: 5px;
+  align-items: center;
 }
-.Reviews .reviewList .reviewItem .info .reviewRating {
-  margin-right: 6px;
+
+.Reviews .reviewList .reviewItem .reviewUser .reviewUsername {
+  font-size: small;
 }
-.Reviews .reviewList .reviewItem .info .reviewRating svg {
-  width: 10px;
-  height: 10px;
+
+.Reviews .reviewList .reviewItem .reviewInfo {
+  display: flex;
+  align-items: center;
 }
-.Reviews .reviewList .reviewItem .info .reviewUsername {
-  margin-left: auto;
+.Reviews .reviewList .reviewItem .reviewInfo .reviewRating {
+  margin-right: 4px;
 }
+.Reviews .reviewList .reviewItem .reviewInfo .reviewRating svg {
+  width: 13px;
+  height: 13px;
+}
+
+.Reviews .reviewList .reviewItem .reviewInfo .reviewDate {
+  font-size: small;
+}
+
 .reviewItem:last-child {
   border-bottom: none; /* 마지막 아이템은 선을 없앰 */
 }

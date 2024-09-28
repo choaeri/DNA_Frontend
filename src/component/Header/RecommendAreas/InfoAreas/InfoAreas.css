@@ -42,14 +42,13 @@
 
 .InfoAreas .infoCnt .label {
   display: flex;
-  padding: 7px 14px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  width: 190px;
-  margin-top: 23px;
-  border-radius: 4px;
-  background: var(--Gray-2, #15181C);
+  width: fit-content;
+  height: fit-content;
+  gap: 4px;
+  margin-top: 2rem;
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
 }
 .InfoAreas .infoCnt .label span {
   color: var(--Gray-10, #FFF);
@@ -91,4 +90,32 @@
   font-style: normal;
   font-weight: 400;
   line-height: 160%;
+}
+
+.InfoAreas .infoCnt .spots {
+  display: flex;
+  margin-top: 41px;
+  gap: 8px;
+  align-items: center;
+}
+.InfoAreas .infoCnt .spots span {
+  color: var(--Gray1, #000);
+  font-family: "Syne";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+
+.InfoAreas .infoCnt .img {
+  display: flex;
+  margin-top: 17px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+}
+.InfoAreas .infoCnt .img img {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
 }

@@ -44,7 +44,6 @@ export default function WriteReviews(props) { // scheduleId를 props로 받음
         content,
       });
 
-      console.log(`리뷰: ${content}, 별점: ${rating}`);
       setWriteReviewsModal(false);
       setRating(0); // 별점 초기화
       setContent(""); // 내용 초기화
