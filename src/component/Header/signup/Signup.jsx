@@ -40,11 +40,11 @@ export default function Signup() {
     try {
       const data = { username: signUpUserName, email: signUpEmail, password: signUpPassword };
       axiosInstance.post("/api/public/users", data);
-      notification.success({ message: '회원 가입 더럽게 힘드네!' });
+      notification.success({ message: 'Success Signup' });
       navigate("/login");
     } catch (error) {
       errMessageCheck(error.response.data.errorMessage);
-      notification.error({ message: '회원 가입 실패' });
+      notification.error({ message: 'Failed Signup' });
     }
   };
 
@@ -158,7 +158,7 @@ export default function Signup() {
                 placeholder="Enter your username" 
                 onChange={(e) => setSignUpUserName(e.target.value)} 
                 style={{ width: '100%' }}
-                autoComplete="new-password"
+                // autoComplete="new-password"
               />
               {!isUsernameValid && (
                 <Button 

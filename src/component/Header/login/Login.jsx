@@ -41,7 +41,7 @@ export default function Login() {
     axiosInstance.post("/api/public/auth/login", data)
       .then((res) => {
         notification.open({
-          message: "로그인 완료",
+          message: "Success Login",
           icon: successLogin,
         });
         processLogin();
@@ -56,8 +56,8 @@ export default function Login() {
           } = error.response;
 
           notification.open({
-            message: "로그인 실패",
-            description: "올바른 정보를 입력해주세요!",
+            message: "Failed Login",
+            description: "Please enter the correct information!",
             icon: failLogin,
           });
 
