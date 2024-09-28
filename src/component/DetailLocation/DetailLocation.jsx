@@ -6,6 +6,7 @@ import { AppContext } from '../../context/AppContext';
 import { axiosInstance } from '../../common/func/axios';
 import LocationInfo from './LocationInfo/LocationInfo';
 import { useParams } from 'react-router-dom';
+import LocationImage from './LocationImage/LocationImage';
 
 export default function DetailLocation () {
   const {setDetailInfo, errMessageCheck} = useContext(AppContext);
@@ -14,6 +15,7 @@ export default function DetailLocation () {
     lng: 0
   });
   const [count, setCount] = useState();
+  const [imageCntOpen, setImageCntOpen] = useState(false);
   const {locationId} = useParams();
 
   useEffect(() => {
@@ -47,16 +49,26 @@ export default function DetailLocation () {
 
   return (
     <div className="DetailLocation">
-      <LocationInfo />
-      <div className="mapArea">
-        <Map
-          className="map"
-          center={centerMarker}
-          level={8}
-        >
-          <LocationMap />
-        </Map>
+      <div className='detailContent'>
+        <LocationInfo />
+        <div className="mapArea">
+          <Map
+            className="map"
+            center={centerMarker}
+            level={8}
+          >
+            <LocationMap />
+          </Map>
+        </div>
       </div>
+      <div className='imageContent' onClick={() => setImageCntOpen(true)}>
+        <span>Images</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 29 28" fill="none">
+          <path d="M14.5 4.70996L14.5 22.0582" stroke="black" strokeWidth="1.5"/>
+          <path d="M22.2104 15L14.5001 22.7103L6.78983 15" stroke="black" strokeWidth="1.5"/>
+        </svg>
+      </div>
+      {imageCntOpen ? <LocationImage /> : null}
     </div>
   )
 };
