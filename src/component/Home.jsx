@@ -62,16 +62,12 @@ export default function Home() {
   return (
     <div className="DNAHome">
       <Popup />
-      <LoginPopup />
+      <LoginPopup message={'Token is expired'} />
       <Header />
       <div className="Content">
         <Recommend />
         <div 
           className="ViewContent" 
-          // style={ 
-          //   viewMode === "list" ? 
-          //   { height: "119rem" } : 
-          //   { height: "39rem" }}
         >
           { viewMode === 'list' ? <ListView /> : <MapView /> }
         </div>

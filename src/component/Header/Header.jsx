@@ -28,6 +28,7 @@ export default function Header () {
       await axiosInstance.post("/api/auth/logout");
       processLogout();
       navigate("/");
+      window.location.reload();
     } catch (err) {
       errMessageCheck(err.response.data.errorMessage);
       console.error("Error during logout:", err);

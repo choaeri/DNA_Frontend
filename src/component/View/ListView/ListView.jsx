@@ -5,7 +5,7 @@ import './ListView.css';
 import { locationMatch } from '../../../common/func/match';
 
 export default function ListView() {
-	const { locations, location, facilityCount, setSelectLocationName } =
+	const { location, facilityCount, setSelectLocationName } =
 		useContext(AppContext);
 	const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ export default function ListView() {
 					<span className="title">
 						Clean Beaches,
 						<br />
-						Quiet Streets
+						Attraction
 					</span>
 				</header>
 				<div className="cardCnt">
@@ -99,9 +99,9 @@ export default function ListView() {
 				<header>
 					<span className="num">02</span>
 					<span className="title">
-						Clean Beaches,
+						Natural Scenery,
 						<br />
-						Quiet Streets
+						Landscape
 					</span>
 				</header>
 				<div className="cardCnt">
@@ -178,9 +178,9 @@ export default function ListView() {
 				<header>
 					<span className="num">03</span>
 					<span className="title">
-						Clean Beaches,
+						Rich In Culture,
 						<br />
-						Quiet Streets
+						Historically Significant
 					</span>
 				</header>
 				<div className="cardCnt">

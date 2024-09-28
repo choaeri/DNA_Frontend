@@ -11,8 +11,8 @@
   
   .loginPopupModal {
      position: relative;
-    width: 30%;
-    height: 43%;
+     width: 25%;
+     height: 32%;
      background-color: #fff;
      overflow-x: hidden;
      border-radius: 1rem;
@@ -28,7 +28,7 @@
   
   .loginPopupHeader {
     display: flex;
-    padding: 16px 20px;
+    padding: 10px 15px;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -61,25 +61,8 @@
     gap: 28px;
   }
   
-  .loginPopupCnt .expCnt,
-  .loginPopupCnt .schedCnt {
+  .loginPopupCnt .expCnt {
     display: flex;
-  }
-  
-  .loginPopupCnt .schedCnt {
-    display: flex;
-    width: 100%;
-    padding: var(--Input-Radius-input-radius-lg, 12px);
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    border-radius: 8px;
-    border: 1px solid var(--Gray-8, #ECEEF4);
-    background: var(--Gray-9, #F8FAFF);
-  }
-  .loginPopupCnt .schedCnt .info {
-    display: flex;
-    flex-direction: column;
   }
   
   .loginPopupCnt .expCnt {
@@ -117,7 +100,7 @@
   }
   
   .loginPopupModal .btnCnt {
-    padding: 1rem;
+    padding: 0.7rem;
   }
   .loginPopupModal .btnCnt .writeBtn {
     display: flex;

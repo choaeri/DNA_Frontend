@@ -75,6 +75,17 @@
   margin-left: auto;
 }
 
+.wknCnt .content .facImg {
+  display: flex;
+  flex-wrap: wrap;
+}
+.wknCnt .content .facImg img {
+  width: 15rem;
+  border-radius: 5px;
+  display: flex;
+  padding: 9px;
+}
+
 .wknCnt .content .facInfo {
   display: flex;
   flex-direction: column;

@@ -160,6 +160,9 @@ export default function Survey () {
                   {step + 1} 
                   <span>/ {questions.length}</span>
                 </div>
+                <div className="stepBar">
+                  <div className="bar" style={{ width: `${((step + 1) / questions.length) * 100}%` }} />
+                </div>
                 {renderQuestion()}
                 <Box className="stepBtnCnt">
                   <button 
@@ -168,7 +171,7 @@ export default function Survey () {
                     disabled={step === 0} 
                     onMouseOver={(e) => {
                       step === 0
-                        ? (e.target.style.color = '#E1E4E9')
+                        ? (e.target.style.color = '#676868')
                         : (e.target.style.color = '#000');
                     }}
                     onMouseOut={(e) => {
@@ -189,61 +192,3 @@ export default function Survey () {
     </div>
   );
 }
-
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: '20px',
-    boxSizing: 'border-box',
-    minHeight: '100vh',
-  },
-  innerContainer: {
-    textAlign: 'center',
-    paddingTop: '20px',
-    background: '#f9f9f9',
-    borderRadius: '8px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    padding: '30px',
-    width: '100%',
-    maxWidth: '600px',
-    marginTop: '100px',  
-  },
-  button: {
-    margin: '5px',
-    border: 'none',
-    borderRadius: '5px',
-    padding: '10px 20px',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s, transform 0.3s',
-  },
-  navButton: {
-    margin: '0 10px', // 버튼 사이에 간격 추가
-    backgroundColor: '#007bff',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    padding: '10px', // 고정된 높이
-    width: '80px', // 고정된 너비
-    transition: 'background-color 0.3s, transform 0.3s',
-  },
-  navigationButtons: {
-    marginTop: '20px',
-    display: 'flex',
-    justifyContent: 'center', // 버튼을 가운데 정렬
-  },
-  progressBar: {
-    width: '100%',
-    height: '10px',
-    backgroundColor: '#e0e0e0',
-    borderRadius: '5px',
-    marginTop: '20px',
-  },
-  progress: {
-    height: '100%',
-    backgroundColor: '#007bff',
-    borderRadius: '5px',
-  }
-};

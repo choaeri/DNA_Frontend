@@ -93,13 +93,15 @@ export default function Schedule() {
       {selectedSchedule ? <WriteReviews selectedSchedule={selectedSchedule} /> : null}
       
       {confirmDeleteModal && <div className="modalOverlay" onClick={() => setConfirmDeleteModal(false)} />}
-      <Modal open={confirmDeleteModal} onClose={() => setConfirmDeleteModal(false)}>
-        <div className="confirmModal">
-          <h2>정말로 삭제하시겠습니까?</h2>
-          <button onClick={confirmDelete}>예</button>
-          <button onClick={() => setConfirmDeleteModal(false)}>아니요</button>
-        </div>
-      </Modal>
-    </div>
+        <Modal open={confirmDeleteModal} onClose={() => setConfirmDeleteModal(false)}>
+          <div className="confirmModal">
+            <h2>Are you sure you want to delete this?</h2>
+            <div className="confirmBtn">
+              <Button onClick={confirmDelete}>예</Button>
+              <Button onClick={() => setConfirmDeleteModal(false)}>아니요</Button>
+            </div>
+          </div>
+        </Modal>
+      </div>
   );
 }

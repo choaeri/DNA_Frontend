@@ -5,6 +5,7 @@ import { Modal } from "@mui/material";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import { axiosInstance } from "../../../../common/func/axios";
 
+const locationImg = ['/img/workation1.jpg', '/img/workation2.jpg', '/img/workation3.jpg', '/img/workation4.jpg', '/img/workation5.jpg'];
 export default function WorkationDetail({ locationName, officeName, officeId }) {
   const { isWorkationBookmarked, 
           workationModal, setWorkationModal,
@@ -18,8 +19,6 @@ export default function WorkationDetail({ locationName, officeName, officeId }) 
         const res = await axiosInstance.get(`/api/public/workation-offices/${officeId}`);
         const data = res.data;
         setOffice(data);
-    
-      
       } catch (err) {
         errMessageCheck(err.response.data.errorMessage);
       }
@@ -49,17 +48,22 @@ export default function WorkationDetail({ locationName, officeName, officeId }) 
                 isWorkationBookmarked[officeId] ? (
                   <HeartFilled 
                     className="bmBtn"
-                    onClick={(e) => onClickLike(e, officeId)} 
+                    onClick={(e) => onClickLike(e, officeId, 'Workation Office')} 
                     style={{ color: 'red', cursor: 'pointer' }} 
                   /> 
                 ) : (
                   <HeartOutlined 
                     className="bmBtn"
-                    onClick={(e) => onClickLike(e, officeId)} 
+                    onClick={(e) => onClickLike(e, officeId, 'Workation Office')} 
                     style={{ color: 'black', cursor: 'pointer' }} 
                   />
                 )
               ) : null } 
+            </div>
+            <div className='facImg'>
+              {locationImg?.map((img, idx) => {
+                return <img key={idx} src={img} alt={img} />
+              })}
             </div>
             <div className="facInfo">
               <div className="item">

@@ -65,6 +65,18 @@
   font-weight: 400;
   line-height: 160%;
 }
+.Survey .survCnt .content .stepBar {
+  width: 228px;
+  height: 2px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+.Survey .survCnt .content .stepBar .bar {
+  height: 100%;
+  background-color: #000000;
+  border-radius: 5px;
+}
 .Survey .survCnt .content .quesCnt {
   display: flex;
   height: 260px;
@@ -112,7 +124,7 @@
 }
 .Survey .survCnt .content .stepBtnCnt .backBtn,
 .Survey .survCnt .content .stepBtnCnt .nextBtn {
-  color: var(--Gray-7, #E1E4E9);
+  color: var(--Gray-7, #676868);
   font-family: "Syne";
   font-size: 20px;
   font-style: normal;

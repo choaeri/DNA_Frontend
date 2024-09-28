@@ -104,3 +104,26 @@
   margin-top: 40px;
   background: var(--Gray-7, #E1E4E9);
 }
+
+.dtrCnt .rightCnt {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 60px;
+}
+.dtrCnt .rightCnt .reviewItem {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+.dtrCnt .rightCnt .reviewItem .reviewUser {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.dtrCnt .rightCnt .reviewItem .reviewInfo {
+  display: flex;
+  margin-bottom: 4px;
+  gap: 6px;
+}

@@ -3,17 +3,24 @@ import { useContext, useEffect, useState } from "react";
 import { axiosInstance } from "../../../../common/func/axios";
 import { AppContext } from "../../../../context/AppContext";
 import "./AddSchedule.css";
+import useLocalStorage from "../../../../utils/useLocalStorage";
+import LoginPopup from "../../../LoginPopup/LoginPopup";
 
 const { RangePicker } = DatePicker;
 
 export default function AddSchedule () {
-  const { detailInfo, errMessageCheck } = useContext(AppContext);
+  const { isLoginPopup, setIsLoginPopup, detailInfo, errMessageCheck } = useContext(AppContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [scheduledDates, setScheduledDates] = useState([]);
+  const { isLoggedIn } = useLocalStorage();
   const [form] = Form.useForm(); // Form 인스턴스 생성
 
   const showModal = () => {
-    setIsModalVisible(true);
+    if(isLoggedIn) {
+      setIsModalVisible(true);
+    } else {
+      setIsLoginPopup(true);
+    };
   };
 
   const handleOk = async () => {
@@ -76,6 +83,7 @@ export default function AddSchedule () {
       <button className="schdBtn" onClick={showModal}>
         <span>Add to Schedule</span>
       </button>
+      {isLoginPopup && <LoginPopup message={'Please Login'} />}
       {/* Modal 추가 */}
       <Modal
         title="Add to schedule"

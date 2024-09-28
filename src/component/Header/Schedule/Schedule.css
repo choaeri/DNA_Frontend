@@ -95,7 +95,20 @@
   cursor: pointer;
 }
 
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+  z-index: 999; /* 모달 오버레이가 모달보다 아래에 위치 */
+}
+
 .confirmModal {
+  display: flex;
+  flex-direction: column;
   position: fixed; /* 화면에 고정 */
   top: 50%; /* 세로 중앙 */
   left: 50%; /* 가로 중앙 */
@@ -107,13 +120,30 @@
   z-index: 1000; /* 다른 요소 위에 표시 */
   text-align: center;
 }
+.confirmModal h2 {
+  color: var(--Gray1, #000);
+  font-family: "Syne";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 160%;
+}
 
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
-  z-index: 999; /* 모달 오버레이가 모달보다 아래에 위치 */
+.confirmModal .confirmBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.confirmModal .confirmBtn button {
+  display: flex;
+  height: 2rem;
+  width: 4rem;
+  padding: 8px var(--button-padding-gap-button-padding-md, 16px);
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--Gray-7, #E1E4E9);
+  background: var(--Gray-10, #FFF);
 }
