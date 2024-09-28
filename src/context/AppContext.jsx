@@ -18,6 +18,11 @@ const AppProvider = ({ children }) => {
 	const [signUpVerifyCode, setSignUpVerifyCode] = useState('');
 
 	const [locations, setLocations] = useState([]);
+	const [location, setLocation] = useState({
+    beach: [],
+    mount: [],
+    culture: []
+  })
 	const [facilityCount, setFacilityCount] = useState();
 	const [viewMode, setViewMode] = useState('list');
 	const [selectLocationName, setSelectLocationName] = useState('');
@@ -129,6 +134,7 @@ const AppProvider = ({ children }) => {
 				signUpVerifyCode,
 
 				locations,
+				location,
 				facilityCount,
 				viewMode,
 				selectLocationName,
@@ -163,6 +169,7 @@ const AppProvider = ({ children }) => {
 				setSignUpVerifyCode,
 
 				setLocations,
+				setLocation,
 				setFacilityCount,
 				setViewMode,
 				setSelectLocationName,

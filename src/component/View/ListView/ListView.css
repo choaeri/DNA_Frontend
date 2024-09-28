@@ -1,8 +1,7 @@
 .CardContent {
   display: flex;
   flex-direction: column;
-  padding: 10rem 14rem;
-  width: 61rem;
+  width: 100%;
   align-items: flex-start;
   gap: 80px;
 }
@@ -12,6 +11,8 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--button-padding-gap-button-padding-md, 16px);
+  margin-bottom: 5rem;
+  padding: 10rem 14rem;
 }
 .CardContent header .num,
 .CardContent header .title {
@@ -30,7 +31,7 @@
   letter-spacing: -1.62px;
 }
 
-.CardContent .cardCnt {
+.CardContent .content {
   display: flex;
   height: fit-content;
   width: 100%;
@@ -38,17 +39,30 @@
   float: left;
   margin-right: 4rem;
 }
-.CardContent .cardCnt .card {
-  display: flex;
-  margin-bottom: 120px;
+.CardContent .content.mount {
+  background: linear-gradient(180deg, rgba(174, 247, 186, 0.20) 0%, rgba(255, 255, 255, 0.20) 68.25%);
 }
-.CardContent .cardCnt img {
+.CardContent .content.culture {
+  background: linear-gradient(180deg, rgba(255, 219, 171, 0.2) 0%, rgba(255, 255, 255, 0.20) 68.25%);
+}
+.CardContent .content .cardCnt {
+  display: flex;
+  flex-direction: column;
+  padding: 10rem 14rem;
+}
+
+/* location 홀수 */
+.CardContent .content .cardCnt .card:nth-child(odd) {
+  display: flex;
+  margin-bottom: 200px;
+  position: relative;
+}
+.CardContent .content .cardCnt .card:nth-child(odd) img {
   width: 250px;
   height: 23rem;
   flex-shrink: 0;
 }
-
-.CardContent .cardCnt .card .locationCnt {
+.CardContent .content .cardCnt .card:nth-child(odd) .locationCnt {
   display: flex;
   flex-direction: column;
   margin-left: 40px;
@@ -57,7 +71,7 @@
   height: 75%;
   align-items: flex-start;
 }
-.CardContent .cardCnt .card .header .location {
+.CardContent .content .cardCnt .card:nth-child(odd) .header .location {
   color: var(--Gray-01, var(--Gray1, #000));
   font-family: "Syne";
   font-size: 54px;
@@ -66,24 +80,23 @@
   line-height: 120%;
   letter-spacing: -1.62px;
 }
-.CardContent .cardCnt .card .header .modalBtn {
+.CardContent .content .cardCnt .card:nth-child(odd) .header .modalBtn {
   width: 28px;
   height: 28px;
 }
 
-.CardContent .cardCnt .card .detail {
+.CardContent .content .cardCnt .card:nth-child(odd) .detail {
   margin-top: 2rem;
-  position: relative;
 }
-.CardContent .cardCnt .card .detail .item {
+.CardContent .content .cardCnt .card:nth-child(odd) .detail .item {
   display: flex;
   align-items: center;
 }
-.CardContent .cardCnt .card .detail svg {
+.CardContent .content .cardCnt .card:nth-child(odd) .detail svg {
   width: var(--button-padding-gap-button-padding-xl, 24px);
   height: var(--button-padding-gap-button-padding-xl, 24px);
 }
-.CardContent .cardCnt .card .detail .item .detailCtn {
+.CardContent .content .cardCnt .card:nth-child(odd) .detail .item .detailCtn {
   color: var(--Gray1, #000);
   font-family: "Pretendard Variable";
   font-size: 14px;
@@ -92,12 +105,12 @@
   line-height: 160%;
   margin-left: 0.5rem;
 }
-.CardContent .cardCnt .card .detail .item .detailCtn.spot {
+.CardContent .content .cardCnt .card:nth-child(odd) .detail .item .detailCtn.spot {
   font-family: "Syne";
   font-size: 20px;
 }
 
-.CardContent .cardCnt .card .detail .item .keyword {
+.CardContent .content .cardCnt .card:nth-child(odd) .detail .item .keyword {
   display: flex;
   padding: 1px 8px;
   justify-content: center;
@@ -114,12 +127,123 @@
   line-height: 160%;
 }
 
-.CardContent .cardCnt .card .detail .item.spots {
+.CardContent .content .cardCnt .card:nth-child(odd) .detail .item.spots {
   margin-top: 21px;
 }
-.CardContent .cardCnt .card .detail .item.desp {
+
+
+/* location 짝수 */
+.CardContent .content .cardCnt .card:nth-child(even) {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 200px;
+  margin-left: auto;
+  position: relative;
+}
+.CardContent .content .cardCnt .card:nth-child(even) img {
+  width: 440px;
+  height: 295px;
+  flex-shrink: 0;
+}
+.CardContent .content .cardCnt .card:nth-child(even) .locationCnt {
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+  margin-top: auto;
+  width: fit-content;
+  height: 75%;
+  align-items: flex-start;
+}
+.CardContent .content .cardCnt .card:nth-child(even) .header .location {
+  color: var(--Gray-01, var(--Gray1, #000));
+  font-family: "Syne";
+  font-size: 54px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: -1.62px;
+}
+.CardContent .content .cardCnt .card:nth-child(even) .header .modalBtn {
+  width: 28px;
+  height: 28px;
+}
+
+.CardContent .content .cardCnt .card:nth-child(even) .detail {
+  margin-top: 2rem;
+}
+.CardContent .content .cardCnt .card:nth-child(even) .detail .item {
+  display: flex;
+  align-items: center;
+}
+.CardContent .content .cardCnt .card:nth-child(even) .detail svg {
+  width: var(--button-padding-gap-button-padding-xl, 24px);
+  height: var(--button-padding-gap-button-padding-xl, 24px);
+}
+.CardContent .content .cardCnt .card:nth-child(even) .detail .item .detailCtn {
+  color: var(--Gray1, #000);
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  margin-left: 0.5rem;
+}
+.CardContent .content .cardCnt .card:nth-child(even) .detail .item .detailCtn.spot {
+  font-family: "Syne";
+  font-size: 20px;
+}
+
+.CardContent .content .cardCnt .card:nth-child(even) .detail .item .keyword {
+  display: flex;
+  padding: 1px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-right: 0.5rem;
+  border-radius: 2px;
+  background: var(--Gray-8, #ECEEF4);
+  color: var(--Gray-5, #808388);
+  font-family: "Pretendard Variable";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+
+.CardContent .content .cardCnt .card:nth-child(even) .detail .item.spots {
+  margin-top: 21px;
+}
+
+
+.CardContent .content .cardCnt .card:first-child .detail .item.desp,
+.CardContent .content .cardCnt .card:nth-child(5) .detail .item.desp,
+.CardContent .content .cardCnt .card:nth-child(9) .detail .item.desp {
   position: absolute;
-  right: -120%;
-  top: 0%;
-  width: 80%;
+  left: 62%;
+  top: 0;
+  width: 32%;
+}
+.CardContent .content .cardCnt .card:nth-child(2) .detail .item.desp,
+.CardContent .content .cardCnt .card:nth-child(6) .detail .item.desp,
+.CardContent .content .cardCnt .card:nth-child(10) .detail .item.desp {
+  position: absolute;
+  top: 45%;
+  left: -87%;
+  width: 73%;
+}
+.CardContent .content .cardCnt .card:nth-child(3) .detail .item.desp,
+.CardContent .content .cardCnt .card:nth-child(7) .detail .item.desp,
+.CardContent .content .cardCnt .card:nth-child(11) .detail .item.desp {
+  position: absolute;
+  left: 0;
+  bottom: -29%;
+  width: 32%;
+}
+.CardContent .content .cardCnt .card:nth-child(4) .detail .item.desp,
+.CardContent .content .cardCnt .card:nth-child(8) .detail .item.desp,
+.CardContent .content .cardCnt .card:nth-child(12) .detail .item.desp {
+  position: absolute;
+  left: -120%;
+  top: 45%;
+  width: 65%;
 }

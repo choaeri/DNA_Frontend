@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { axiosInstance } from "../common/func/axios";
 import './Home.css';
@@ -13,7 +13,7 @@ import LoginPopup from './LoginPopup/LoginPopup';
 
 
 export default function Home() {
-  const { setLocations, setFacilityCount, viewMode, setViewMode, errMessageCheck, isLoginPopup, setIsLoginPopup } = useContext(AppContext);
+  const { setLocations, location, setLocation, setFacilityCount, viewMode, setViewMode, errMessageCheck, isLoginPopup, setIsLoginPopup } = useContext(AppContext);
 
   useEffect(() => {
   // 지역 조회 API 호출
@@ -23,6 +23,18 @@ export default function Home() {
       const data = res.data;
       if (Array.isArray(data)) {
         setLocations(data);
+        data.forEach(locationItem => {
+          const locationName = locationItem.locationName; // locationName을 가져옴
+
+          if (['yangyang', 'samcheok', 'gangneung', 'sokcho'].includes(locationName)) {
+            location.beach.push(locationItem);
+          } else if (['chuncheon', 'inje', 'goseong', 'pyeongchang'].includes(locationName)) {
+            location.mount.push(locationItem);
+          } else if (['yeongwol', 'hoengseong', 'jeongseon', 'hongcheon'].includes(locationName)) {
+            location.culture.push(locationItem);
+          }
+        });
+        setLocation(location);
       } else {
         console.error("Fetched locations data is not an array:", data);
         setLocations([]);
