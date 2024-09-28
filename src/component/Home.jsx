@@ -62,12 +62,13 @@ export default function Home() {
   return (
     <div className="DNAHome">
       <Popup />
-      <LoginPopup message={'Token is expired'} />
+      <LoginPopup message={'Your token has expired.\nPlease log in again to continue.'} />
       <Header />
       <div className="Content">
         <Recommend />
         <div 
           className="ViewContent" 
+          style={viewMode !== 'list' ? {paddingBottom: "4rem"} : null}
         >
           { viewMode === 'list' ? <ListView /> : <MapView /> }
         </div>

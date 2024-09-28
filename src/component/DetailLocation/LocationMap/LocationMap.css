@@ -8,8 +8,10 @@
   top: 8%;
   left: 50%;
   transform: translate(-50%, -50%);
-  align-items: center;
   gap: 6px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 .locationDetail .category button {
   display: flex;

@@ -24,12 +24,12 @@ export default function Recommend () {
       <div className="rmdTitle">
         <span>Recommendation<br />of Workation<br />for Digital Nomads</span>
       </div>
-      <img className="dnaHome" src="img/DNAHome.png" alt="DNAHome"></img>
+      <img className="dnaHome" src="img/DNAHome.webp" alt="DNAHome"></img>
       <div className="rmdBtnContent" onClick={goToSurvey}>
         <p>Find the perfect workation spot for you</p>
         <RightCircleFilled className="recommendBtn" />
       </div>
-      {isLoginPopup && <LoginPopup message={'Please Login'} />}
+      {isLoginPopup && <LoginPopup message={'Please log in to access this feature.'} />}
     </div>
   );
 };

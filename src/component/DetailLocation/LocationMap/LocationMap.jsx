@@ -45,9 +45,6 @@ export default function LocationMap() {
 
 	const onClickMarker = async (marker) => {
 		setInfo(marker);
-		console.log(marker);
-		
-		console.log(marker.type === 'Workation Office');
 
 		if (marker.type === 'Workation Office') {
 			try {

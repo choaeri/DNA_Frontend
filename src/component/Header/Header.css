@@ -146,9 +146,10 @@
 .Account .content .accountBtn.basic {
   height: var(--Button-Size-button-size-lg, 48px);
   padding: 0px 24px;
+  width: 100%;
   gap: var(--button-padding-gap-button-gap-lg, 4px);
-  background: var(--Fill-fill-disabled, rgba(22, 88, 255, 0.03));
 }
+
 
 .Account .content .accountBtn.kakao {
   background: #FEE500;

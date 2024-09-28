@@ -1,7 +1,7 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Header from "../../Header/Header";
 import './Survey.css';
-import { Container, Box, Input } from '@mui/material';
+import { Container, Box, Input, TextField } from '@mui/material';
 import { questions } from "./questions";
 import { axiosInstance } from "../../../common/func/axios";
 import { notification, Spin } from "antd";
@@ -113,6 +113,10 @@ export default function Survey () {
             <Input
               type="number"
               onChange={(e) => handleAnswer(Number(e.target.value))}
+              style={{
+                WebkitAppearance: 'none',
+                MozAppearance: 'textfield'
+              }}
             />
           </div>
         </Box>
