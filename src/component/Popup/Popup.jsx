@@ -5,6 +5,7 @@ import "./Popup.css";
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "../../utils/useLocalStorage";
 import { axiosInstance } from "../../common/func/axios";
+import { locationMatch } from "../../common/func/match";
 
 export default function Popup() {
   const { isPopup, setIsPopup, errMessageCheck } = useContext(AppContext);
@@ -85,7 +86,7 @@ export default function Popup() {
                         className="locationThumbnail"
                       />
                       <div className="details">
-                        <span className="lcnName">{item.locationName}</span>
+                        <span className="lcnName">{locationMatch[item.locationName]}</span>
                         <span className="date">{item.startDate} - {item.endDate}</span>
                       </div>
                     </div>

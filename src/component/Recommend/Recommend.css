@@ -43,7 +43,10 @@
   border: 2px solid var(--Gray1, #000);
   background: var(--Gray-10, #FFF);
   box-shadow: 0px 16px 32px 0px rgba(0, 0, 0, 0.16);
+  position: fixed;
+  z-index: 1;
 }
+
 .RmdContent .rmdBtnContent p {
   margin-right: auto;
 }

@@ -50,6 +50,7 @@
     border: none;
     color: #ffffff;
     justify-content: flex-end;
+    cursor: pointer;
 }
 
 .modalCnt .content {

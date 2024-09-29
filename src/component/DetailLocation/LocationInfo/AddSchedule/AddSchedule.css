@@ -21,3 +21,20 @@
   font-style: normal;
   line-height: 160%;
 }
+
+.ant-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+.ant-modal-footer button {
+  display: flex;
+  width: 5rem;
+  height: var(--Button-Size-button-size-lg, 40px);
+  padding: 0px var(--button-padding-gap-button-padding-xl, 20px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--button-padding-gap-button-gap-lg, 4px);
+  border-radius: var(--Border-Radius-rounded-full, 9999px);
+  background: var(--Gray1, #000);
+  color: white;
+}

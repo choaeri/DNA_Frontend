@@ -10,7 +10,7 @@
   align-items: center;
 }
 .InfoAreas .stepCnt span {
-  color: var(--Gray-5, #808388);
+  color: var(--Gray1, #000);
   font-family: "Pretendard Variable";
   font-size: 14px;
   font-style: normal;
@@ -20,6 +20,7 @@
 .InfoAreas .stepCnt svg {
   width: var(--button-padding-gap-button-padding-md, 16px);
   height: var(--button-padding-gap-button-padding-md, 16px);
+  cursor: pointer;
 }
 
 .InfoAreas .infoCnt .tit {
@@ -38,17 +39,18 @@
   width: 28px;
   height: 28px;
   margin-left: 8px;
+  cursor: pointer;
 }
 
 .InfoAreas .infoCnt .label {
   display: flex;
-  width: fit-content;
-  height: fit-content;
-  gap: 4px;
-  margin-top: 2rem;
-  position: absolute;
-  bottom: 5%;
-  left: 50%;
+  padding: 7px 14px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 4px;
+  background: var(--Gray-2, #15181C);
+  margin-top: 16px;
 }
 .InfoAreas .infoCnt .label span {
   color: var(--Gray-10, #FFF);

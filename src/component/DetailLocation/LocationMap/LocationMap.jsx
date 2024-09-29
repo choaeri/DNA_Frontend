@@ -47,7 +47,9 @@ export default function LocationMap() {
 
 		if (marker.type === 'Workation Office') {
 			try {
-				const response = await axiosInstance.get(`/api/workation-offices/${marker.facilityId}/bookmark`);
+				const response = await axiosInstance.get(
+					`/api/workation-offices/${marker.facilityId}/bookmark`
+				);
 				const data = response.data;
 				setIsWorkationBookmarked({
 					[marker.facilityId]: data.isBookmarked,
@@ -57,7 +59,9 @@ export default function LocationMap() {
 			}
 		} else {
 			try {
-				const response = await axiosInstance.get(`/api/facilities/${marker.facilityId}/bookmark`);
+				const response = await axiosInstance.get(
+					`/api/facilities/${marker.facilityId}/bookmark`
+				);
 				const data = response.data;
 				setIsBookmarked({
 					[marker.facilityId]: data.isBookmarked,
@@ -133,117 +137,122 @@ export default function LocationMap() {
 				</button>
 			</div>
 			<MarkerClusterer
-        averageCenter={true}
-        minLevel={4}
-        disableClickZoom={true}
-      >
-				{selectCategory !== '' && markers ? markers.map((marker, idx) => (
-					<MapMarker
-						key={idx}
-						position={{ lat: marker.latitude, lng: marker.longitude }}
-						image={{
-							src: categoryMatch[selectCategory].img,
-							size: {
-								width: 25,
-								height: 25,
-							},
-						}}
-						onClick={() => onClickMarker(marker)}
-					>
-						{ info && info.facilityId === marker.facilityId && (
-								selectCategory === 'Workation Office' ? (
-									<div className="markerCnt">
-										<div>
-											{isWorkationBookmarked && isWorkationBookmarked[info.facilityId] ? (
-												<HeartFilled
-													onClick={(e) =>
-														onClickLike(e, info.facilityId, info.type)
-													}
-													style={{ color: 'red', cursor: 'pointer' }}
-												/>
-											) : (
-												<HeartOutlined
-													onClick={(e) =>
-														onClickLike(e, info.facilityId, info.type)
-													}
-													style={{ color: 'black', cursor: 'pointer' }}
-												/>
-											)}
-										</div>
-										<div className="facInfo" onClick={() => setWorkationModal(true)}>
-											<div
-												style={{ display: 'flex', flexDirection: 'column' }}
-											>
-												<span className="type">Workation Office</span>
-												<span className="tit">{info.facilityName}</span>
+				averageCenter={true}
+				minLevel={4}
+				disableClickZoom={true}
+			>
+				{selectCategory !== '' && markers
+					? markers.map((marker, idx) => (
+							<MapMarker
+								key={idx}
+								position={{ lat: marker.latitude, lng: marker.longitude }}
+								image={{
+									src: categoryMatch[selectCategory].img,
+									size: {
+										width: 25,
+										height: 25,
+									},
+								}}
+								onClick={() => onClickMarker(marker)}
+							>
+								{info &&
+									info.facilityId === marker.facilityId &&
+									(selectCategory === 'Workation Office' ? (
+										<div className="markerCnt">
+											<div>
+												{isWorkationBookmarked &&
+												isWorkationBookmarked[info.facilityId] ? (
+													<HeartFilled
+														onClick={(e) =>
+															onClickLike(e, info.facilityId, info.type)
+														}
+														style={{ color: 'red', cursor: 'pointer' }}
+													/>
+												) : (
+													<HeartOutlined
+														onClick={(e) =>
+															onClickLike(e, info.facilityId, info.type)
+														}
+														style={{ color: 'black', cursor: 'pointer' }}
+													/>
+												)}
 											</div>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="12"
-												height="13"
-												viewBox="0 0 12 13"
-												fill="none"
-											>
-												<path
-													d="M8.64795 6.89795L4.89795 10.6479C4.79228 10.7536 4.64895 10.813 4.49951 10.813C4.35007 10.813 4.20675 10.7536 4.10107 10.6479C3.9954 10.5423 3.93604 10.399 3.93604 10.2495C3.93604 10.1001 3.9954 9.95675 4.10107 9.85107L7.4531 6.49998L4.10201 3.14795C4.04969 3.09562 4.00818 3.03351 3.97986 2.96514C3.95155 2.89678 3.93697 2.82351 3.93697 2.74951C3.93697 2.67551 3.95155 2.60224 3.97986 2.53388C4.00818 2.46551 4.04969 2.4034 4.10201 2.35107C4.15433 2.29875 4.21645 2.25724 4.28482 2.22893C4.35318 2.20061 4.42645 2.18604 4.50045 2.18604C4.57445 2.18604 4.64772 2.20061 4.71608 2.22893C4.78445 2.25724 4.84656 2.29875 4.89889 2.35107L8.64889 6.10107C8.70126 6.15339 8.7428 6.21554 8.77111 6.28394C8.79942 6.35235 8.81395 6.42567 8.81386 6.49971C8.81377 6.57374 8.79907 6.64703 8.7706 6.71537C8.74213 6.7837 8.70045 6.84575 8.64795 6.89795Z"
-													fill="#292C30"
-												/>
-											</svg>
-										</div>
-										<WorkationDetail
-											locationName={detailInfo.locationName}
-											officeName={info.facilityName}
-											officeId={info.facilityId}
-										/>
-									</div>
-								) : (
-									<div className="markerCnt">
-										<div className="facInfo">
 											<div
-												style={{
-													display: 'flex',
-													flexDirection: 'column',
-													width: '100%',
-												}}
+												className="facInfo"
+												onClick={() => setWorkationModal(true)}
 											>
-												<span className="type">
-													{categoryMatch[info.type].type}
-												</span>
-												<div className="likeCnt">
+												<div
+													style={{ display: 'flex', flexDirection: 'column' }}
+												>
+													<span className="type">Workation Office</span>
 													<span className="tit">{info.facilityName}</span>
+												</div>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													width="7"
+													height="13"
+													viewBox="0 0 7 13"
+													fill="none"
+												>
+													<path
+														d="M6.53109 7.0306L1.53109 12.0306C1.39019 12.1715 1.19909 12.2506 0.999836 12.2506C0.800579 12.2506 0.609482 12.1715 0.468586 12.0306C0.32769 11.8897 0.248535 11.6986 0.248535 11.4993C0.248535 11.3001 0.32769 11.109 0.468586 10.9681L4.93796 6.49997L0.469836 2.0306C0.400071 1.96083 0.344731 1.87801 0.306974 1.78686C0.269218 1.69571 0.249785 1.59801 0.249785 1.49935C0.249785 1.40069 0.269218 1.30299 0.306974 1.21184C0.344731 1.12069 0.400071 1.03786 0.469836 0.968098C0.539601 0.898333 0.622424 0.842993 0.713576 0.805236C0.804728 0.76748 0.902424 0.748047 1.00109 0.748047C1.09975 0.748047 1.19744 0.76748 1.2886 0.805236C1.37975 0.842993 1.46257 0.898333 1.53234 0.968098L6.53234 5.9681C6.60217 6.03786 6.65755 6.12072 6.6953 6.21193C6.73305 6.30313 6.75242 6.4009 6.7523 6.49961C6.75219 6.59832 6.73259 6.69604 6.69462 6.78715C6.65666 6.87827 6.60109 6.961 6.53109 7.0306Z"
+														fill="#292C30"
+													/>
+												</svg>
+											</div>
+											<WorkationDetail
+												locationName={detailInfo.locationName}
+												officeName={info.facilityName}
+												officeId={info.facilityId}
+											/>
+										</div>
+									) : (
+										<div className="markerCnt">
+											<div className="facInfo">
+												<div
+													style={{
+														display: 'flex',
+														flexDirection: 'column',
+														width: '100%',
+													}}
+												>
+													<span className="type">
+														{categoryMatch[info.type].type}
+													</span>
+													<div className="likeCnt">
+														<span className="tit">{info.facilityName}</span>
 
-													{isBookmarked && isBookmarked[info.facilityId] ? (
-														<HeartFilled
-															onClick={(e) =>
-																onClickLike(e, info.facilityId, info.type)
-															}
-															style={{
-																color: 'red',
-																cursor: 'pointer',
-																marginLeft: 'auto',
-															}}
-														/>
-													) : (
-														<HeartOutlined
-															onClick={(e) =>
-																onClickLike(e, info.facilityId, info.type)
-															}
-															style={{
-																color: 'black',
-																cursor: 'pointer',
-																marginLeft: 'auto',
-															}}
-														/>
-													)}
+														{isBookmarked && isBookmarked[info.facilityId] ? (
+															<HeartFilled
+																onClick={(e) =>
+																	onClickLike(e, info.facilityId, info.type)
+																}
+																style={{
+																	color: 'red',
+																	cursor: 'pointer',
+																	marginLeft: 'auto',
+																}}
+															/>
+														) : (
+															<HeartOutlined
+																onClick={(e) =>
+																	onClickLike(e, info.facilityId, info.type)
+																}
+																style={{
+																	color: 'black',
+																	cursor: 'pointer',
+																	marginLeft: 'auto',
+																}}
+															/>
+														)}
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-								)
-							)
-						}
-					</MapMarker>
-			  )) : null}
+									))}
+							</MapMarker>
+					  ))
+					: null}
 			</MarkerClusterer>
 		</div>
 	);

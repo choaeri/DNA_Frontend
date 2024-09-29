@@ -27,7 +27,11 @@ export default function ListView() {
 				</header>
 				<div className="cardCnt">
 					{location.beach?.map((location, index) => (
-						<div key={index} className="card">
+						<div
+							key={index}
+							className="card"
+							onClick={() => onClickDetailBtn(location)}
+						>
 							<img alt={location.locationName} src={location.thumbnail}></img>
 							<div
 								style={{
@@ -49,7 +53,6 @@ export default function ListView() {
 										height="29"
 										viewBox="0 0 28 29"
 										fill="none"
-										onClick={() => onClickDetailBtn(location)}
 									>
 										<path
 											d="M2 14.2104L23.2756 14.2105"
@@ -117,7 +120,11 @@ export default function ListView() {
 				</header>
 				<div className="cardCnt">
 					{location.mount?.map((location, index) => (
-						<div key={index} className="card">
+						<div
+							key={index}
+							className="card"
+							onClick={() => onClickDetailBtn(location)}
+						>
 							<img alt={location.locationName} src={location.thumbnail}></img>
 							<div
 								style={{
@@ -139,7 +146,6 @@ export default function ListView() {
 										height="29"
 										viewBox="0 0 28 29"
 										fill="none"
-										onClick={() => onClickDetailBtn(location)}
 									>
 										<path
 											d="M2 14.2104L23.2756 14.2105"
@@ -207,7 +213,11 @@ export default function ListView() {
 				</header>
 				<div className="cardCnt">
 					{location.culture?.map((location, index) => (
-						<div key={index} className="card">
+						<div
+							key={index}
+							className="card"
+							onClick={() => onClickDetailBtn(location)}
+						>
 							<img alt={location.locationName} src={location.thumbnail}></img>
 							<div
 								style={{
@@ -229,7 +239,6 @@ export default function ListView() {
 										height="29"
 										viewBox="0 0 28 29"
 										fill="none"
-										onClick={() => onClickDetailBtn(location)}
 									>
 										<path
 											d="M2 14.2104L23.2756 14.2105"
