@@ -17,16 +17,7 @@ export default function DetailReviews() {
 	useEffect(() => {
 		const fetchReviews = async () => {
 			try {
-				const res = await axiosInstance.get(
-					`/api/public/locations/${detailInfo.locationId}/workation-reviews`,
-					{
-						params: {
-							page: 0,
-							size: 7,
-							sort: 'createdAt,desc',
-						},
-					}
-				);
+				const res = await axiosInstance.get(`/api/public/locations/${detailInfo.locationId}/workation-reviews`);
 				const data = res.data;
 				if (data && Array.isArray(data.content)) {
 					setReviews(data.content);
