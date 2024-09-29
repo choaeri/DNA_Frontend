@@ -170,7 +170,7 @@ export default function LocationMap() {
 												/>
 											)}
 										</div>
-										<div className="facInfo">
+										<div className="facInfo" onClick={() => setWorkationModal(true)}>
 											<div
 												style={{ display: 'flex', flexDirection: 'column' }}
 											>
@@ -178,7 +178,6 @@ export default function LocationMap() {
 												<span className="tit">{info.facilityName}</span>
 											</div>
 											<svg
-												onClick={() => setWorkationModal(true)}
 												xmlns="http://www.w3.org/2000/svg"
 												width="12"
 												height="13"

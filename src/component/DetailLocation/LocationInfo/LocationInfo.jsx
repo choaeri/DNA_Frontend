@@ -15,14 +15,6 @@ export default function LocationInfo() {
     <>
     { detailInfo !== null ? 
       <div className="LocationInfo">
-        <div className="header">
-          <svg onClick={() => navigate("/")} xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <path d="M23 13.7104L5.65181 13.7104" stroke="black" strokeWidth="1.5"/>
-            <path d="M12.7102 21.4207L4.9999 13.7103L12.7102 6.00004" stroke="black" strokeWidth="1.5"/>
-          </svg>
-          <span>All</span>
-        </div>
-  
         <div className="title">
           <span>{locationMatch[detailInfo.locationName]}</span>
         </div>

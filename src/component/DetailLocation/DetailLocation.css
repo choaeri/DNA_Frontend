@@ -5,7 +5,7 @@
 .DetailLocation .detailContent {
   display: flex;
   width: 100%;
-  padding: 2rem 3rem 0rem;
+  padding: 6rem 3rem 0rem;
   overflow: hidden;
   align-items: center;
 }
@@ -15,7 +15,7 @@
   bottom: 0;
   position: relative;
   width: 70%;
-  height: 35rem;
+  height: 32rem;
   margin-left: 4rem;
 }
 

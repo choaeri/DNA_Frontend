@@ -12,11 +12,7 @@ const locationImg = [
   "/img/workation4.jpg",
   "/img/workation5.jpg",
 ];
-export default function WorkationDetail({
-  locationName,
-  officeName,
-  officeId,
-}) {
+export default function WorkationDetail(props) {
   const {
     isWorkationBookmarked,
     workationModal,
@@ -38,7 +34,7 @@ export default function WorkationDetail({
     const fetchOffice = async () => {
       try {
         const res = await axiosInstance.get(
-          `/api/public/workation-offices/${officeId}`
+          `/api/public/workation-offices/${props.officeId}`
         );
         const data = res.data;
         setOffice(data);
@@ -47,7 +43,7 @@ export default function WorkationDetail({
       }
     };
     fetchOffice();
-  }, [officeId, errMessageCheck]);
+  }, [props.officeId, errMessageCheck]);
 
   return (
     <Modal
@@ -80,16 +76,16 @@ export default function WorkationDetail({
             </svg>
           </div>
           <div className="content">
-            <span className="lcnName">{locationName}</span>
+            <span className="lcnName">{props.locationName}</span>
             <div className="facName">
-              <span>{officeName}</span>
+              <span>{props.officeName}</span>
               {isWorkationBookmarked &&
-              isWorkationBookmarked[officeId] !== undefined ? (
-                isWorkationBookmarked[officeId] ? (
+              isWorkationBookmarked[props.officeId] !== undefined ? (
+                isWorkationBookmarked[props.officeId] ? (
                   <HeartFilled
                     className="bmBtn"
                     onClick={(e) =>
-                      onClickLike(e, officeId, "Workation Office")
+                      onClickLike(e, props.officeId, "Workation Office")
                     }
                     style={{ color: "red", cursor: "pointer" }}
                   />
@@ -97,7 +93,7 @@ export default function WorkationDetail({
                   <HeartOutlined
                     className="bmBtn"
                     onClick={(e) =>
-                      onClickLike(e, officeId, "Workation Office")
+                      onClickLike(e, props.officeId, "Workation Office")
                     }
                     style={{ color: "black", cursor: "pointer" }}
                   />

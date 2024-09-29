@@ -121,12 +121,12 @@ export default function Likes() {
                         {isWorkationBookmarked &&
                         isWorkationBookmarked[bookmark.officeId] ? (
                           <HeartFilled
-                            onClick={(e) => onClickLike(e, bookmark.officeId)}
+                            onClick={(e) => onClickLike(e, bookmark.officeId, 'Workation Office')}
                             style={{ color: "red", cursor: "pointer" }}
                           />
                         ) : (
                           <HeartOutlined
-                            onClick={(e) => onClickLike(e, bookmark.officeId)}
+                            onClick={(e) => onClickLike(e, bookmark.officeId, 'Workation Office')}
                             style={{ color: "black", cursor: "pointer" }}
                           />
                         )}

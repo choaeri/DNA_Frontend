@@ -54,10 +54,10 @@ export default function Header () {
 
   const dropdownMenu = (
     <Menu>
-      <Menu.Item onClick={() => navigate("/mypage/recommendAreas")}>Recommended Areas</Menu.Item>
-      <Menu.Item onClick={() => navigate("/mypage/likes")}>Likes</Menu.Item>
-      <Menu.Item onClick={() => navigate("/mypage/schedule")}>Schedule</Menu.Item>
-      <Menu.Item onClick={onClickLogoutButton}>Logout</Menu.Item>
+      <Menu.Item key="recommendAreas" onClick={() => navigate("/mypage/recommendAreas")}>Recommended Areas</Menu.Item>
+      <Menu.Item key="likes" onClick={() => navigate("/mypage/likes")}>Likes</Menu.Item>
+      <Menu.Item key="schedule" onClick={() => navigate("/mypage/schedule")}>Schedule</Menu.Item>
+      <Menu.Item key="logout" onClick={onClickLogoutButton}>Logout</Menu.Item>
     </Menu>
   );
 

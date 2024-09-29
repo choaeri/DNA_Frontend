@@ -33,6 +33,7 @@
   border-radius: 50px;
   border: none;
   background-color: #000;
+  gap: 6px;
 }
 .DNAHome .Content .ViewBtn .list {
   padding: 7.5px 26px 8.5px 26px;

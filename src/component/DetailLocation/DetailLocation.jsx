@@ -7,6 +7,7 @@ import LocationMap from "./LocationMap/LocationMap";
 import LocationInfo from './LocationInfo/LocationInfo';
 import LocationImage from './LocationImage/LocationImage';
 import "./DetailLocation.css";
+import Header from '../Header/Header';
 
 export default function DetailLocation() {
   const { detailInfo, setDetailInfo, errMessageCheck } = useContext(AppContext);
@@ -61,6 +62,7 @@ export default function DetailLocation() {
 
   return (
     <div className="DetailLocation">
+      <Header />
       <div className='detailContent'>
         <LocationInfo />
         <div className="mapArea">
