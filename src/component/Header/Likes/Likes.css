@@ -93,3 +93,12 @@
   font-size: 14px;
   font-weight: 500;
 }
+
+.Likes .bmkCnt .content .card .item .icon {
+  position: absolute;
+}
+
+.Likes .bmkCnt .content .card .item .imgCnt img {
+  width: 10rem;
+  height: 5rem;
+}

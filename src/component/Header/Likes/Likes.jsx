@@ -8,6 +8,13 @@ import "./Likes.css";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import WorkationDetail from "../../DetailLocation/LocationMap/WorkationDetail/WorkationDetail";
 
+const locationImg = [
+  "/img/workation1.jpg",
+  "/img/workation2.jpg",
+  "/img/workation3.jpg",
+  "/img/workation4.jpg",
+  "/img/workation5.jpg",
+];
 export default function Likes() {
   const {
     isBookmarked,
@@ -20,7 +27,7 @@ export default function Likes() {
   } = useContext(AppContext);
   const [bookmarkList, setBookmarkList] = useState();
   const [bookmarkOfficeList, setBookmarkOfficeList] = useState();
-  const { isLoggedIn } = useLocalStorage();
+  const [selectedBookmark, setSelectedBookmark] = useState(null);
 
   const newIsBookmarked = {};
   // 북마크 시설
@@ -103,6 +110,11 @@ export default function Likes() {
     fetchBookmarkOfficeList();
   }, []);
 
+  const handleOpenDetail = (bookmark) => {
+    setSelectedBookmark(bookmark); 
+    setWorkationModal(true);
+  };
+
   return (
     <div className="Likes">
       <Header />
@@ -121,15 +133,21 @@ export default function Likes() {
                         {isWorkationBookmarked &&
                         isWorkationBookmarked[bookmark.officeId] ? (
                           <HeartFilled
+                            className="icon"
                             onClick={(e) => onClickLike(e, bookmark.officeId, 'Workation Office')}
                             style={{ color: "red", cursor: "pointer" }}
                           />
                         ) : (
                           <HeartOutlined
+                            className="icon"
                             onClick={(e) => onClickLike(e, bookmark.officeId, 'Workation Office')}
                             style={{ color: "black", cursor: "pointer" }}
                           />
                         )}
+                        <div className="imgCnt">
+                          <img src={locationImg[bookmark.officeId % 5]}>
+                          </img>
+                        </div>
                         <div className="like wkn">
                           <div className="exp">
                             <span className="type">
@@ -138,7 +156,7 @@ export default function Likes() {
                             <span className="name">{bookmark.officeName}</span>
                           </div>
                           <svg
-                            onClick={() => setWorkationModal(true)}
+                            onClick={() => handleOpenDetail(bookmark)}
                             xmlns="http://www.w3.org/2000/svg"
                             width="12"
                             height="13"
@@ -151,11 +169,13 @@ export default function Likes() {
                             />
                           </svg>
                         </div>
-                        <WorkationDetail
-                          locationName={bookmark.locationName}
-                          officeName={bookmark.officeName}
-                          officeId={bookmark.officeId}
-                        />
+                        {selectedBookmark && selectedBookmark.officeId === bookmark.officeId && (
+                          <WorkationDetail
+                            locationName={bookmark.locationName}
+                            officeName={bookmark.officeName}
+                            officeId={bookmark.officeId}
+                          />
+                        )}
                       </div>
                     ) : null;
                   })}
