@@ -50,7 +50,6 @@ export default function LoginCheck() {
 				setIsFirstLogin(response.data.isFirstLogin);
 			} catch (error) {
 				errMessageCheck(error.response.data.errorMessage);
-				console.error('Failed to fetch isFirstLogin:', error);
 			}
 		};
 		fetchFirstLogin();
@@ -73,7 +72,6 @@ export default function LoginCheck() {
 		} catch (error) {
 			errMessageCheck(error.response.data.errorMessage);
       notification.error({ message: 'Failed Signup' });
-			console.error('Failed to submit name:', error);
 		}
 	};
 

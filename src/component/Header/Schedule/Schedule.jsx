@@ -22,12 +22,10 @@ export default function Schedule() {
         if (Array.isArray(data)) {
           setSchedules(data);
         } else {
-          console.error("Fetched locations data is not an array:", data);
           setSchedules([]);
         }
       } catch (err) {
         errMessageCheck(err.response.data.errorMessage);
-        console.error("Error fetching schedules:", err);
       }
     };
 
@@ -56,7 +54,6 @@ export default function Schedule() {
       setConfirmDeleteModal(false);
     } catch (err) {
       errMessageCheck(err.response.data.errorMessage);
-      console.error("Error deleting schedule:", err);
     }
   };
 

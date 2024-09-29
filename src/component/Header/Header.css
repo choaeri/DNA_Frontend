@@ -149,7 +149,9 @@
   width: 100%;
   gap: var(--button-padding-gap-button-gap-lg, 4px);
 }
-
+.Account .content .accountBtn.basic:hover {
+  background-color: #4096ff;
+}
 
 .Account .content .accountBtn.kakao {
   background: #FEE500;

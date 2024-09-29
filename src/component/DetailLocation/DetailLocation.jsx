@@ -26,7 +26,6 @@ export default function DetailLocation() {
         setCenterMarker({ lat: data.latitude, lng: data.longitude });
       } catch (err) {
         errMessageCheck(err.response.data.errorMessage);
-        console.error("Error fetching locations:", err);
       }
     };
 
@@ -36,7 +35,6 @@ export default function DetailLocation() {
         setCount(res.data);
       } catch (err) {
         errMessageCheck(err.response.data.errorMessage);
-        console.error("Error fetching facilities count:", err);
       }
     };
 

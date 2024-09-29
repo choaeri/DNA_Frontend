@@ -105,7 +105,6 @@ export default function Signup() {
 				'/api/public/users/email/code/verify',
 				data
 			);
-			console.log(response.data);
 
 			if (response.data.isVerified) {
 				notification.success({ message: 'Email Verification Success!' });
@@ -353,7 +352,6 @@ export default function Signup() {
 						<Form.Item {...tailLayout}>
 							<Button
 								className="accountBtn basic"
-								htmlType="submit"
 								style={{ marginTop: '20px' }}
 							>
 								Sign Up

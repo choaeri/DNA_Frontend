@@ -33,7 +33,6 @@ export default function Likes() {
       newIsBookmarked[facilityId] = data.isBookmarked;
     } catch (error) {
       errMessageCheck(error.response.data.errorMessage);
-      console.log(error);
     }
   };
 
@@ -47,7 +46,6 @@ export default function Likes() {
       newIsBookmarkedOffice[facilityId] = data.isBookmarked;
     } catch (error) {
       errMessageCheck(error.response.data.errorMessage);
-      console.log(error);
     }
   };
 
@@ -73,7 +71,6 @@ export default function Likes() {
         }
       } catch (error) {
         errMessageCheck(error.response.data.errorMessage);
-        console.log(error);
       }
     };
 
@@ -99,7 +96,6 @@ export default function Likes() {
         }
       } catch (error) {
         errMessageCheck(error.response.data.errorMessage);
-        console.log(error);
       }
     };
 

@@ -36,12 +36,10 @@ export default function Home() {
         });
         setLocation(location);
       } else {
-        console.error("Fetched locations data is not an array:", data);
         setLocations([]);
       }
     } catch (err) {
       errMessageCheck(err.response.data.errorMessage);
-      console.error("Error fetching locations:", err);
     }
   };
 
@@ -52,7 +50,6 @@ export default function Home() {
       setFacilityCount(res.data);
     } catch (err) {
       errMessageCheck(err.response.data.errorMessage);
-      console.error("Error fetching locations:", err);
     }
   };
   fetchLocations();

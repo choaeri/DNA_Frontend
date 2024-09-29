@@ -21,9 +21,7 @@ export default function Reviews () {
         const data = res.data;
         if (data && Array.isArray(data.content)) {
           setReviews(data.content);
-        } else {
-          console.error("Fetched data is not an array:", data);
-        }
+        } else {}
       } catch (err) {
         errMessageCheck(err.response.data.errorMessage);
       }

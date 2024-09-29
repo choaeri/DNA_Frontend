@@ -75,7 +75,6 @@ const AppProvider = ({ children }) => {
 					[facilityId]: currentIsBookmarked, // 원래 상태로 되돌리기
 				}));
 				errMessageCheck(error.response.data.errorMessage);
-				console.log(error);
 			}
 		} else {
 			apiUrl = `/api/facilities/${facilityId}/bookmark`;
@@ -96,7 +95,6 @@ const AppProvider = ({ children }) => {
 					[facilityId]: currentIsBookmarked, // 원래 상태로 되돌리기
 				}));
 				errMessageCheck(error.response.data.errorMessage);
-				console.log(error);
 			}
 		}
 	};
@@ -113,7 +111,6 @@ const AppProvider = ({ children }) => {
 				navigate('/');
 			} catch (err) {
 				errMessageCheck(err.response.data.errorMessage);
-				console.log(err);
 			}
 		};
 		fetchPopup();

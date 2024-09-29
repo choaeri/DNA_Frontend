@@ -38,7 +38,6 @@ export default function AddSchedule () {
         window.location.reload();
       } catch (errorInfo) {
         errMessageCheck(errorInfo.response.data.errorMessage);
-        console.log('Validation Failed:', errorInfo);
       };
     };
   };

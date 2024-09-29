@@ -23,7 +23,6 @@ export default function Popup() {
           await axiosInstance.patch("/api/users/popup-status");
         } catch (err) {
           errMessageCheck(err.response.data.errorMessage);
-          console.log(err);
         }
 
         try {
@@ -33,7 +32,6 @@ export default function Popup() {
           }
         } catch (err) {
           errMessageCheck(err.response.data.errorMessage);
-          console.log(err);
         }
       };
       fetchPopupStatus();

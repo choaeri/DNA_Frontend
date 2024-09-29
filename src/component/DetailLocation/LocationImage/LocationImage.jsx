@@ -14,7 +14,6 @@ export default function LocationImage({ locationName, setImageCntOpen }) {
         const response = await axios.get(`${process.env.REACT_APP_CRAWLING_URL}?location=${locationName}&size=15`);
         setImages(response.data.images);
       } catch (error) {
-        console.error("Error fetching images:", error);
         setError("Failed to load images.");
       } finally {
         setLoading(false);
