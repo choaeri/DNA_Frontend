@@ -27,6 +27,7 @@
   margin-left: auto;
   width: var(--button-padding-gap-button-padding-md, 16px);
   height: var(--button-padding-gap-button-padding-md, 16px);
+  cursor: pointer;
 }
 
 .Reviews .reviewStats {

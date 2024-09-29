@@ -4,13 +4,14 @@ import "./WorkationDetail.css";
 import { Modal } from "@mui/material";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import { axiosInstance } from "../../../../common/func/axios";
+import { locationMatch } from "../../../../common/func/match";
 
 const locationImg = [
-  "/img/workation1.jpg",
-  "/img/workation2.jpg",
-  "/img/workation3.jpg",
-  "/img/workation4.jpg",
-  "/img/workation5.jpg",
+  "/img/workation1.webp",
+  "/img/workation2.webp",
+  "/img/workation3.webp",
+  "/img/workation4.webp",
+  "/img/workation5.webp",
 ];
 export default function WorkationDetail(props) {
   const {
@@ -76,7 +77,7 @@ export default function WorkationDetail(props) {
             </svg>
           </div>
           <div className="content">
-            <span className="lcnName">{props.locationName}</span>
+            <span className="lcnName">{locationMatch[props.locationName]}</span>
             <div className="facName">
               <span>{props.officeName}</span>
               {isWorkationBookmarked &&

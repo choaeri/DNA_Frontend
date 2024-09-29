@@ -4,6 +4,7 @@ import { AppContext } from "../../context/AppContext";
 import { axiosInstance } from "../../common/func/axios";
 import "./WriteReviews.css";
 import { Modal } from "@mui/material";
+import { locationMatch } from "../../common/func/match";
 
 export default function WriteReviews(props) { // scheduleId를 props로 받음
   const { writeReviewsModal, setWriteReviewsModal, errMessageCheck } = useContext(AppContext);
@@ -73,7 +74,7 @@ export default function WriteReviews(props) { // scheduleId를 props로 받음
             <div className="location">
               <div className="lcnCnt">
                 <img src={props.selectedSchedule.locationThumbnail} alt={props.selectedSchedule.locationName} />
-                <span>{props.selectedSchedule.locationName}</span>
+                <span>{locationMatch[props.selectedSchedule.locationName]}</span>
               </div>
             </div>
 
