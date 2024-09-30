@@ -5,10 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../../../context/AppContext';
 import { locationMatch } from '../../../../common/func/match';
 import axios from 'axios';
+import { axiosInstance } from '../../../../common/func/axios';
 
 export default function InfoAreas(props) {
-	const { facilityCount } = useContext(AppContext);
+	const { errMessageCheck } = useContext(AppContext);
 	const [images, setImages] = useState([]);
+	const [facilityCount, setFacilityCount] = useState();
 	const navigate = useNavigate();
 
 	const handleBack = () => {
@@ -34,7 +36,16 @@ export default function InfoAreas(props) {
 				} catch (error) {
 				}
 			};
+			const fetchFacilitiesCount = async () => {
+				try {
+					const res = await axiosInstance.get(`/api/public/locations/${currentArea.locationId}/facilities/count`);
+					setFacilityCount(res.data.facilityCount);
+				} catch (err) {
+					errMessageCheck(err.response.data.errorMessage);
+				}
+			}
 			fetchImages();
+			fetchFacilitiesCount();
 		}
   }, []);
 
@@ -145,12 +156,7 @@ export default function InfoAreas(props) {
 								/>
 							</svg>
 							<span>
-								{
-									facilityCount?.filter(
-										(obj) => obj.locationId === currentArea.locationId
-									)[0].facilityCount
-								}{' '}
-								spots
+								{facilityCount} spots
 							</span>
 						</div>
 						{/* 지역 이미지 */}
