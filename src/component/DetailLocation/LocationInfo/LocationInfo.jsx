@@ -52,7 +52,7 @@ export default function LocationInfo() {
           })}
         </div>
         <Reviews />
-        <AddSchedule />
+        <AddSchedule locationId={detailInfo.locationId} />
         <OpenChat />
       </div> : null
     }

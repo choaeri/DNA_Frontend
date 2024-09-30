@@ -8,7 +8,7 @@ import LoginPopup from "../../../LoginPopup/LoginPopup";
 
 const { RangePicker } = DatePicker;
 
-export default function AddSchedule () {
+export default function AddSchedule (props) {
   const { isLoginPopup, setIsLoginPopup, detailInfo, errMessageCheck } = useContext(AppContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [scheduledDates, setScheduledDates] = useState([]);
@@ -24,7 +24,7 @@ export default function AddSchedule () {
   };
 
   const handleOk = async () => {
-    if(detailInfo !== null) {
+    if(props.locationId !== null) {
       try {
         const selectedDates = await form.validateFields(); // 선택된 날짜 유효성 검사
         const { dates } = selectedDates; // 선택된 날짜 배열 가져오기
@@ -33,7 +33,7 @@ export default function AddSchedule () {
           endDate: dates[1].format('YYYY-MM-DD')    // 종료 날짜 포맷
         };
   
-        await axiosInstance.post(`/api/locations/${detailInfo.locationId}/workation-schedules`, createWorkationScheduleRequest);
+        await axiosInstance.post(`/api/locations/${props.locationId}/workation-schedules`, createWorkationScheduleRequest);
   
         window.location.reload();
       } catch (errorInfo) {

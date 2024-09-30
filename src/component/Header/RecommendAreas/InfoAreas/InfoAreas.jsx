@@ -161,7 +161,7 @@ export default function InfoAreas(props) {
 								})
 							) : null}
 						</div>
-						<AddSchedule />
+						<AddSchedule locationId={currentArea.locationId} />
 					</div>
 				</div>
 			) : null}
