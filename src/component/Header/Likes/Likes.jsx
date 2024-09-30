@@ -9,11 +9,11 @@ import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import WorkationDetail from "../../DetailLocation/LocationMap/WorkationDetail/WorkationDetail";
 
 const locationImg = [
-  "/img/workation1.jpg",
-  "/img/workation2.jpg",
-  "/img/workation3.jpg",
-  "/img/workation4.jpg",
-  "/img/workation5.jpg",
+	"/img/workation1.webp",
+	"/img/workation2.webp",
+	"/img/workation3.webp",
+	"/img/workation4.webp",
+	"/img/workation5.webp",
 ];
 export default function Likes() {
   const {
