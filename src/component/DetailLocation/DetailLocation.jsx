@@ -66,9 +66,7 @@ export default function DetailLocation() {
       <div className='detailContent'>
         <LocationInfo />
         <div className="mapArea">
-          <Map className="map" center={centerMarker} level={8}>
-            <LocationMap />
-          </Map>
+          <LocationMap />
         </div>
       </div>
       <div className='imageContent' onClick={handleImageClick}>
