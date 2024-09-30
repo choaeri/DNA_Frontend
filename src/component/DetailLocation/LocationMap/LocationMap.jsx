@@ -14,7 +14,7 @@ const locationImg = [
   "/img/workation4.webp",
   "/img/workation5.webp",
 ];
-export default function LocationMap() {
+export default function LocationMap({centerMarker}) {
   const {
     detailInfo,
     isBookmarked,
@@ -29,10 +29,6 @@ export default function LocationMap() {
   const [markers, setMarkers] = useState(null);
   const [info, setInfo] = useState(null);
   const mapRef = useRef();
-  const [centerMarker, setCenterMarker] = useState({
-    lat: 38.207,
-    lng: 128.5912,
-  });
 
   const onClickCategoryBtn = async (category) => {
     setSelectCategory(`${category}`);
