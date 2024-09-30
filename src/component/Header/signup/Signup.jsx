@@ -202,7 +202,6 @@ export default function Signup() {
 					<Form
 						form={form}
 						autoComplete="off"
-						onFinish={onFinish}
 						initialValues={{ username: '' }}
 					>
 						{/* 이름 중복 검증 */}
@@ -351,6 +350,7 @@ export default function Signup() {
 
 						<Form.Item {...tailLayout}>
 							<Button
+								onClick={onFinish}
 								className="accountBtn basic"
 								style={{ marginTop: '20px' }}
 							>
