@@ -76,6 +76,10 @@
   gap: 10px;
   background: #FFFFFF;
   border-radius: 40px;
+  position: absolute;
+  cursor: pointer;
+  left: 20px;
+  top: 20px;
 }
 .Likes .bmkCnt .content .card .item .like,
 .Likes .bmkCnt .content .card .item .like.wkn,

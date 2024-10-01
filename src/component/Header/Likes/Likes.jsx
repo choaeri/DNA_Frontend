@@ -135,13 +135,13 @@ export default function Likes() {
                           <HeartFilled
                             className="icon"
                             onClick={(e) => onClickLike(e, bookmark.officeId, 'Workation Office')}
-                            style={{ color: "red", cursor: "pointer", position: "absolute" }}
+                            style={{ color: "red" }}
                           />
                         ) : (
                           <HeartOutlined
                             className="icon"
                             onClick={(e) => onClickLike(e, bookmark.officeId, 'Workation Office')}
-                            style={{ color: "black", cursor: "pointer", position: "absolute" }}
+                            style={{ color: "black" }}
                           />
                         )}
                         <div className="imgCnt">
