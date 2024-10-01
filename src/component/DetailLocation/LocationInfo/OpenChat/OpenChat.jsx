@@ -96,7 +96,9 @@ export default function OpenChat() {
         if (Array.isArray(data)) {
           setChatRoomMessages(data);
         }
-      } catch (error) {}
+      } catch (err) {
+        errMessageCheck(err.response.data.errorMessage);
+      }
     };
 
     fetchUsername();

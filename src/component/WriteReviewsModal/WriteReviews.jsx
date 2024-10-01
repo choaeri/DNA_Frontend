@@ -51,7 +51,6 @@ export default function WriteReviews(props) { // scheduleId를 props로 받음
       window.location.reload();
     } catch (error) {
       errMessageCheck(error.response.data.errorMessage);
-      console.error("리뷰 제출 중 오류 발생:", error);
     }
   };
 

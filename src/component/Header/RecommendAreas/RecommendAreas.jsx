@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Header from "../Header";
 import './RecommendAreas.css';
 import { axiosInstance } from "../../../common/func/axios";
@@ -6,6 +6,7 @@ import InfoAreas from "./InfoAreas/InfoAreas";
 import MapAreas from "./MapAreas/MapAreas";
 import { Map } from "react-kakao-maps-sdk";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from '../../../context/AppContext';
 
 const { kakao } = window;
 export default function RecommendAreas () {
@@ -16,6 +17,7 @@ export default function RecommendAreas () {
     lng: 0
   });
   const navigate = useNavigate();
+  const { errMessageCheck } = useContext(AppContext);
 
   const geocoder = new window.kakao.maps.services.Geocoder();
   const getLocationByAddress = async (address) => {
@@ -36,10 +38,8 @@ export default function RecommendAreas () {
       try {
         const res = await axiosInstance.get('/api/recommend/locations');
         setRecommendedArea(res.data);
-      } catch (error) {
-        const {
-          data: { errorMessage },
-        } = error.response;
+      } catch (err) {
+        errMessageCheck(err.response.data.errorMessage);
       };
     };
     getRecommendedAreas();

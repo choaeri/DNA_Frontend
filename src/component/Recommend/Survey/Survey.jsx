@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Header from "../../Header/Header";
 import './Survey.css';
 import { Container, Box, Input, TextField } from '@mui/material';
@@ -7,6 +7,7 @@ import { axiosInstance } from "../../../common/func/axios";
 import { notification, Spin } from "antd";
 import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../../context/AppContext";
 
 export default function Survey () {
   const [step, setStep] = useState(0);
@@ -25,6 +26,7 @@ export default function Survey () {
     photographyImportance: null,
   });
   const navigate = useNavigate();
+  const { errMessageCheck } = useContext(AppContext);
   
   const handleNext = async () => {
     const currentQuestion = questions[step];
@@ -59,6 +61,8 @@ export default function Survey () {
         });
         navigate("/mypage/recommendAreas");
       } catch (error) {
+        errMessageCheck(error.response.data.errorMessage);
+
         const {
           data: { errorMessage },
         } = error.response;

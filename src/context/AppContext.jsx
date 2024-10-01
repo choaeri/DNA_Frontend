@@ -75,7 +75,7 @@ const AppProvider = ({ children }) => {
         } catch (error) {
           setIsWorkationBookmarked((prev) => ({
             ...prev,
-            [facilityId]: currentIsBookmarked, // 원래 상태로 되돌리기
+            [facilityId]: currentIsBookmarked,
           }));
           errMessageCheck(error.response.data.errorMessage);
         }
