@@ -13,8 +13,11 @@ export default function Reviews() {
 		const fetchReviews = async () => {
 			try {
 				const res = await axiosInstance.get(
-					`/api/public/locations/${detailInfo.locationId}/workation-reviews`
-				);
+					`/api/public/locations/${detailInfo.locationId}/workation-reviews`, {
+						params: {
+						  sort: 'createdAt,desc'
+						},
+					});
 				const data = res.data;
 				if (data && Array.isArray(data.content)) {
 					setReviews(data.content);
