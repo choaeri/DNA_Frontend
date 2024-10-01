@@ -31,7 +31,6 @@
   width: 100%;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  margin-top: 12px;
 }
 .Likes .bmkCnt .content::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera*/
@@ -43,6 +42,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: 160%;
+  margin-top: 14px;
 }
 .Likes .bmkCnt .content .card {
   display: flex;
@@ -65,11 +65,12 @@
 }
 .Likes .bmkCnt .content .card .item.work {
   width: fit-content;
-  height: 204px;
+  height: 200px;
+  position: relative;
 }
 .Likes .bmkCnt .content .card .item.etc {
-  width: 236px;
-  height: 118px;
+  width: 205px;
+  height: 90px;
 }
 .Likes .bmkCnt .content .card .item.work .icon {
   padding: 8px;
