@@ -47,4 +47,17 @@ const dataMatch = {
   12: 'December'
 }
 
-export { categoryMatch, locationMatch, dataMatch };
+const locationImg = [
+	'/img/workation01.webp',
+	'/img/workation02.webp',
+	'/img/workation03.webp',
+	'/img/workation04.webp',
+	'/img/workation05.webp',
+  '/img/workation06.webp',
+	'/img/workation07.webp',
+	'/img/workation08.webp',
+	'/img/workation09.webp',
+	'/img/workation10.webp',
+];
+
+export { categoryMatch, locationMatch, dataMatch, locationImg };

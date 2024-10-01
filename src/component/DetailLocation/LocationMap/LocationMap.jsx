@@ -5,15 +5,8 @@ import { Map, MapMarker, MarkerClusterer } from 'react-kakao-maps-sdk';
 import { axiosInstance } from '../../../common/func/axios';
 import { HeartFilled, HeartOutlined } from '@ant-design/icons';
 import WorkationDetail from './WorkationDetail/WorkationDetail';
-import { categoryMatch } from '../../../common/func/match';
+import { categoryMatch, locationImg } from '../../../common/func/match';
 
-const locationImg = [
-	'/img/workation1.webp',
-	'/img/workation2.webp',
-	'/img/workation3.webp',
-	'/img/workation4.webp',
-	'/img/workation5.webp',
-];
 export default function LocationMap({ centerMarker }) {
 	const {
 		detailInfo,
@@ -202,7 +195,7 @@ export default function LocationMap({ centerMarker }) {
 												</div>
 												<div>
 													<img
-														src={locationImg[marker.facilityId % 5]}
+														src={locationImg[marker.facilityId % 10]}
 														onClick={() => setWorkationModal(true)}
 														alt=""
 													></img>

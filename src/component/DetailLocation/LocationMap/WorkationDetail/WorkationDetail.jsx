@@ -4,15 +4,8 @@ import "./WorkationDetail.css";
 import { Modal } from "@mui/material";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 import { axiosInstance } from "../../../../common/func/axios";
-import { locationMatch } from "../../../../common/func/match";
+import { locationImg, locationMatch } from "../../../../common/func/match";
 
-const locationImg = [
-  "/img/workation1.webp",
-  "/img/workation2.webp",
-  "/img/workation3.webp",
-  "/img/workation4.webp",
-  "/img/workation5.webp",
-];
 export default function WorkationDetail(props) {
   const {
     isWorkationBookmarked,
@@ -112,7 +105,7 @@ export default function WorkationDetail(props) {
                   ))}
                 </div>
                 <div className="rightRow">
-                  {locationImg.slice(3).map((img, idx) => (
+                  {locationImg.slice(3, 5).map((img, idx) => (
                     <img key={idx} src={img} alt={img} />
                   ))}
                 </div>

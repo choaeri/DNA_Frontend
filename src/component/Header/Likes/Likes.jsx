@@ -3,18 +3,11 @@ import Header from '../Header';
 import useLocalStorage from '../../../utils/useLocalStorage';
 import { AppContext } from '../../../context/AppContext';
 import { axiosInstance } from '../../../common/func/axios';
-import { categoryMatch, locationMatch } from '../../../common/func/match';
+import { categoryMatch, locationImg, locationMatch } from '../../../common/func/match';
 import './Likes.css';
 import { HeartFilled, HeartOutlined } from '@ant-design/icons';
 import WorkationDetail from '../../DetailLocation/LocationMap/WorkationDetail/WorkationDetail';
 
-const locationImg = [
-	'/img/workation1.webp',
-	'/img/workation2.webp',
-	'/img/workation3.webp',
-	'/img/workation4.webp',
-	'/img/workation5.webp',
-];
 export default function Likes() {
 	const {
 		isBookmarked,
@@ -165,7 +158,7 @@ export default function Likes() {
 															)}
 															<div className="imgCnt">
 																<img
-																	src={locationImg[bookmark.officeId % 5]}
+																	src={locationImg[bookmark.officeId % 10]}
 																	alt="location"
 																/>
 															</div>
