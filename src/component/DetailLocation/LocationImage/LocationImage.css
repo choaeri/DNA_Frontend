@@ -3,26 +3,6 @@
     position: relative;
 }
 
-.buttonContainer {
-    display: flex; /* Flexbox를 사용하여 정렬 */
-    justify-content: center; /* 수평 가운데 정렬 */
-    margin-bottom: 20px; /* 버튼과 이미지 간격 */
-}
-
-.scrollButton {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.scrollButton:hover {
-    background-color: #0056b3;
-}
-
 .imageGrid {
     display: grid;
     grid-template-columns: repeat(5, 1fr); /* 5열로 설정 */

@@ -31,7 +31,6 @@
   width: 100%;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  margin-top: 12px;
 }
 .Likes .bmkCnt .content::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera*/
@@ -43,6 +42,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: 160%;
+  margin-top: 14px;
 }
 .Likes .bmkCnt .content .card {
   display: flex;
@@ -50,10 +50,11 @@
   flex-wrap: wrap;
   margin-top: 12px;
 }
+.Likes .bmkCnt .content .card.wkn {
+  position: relative;
+}
 .Likes .bmkCnt .content .card .item {
   display: flex;
-  width: 236px;
-  height: 118px;
   padding: 14px 18px;
   flex-direction: column;
   align-items: flex-start;
@@ -61,6 +62,25 @@
   border-radius: 8px;
   border: 1px solid var(--Gray-7, #E1E4E9);
   background: #FFF;
+}
+.Likes .bmkCnt .content .card .item.work {
+  width: fit-content;
+  height: 200px;
+  position: relative;
+}
+.Likes .bmkCnt .content .card .item.etc {
+  width: 205px;
+  height: 90px;
+}
+.Likes .bmkCnt .content .card .item.work .icon {
+  padding: 8px;
+  gap: 10px;
+  background: #FFFFFF;
+  border-radius: 40px;
+  position: absolute;
+  cursor: pointer;
+  left: 20px;
+  top: 20px;
 }
 .Likes .bmkCnt .content .card .item .like,
 .Likes .bmkCnt .content .card .item .like.wkn,
@@ -94,11 +114,7 @@
   font-weight: 500;
 }
 
-.Likes .bmkCnt .content .card .item .icon {
-  position: absolute;
-}
-
 .Likes .bmkCnt .content .card .item .imgCnt img {
-  width: 10rem;
-  height: 5rem;
+  width: 156px;
+  height: 124px;
 }

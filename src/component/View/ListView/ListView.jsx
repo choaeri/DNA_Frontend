@@ -1,12 +1,18 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AppContext } from '../../../context/AppContext';
 import { useNavigate } from 'react-router-dom';
 import './ListView.css';
 import { locationMatch } from '../../../common/func/match';
 
+const images = [
+	'img/workation1.webp',
+	'img/workation2.webp',
+	'img/workation3.webp',
+];
 export default function ListView() {
 	const { location, facilityCount, setSelectLocationName } =
 		useContext(AppContext);
+	const [hover, setHover] = useState(false);
 	const navigate = useNavigate();
 
 	const onClickDetailBtn = (location) => {
@@ -32,7 +38,24 @@ export default function ListView() {
 							className="card"
 							onClick={() => onClickDetailBtn(location)}
 						>
-							<img alt={location.locationName} src={location.thumbnail}></img>
+							<img
+								alt={location.locationName}
+								src={location.thumbnail}
+								// onMouseOver={() => setHover(true)}
+								// onMouseLeave={() => setHover(false)}
+							></img>
+							{/* {hover && (
+								<div className="hoverImages">
+									{images.map((src, index) => (
+										<img
+											key={index}
+											className="hoverImage"
+											src={src}
+											alt={`Hover ${index}`}
+										/>
+									))}
+								</div>
+							)} */}
 							<div
 								style={{
 									display: 'flex',
@@ -57,12 +80,12 @@ export default function ListView() {
 										<path
 											d="M2 14.2104L23.2756 14.2105"
 											stroke="black"
-											stroke-width="3.33331"
+											strokeWidth="3.33331"
 										/>
 										<path
 											d="M15.4331 5.64343L24.0001 14.2104L15.4331 22.7773"
 											stroke="black"
-											stroke-width="3.33331"
+											strokeWidth="3.33331"
 										/>
 									</svg>
 								</div>
@@ -150,12 +173,12 @@ export default function ListView() {
 										<path
 											d="M2 14.2104L23.2756 14.2105"
 											stroke="black"
-											stroke-width="3.33331"
+											strokeWidth="3.33331"
 										/>
 										<path
 											d="M15.4331 5.64343L24.0001 14.2104L15.4331 22.7773"
 											stroke="black"
-											stroke-width="3.33331"
+											strokeWidth="3.33331"
 										/>
 									</svg>
 								</div>
@@ -243,12 +266,12 @@ export default function ListView() {
 										<path
 											d="M2 14.2104L23.2756 14.2105"
 											stroke="black"
-											stroke-width="3.33331"
+											strokeWidth="3.33331"
 										/>
 										<path
 											d="M15.4331 5.64343L24.0001 14.2104L15.4331 22.7773"
 											stroke="black"
-											stroke-width="3.33331"
+											strokeWidth="3.33331"
 										/>
 									</svg>
 								</div>
