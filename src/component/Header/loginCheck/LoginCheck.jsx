@@ -156,6 +156,7 @@ export default function LoginCheck() {
                   type="primary"
                   htmlType="submit"
                   onClick={onClickLoginCheck}
+                  style={{ marginTop: "7px" }}
                 >
                   <span>Input Username</span>
                 </Button>

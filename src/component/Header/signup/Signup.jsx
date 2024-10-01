@@ -378,7 +378,7 @@ export default function Signup() {
               <Button
                 htmlType="submit"
                 className="accountBtn basic"
-                marginTop="10px"
+                style={{ marginTop: "7px" }}
               >
                 Sign Up
               </Button>
