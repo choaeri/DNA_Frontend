@@ -33,6 +33,7 @@
   gap: 10px;
   border-radius: 4px;
   border: 1px solid var(--Gray-7, #E1E4E9);
+  height: 10.5rem;
 }
 .AllReviews .cont .card .info {
   display: flex;
