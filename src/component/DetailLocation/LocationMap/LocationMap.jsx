@@ -178,7 +178,7 @@ export default function LocationMap({centerMarker}) {
                       <div className="markerCnt">
                         <div>
                           <img 
-						  	src={locationImg[0]} 
+						  	src={locationImg[ marker.facilityId % 5]} 
 							onClick={() => setWorkationModal(true)}
 						  >
 						  </img>

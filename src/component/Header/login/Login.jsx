@@ -168,7 +168,7 @@ export default function Login() {
 										fill="black"
 									/>
 								</svg>
-								<span>Sign up with Kakao</span>
+								<span>Log In with Kakao</span>
 							</button>
 						</Form.Item>
 						<span className="description">or Log in with Username</span>

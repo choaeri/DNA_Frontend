@@ -199,14 +199,12 @@ export default function Signup() {
               hasFeedback
               label={<span className="userTit">Username</span>}
               name="username"
+              {...layout}
               rules={[
-                { required: true, message: "Username is required!" },
-                () => ({
+                ({ getFieldValue }) => ({
                   validator(_, value) {
                     if (!value || value.trim() === "") {
-                      return Promise.reject(
-                        new Error("Username cannot be empty!")
-                      );
+                      return Promise.reject(new Error("Username is required!"));
                     }
                     if (isUsernameAvailable === false) {
                       return Promise.reject(
