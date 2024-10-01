@@ -50,10 +50,11 @@
   flex-wrap: wrap;
   margin-top: 12px;
 }
+.Likes .bmkCnt .content .card.wkn {
+  position: relative;
+}
 .Likes .bmkCnt .content .card .item {
   display: flex;
-  width: 236px;
-  height: 118px;
   padding: 14px 18px;
   flex-direction: column;
   align-items: flex-start;
@@ -61,6 +62,20 @@
   border-radius: 8px;
   border: 1px solid var(--Gray-7, #E1E4E9);
   background: #FFF;
+}
+.Likes .bmkCnt .content .card .item.work {
+  width: fit-content;
+  height: 204px;
+}
+.Likes .bmkCnt .content .card .item.etc {
+  width: 236px;
+  height: 118px;
+}
+.Likes .bmkCnt .content .card .item.work .icon {
+  padding: 8px;
+  gap: 10px;
+  background: #FFFFFF;
+  border-radius: 40px;
 }
 .Likes .bmkCnt .content .card .item .like,
 .Likes .bmkCnt .content .card .item .like.wkn,
@@ -94,11 +109,7 @@
   font-weight: 500;
 }
 
-.Likes .bmkCnt .content .card .item .icon {
-  position: absolute;
-}
-
 .Likes .bmkCnt .content .card .item .imgCnt img {
-  width: 10rem;
-  height: 5rem;
+  width: 156px;
+  height: 124px;
 }

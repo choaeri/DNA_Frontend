@@ -35,4 +35,6 @@
   justify-content: center;
   bottom: 2%; */
 }
-
+.DetailLocation .imageContent svg {
+	transform: translate(-50%, );
+}

@@ -129,19 +129,19 @@ export default function Likes() {
                 <div className="card wkn">
                   {bookmarkOfficeList[locationName].map((bookmark, idx) => {
                     return bookmark.type === "Workation Office" ? (
-                      <div className="item" key={idx}>
+                      <div className="item work" key={idx}>
                         {isWorkationBookmarked &&
                         isWorkationBookmarked[bookmark.officeId] ? (
                           <HeartFilled
                             className="icon"
                             onClick={(e) => onClickLike(e, bookmark.officeId, 'Workation Office')}
-                            style={{ color: "red", cursor: "pointer" }}
+                            style={{ color: "red", cursor: "pointer", position: "absolute" }}
                           />
                         ) : (
                           <HeartOutlined
                             className="icon"
                             onClick={(e) => onClickLike(e, bookmark.officeId, 'Workation Office')}
-                            style={{ color: "black", cursor: "pointer" }}
+                            style={{ color: "black", cursor: "pointer", position: "absolute" }}
                           />
                         )}
                         <div className="imgCnt">
@@ -189,7 +189,7 @@ export default function Likes() {
                 <div className="card etc">
                   {bookmarkList[locationName].map((bookmark, idx) => {
                     return bookmark.type !== "workation" ? (
-                      <div className="item" key={idx}>
+                      <div className="item etc" key={idx}>
                         <span className="type">
                           {categoryMatch[bookmark.type].type}
                         </span>

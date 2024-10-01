@@ -81,7 +81,11 @@ export default function RecommendAreas () {
                 </svg>
               </div>
             </div>
-          ) : null }
+          ) : 
+          <div className="rmdAreaCnt">
+            <span className="tit">Discover Amazing Destinations!</span>
+            <span className="desp">Looking for your next travel adventure?<br />Explore these incredible places that offer a mix of culture, history, and unforgettable experiences.<br />Whether you're seeking a trendy urban vibe or a serene nature escape, we've got the perfect spots for you.<br />Get inspired and start planning your dream trip today!</span>
+          </div> }
         </div>
     </>
   )

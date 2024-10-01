@@ -50,18 +50,36 @@
 .CardContent .content .cardCnt {
   display: flex;
   flex-direction: column;
-  padding: 10rem 14rem 0rem;
+  padding: 10rem 14rem;
   gap: 200px;
 }
 
 .CardContent .content .cardCnt .card {
   cursor: pointer;
+  position: relative;
+}
+.CardContent .content .cardCnt .card .hoverImages .hoverImage {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 2px solid var(--Gray1, #000);
+}
+.CardContent .content .cardCnt .card .hoverImages .hoverImage:nth-child(1) {
+  top: -50px;
+  left: -45px;
+}
+.CardContent .content .cardCnt .card .hoverImages .hoverImage:nth-child(2) {
+  bottom: -60px;
+  left: -128px;
+}
+.CardContent .content .cardCnt .card .hoverImages .hoverImage:nth-child(3) {
+  bottom: -133px;
+  left: 94px;
 }
 
 /* location 홀수 */
 .CardContent .content .cardCnt .card:nth-child(odd) {
   display: flex;
-  position: relative;
 }
 .CardContent .content .cardCnt .card:nth-child(odd) img {
   width: 250px;
@@ -147,7 +165,6 @@
   display: flex;
   flex-direction: column;
   margin-left: auto;
-  position: relative;
 }
 .CardContent .content .cardCnt .card:nth-child(even) img {
   width: 440px;
