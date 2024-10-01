@@ -97,6 +97,7 @@ export default function OpenChat() {
           if (Array.isArray(data)) {
             setChatRoomMessages(data);
           }
+          console.log(data);
         } catch (err) {
           errMessageCheck(err.response.data.errorMessage);
         }
@@ -105,7 +106,7 @@ export default function OpenChat() {
 
     fetchUsername();
     fetchChatRoomMessages();
-  }, []);
+  }, [detailInfo.locationId, isLoggedIn]);
 
   // 채팅방 입장
   useEffect(() => {
@@ -171,8 +172,8 @@ export default function OpenChat() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
-
+  }, [messages, chatRoomMessages]);
+  
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
