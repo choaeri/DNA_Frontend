@@ -256,7 +256,7 @@ export default function Signup() {
                 placeholder="Enter your email"
                 onChange={(e) => {
                   setSignUpEmail(e.target.value);
-                  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                  const emailPattern = /^[^\s@]+@[^\s@]+\.(com|net|org)$/;
                   setIsEmailValid(emailPattern.test(e.target.value));
                 }}
                 autoComplete="new-password"
