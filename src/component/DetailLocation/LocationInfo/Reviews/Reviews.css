@@ -96,6 +96,10 @@
 .Reviews .reviewList .reviewItem .reviewInfo .reviewDate {
   font-size: small;
 }
+.Reviews .reviewList .reviewItem .reviewContent {
+  font-size: small;
+}
+
 
 .reviewItem:last-child {
   border-bottom: none; /* 마지막 아이템은 선을 없앰 */

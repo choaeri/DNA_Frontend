@@ -5,18 +5,20 @@
 .DetailLocation .detailContent {
   display: flex;
   width: 100%;
-  padding: 6rem 3rem 0rem;
+  padding: 4rem 3rem 0rem;
   overflow: hidden;
   align-items: center;
+  position: relative;
 }
 
 .DetailLocation .detailContent .mapArea {
   display: flex;
-  bottom: 0;
-  position: relative;
-  width: 70%;
+  position: absolute;
+  width: 64%;
   height: 32rem;
   margin-left: 4rem;
+  top: 17%;
+  right: 10%;
 }
 
 .DetailLocation .detailContent .mapArea .map {
