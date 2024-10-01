@@ -158,7 +158,7 @@ export default function LoginCheck() {
                   onClick={onClickLoginCheck}
                   style={{ marginTop: "7px" }}
                 >
-                  <span>Input Username</span>
+                  <span>Sign Up</span>
                 </Button>
               </Form.Item>
 

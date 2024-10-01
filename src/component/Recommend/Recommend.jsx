@@ -1,4 +1,3 @@
-import { RightCircleFilled } from "@ant-design/icons";
 import "./Recommend.css";
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "../../utils/useLocalStorage";

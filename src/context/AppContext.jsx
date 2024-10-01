@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import useLocalStorage from "../utils/useLocalStorage";
 import { axiosInstance } from "../common/func/axios";
 import { useNavigate } from "react-router-dom";
@@ -59,7 +59,7 @@ const AppProvider = ({ children }) => {
     let currentIsBookmarked;
 
     if (isLoggedIn) {
-      if (type == "Workation Office") {
+      if (type === "Workation Office") {
         apiUrl = `/api/workation-offices/${facilityId}/bookmark`;
         method = isWorkationBookmarked[facilityId] ? "DELETE" : "POST";
         currentIsBookmarked = isWorkationBookmarked[facilityId];
