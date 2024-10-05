@@ -134,7 +134,9 @@ input[type=number] {
   align-items: center;
   gap: 2px;
   width: 100%;
+  transform: translateX(2vw);
 }
+
 .Survey .survCnt .content .stepBtnCnt .backBtn,
 .Survey .survCnt .content .stepBtnCnt .nextBtn {
   color: var(--Gray-7, #676868);
