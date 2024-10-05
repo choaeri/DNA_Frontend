@@ -51,7 +51,7 @@ export default function MapView () {
                 lng: location.longitude,
               }}
             >
-              <div className="locationMarker" key={index}>
+              <div className="locationMarker" key={index} onClick={() => onClickDetailBtn(location)}>
                 <img alt={location.locationName} src={location.thumbnail}></img>
                 <div className="locationCnt">
                   <div className="detail">
@@ -63,7 +63,7 @@ export default function MapView () {
                       <span className="spot">245 spots</span>
                     </div> */}
                   </div>
-                  <svg className="detailBtn" onClick={() => onClickDetailBtn(location)} xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <svg className="detailBtn" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path d="M3.57129 9.79321L15.9629 9.79321" stroke="black"/>
                     <path d="M10.9211 4.28564L16.4285 9.79301L10.9211 15.3004" stroke="black"/>
                   </svg>
