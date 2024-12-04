@@ -10,7 +10,7 @@ export default function AllReviews() {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await axiosInstance.get('/api/public/workation-reviews', {
+        const res = await axiosInstance.get('/api/public/locations/workation-reviews', {
           params: {
             page: 0,
             size: 6,
